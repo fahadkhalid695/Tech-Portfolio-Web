@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-dark text-light min-h-screen;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  p {
+    @apply leading-relaxed text-sm sm:text-base;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section {
+    @apply py-12 sm:py-16 md:py-24;
+  }
+  
+  .section-title {
+    @apply text-center mb-8 sm:mb-12 relative;
+  }
+  
+  .section-title::after {
+    @apply content-[''] absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 sm:w-16 h-1 bg-primary-500 rounded-full;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-all duration-300 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark focus:ring-primary-500;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white;
+  }
+  
+  .card {
+    @apply bg-dark-lighter rounded-xl shadow-lg overflow-hidden transition-all duration-300;
+  }
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2563eb #1e1e1e;
+}
+
+/* For Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  @apply sm:w-8;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-dark;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-primary-500 rounded-full;
+}
+
+/* Mobile-first media queries */
+@media (max-width: 640px) {
+  .container-custom {
+    @apply px-4;
+  }
+  
+  .section {
+    @apply py-8;
+  }
+  
+  .card {
+    @apply p-4;
+  }
+}
+
+/* Tablet and desktop improvements */
+@media (min-width: 768px) {
+  .section {
+    @apply py-16;
+  }
+  
+  .card {
+    @apply p-6;
+  }
+}
