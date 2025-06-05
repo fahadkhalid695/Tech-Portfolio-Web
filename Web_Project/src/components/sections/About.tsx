@@ -30,7 +30,7 @@ const About: React.FC = () => {
           >
             <div className="w-full h-80 md:h-96 rounded-xl overflow-hidden relative">
               <img 
-                src="/Image/Profile_pic.jpg" 
+                src="./Image/Profile_pic.jpg" 
                 alt="Fahad Khalid" 
                 className="w-full h-full object-cover"
               />
