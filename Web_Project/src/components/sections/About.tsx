@@ -28,17 +28,17 @@ const About: React.FC = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="w-full h-80 md:h-96 rounded-xl overflow-hidden relative">
+            <div className="w-full max-w-md mx-auto bg-transparent rounded-xl relative">
               <img 
-                src="./image/pic.jpg" 
+                src="/image/pic.jpg" 
                 alt="Fahad Khalid" 
-                className="w-full h-full object-cover"
+                className="w-full h-auto rounded-xl object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
             </div>
             
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary-500 rounded-lg flex items-center justify-center transform rotate-12">
-              <div className="transform -rotate-12 text-light font-bold text-3xl">
+            {/* Adjusted badge position and size */}
+            <div className="absolute -bottom-3 right-3 w-24 h-24 bg-primary-500 rounded-lg flex items-center justify-center transform rotate-12">
+              <div className="transform -rotate-12 text-light font-bold text-lg">
                 CS
               </div>
             </div>
