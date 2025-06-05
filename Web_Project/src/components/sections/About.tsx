@@ -30,7 +30,7 @@ const About: React.FC = () => {
           >
             <div className="w-full h-80 md:h-96 rounded-xl overflow-hidden relative">
               <img 
-                src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                src="https://photos.google.com/share/AF1QipM8Or9YmjS6LunIasbDkMr6m1nWwLs7cqjtrFq98w8VBNbMSFGntcjSEddsa5nChQ/photo/AF1QipNNukO_rn2b1Hp4ozxuQOk76eAZwN7GW-gB1I8Y" 
                 alt="Fahad Khalid" 
                 className="w-full h-full object-cover"
               />
