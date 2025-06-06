@@ -3,17 +3,17 @@ import { Certification } from '../types';
 export const certifications: Certification[] = [
   {
     id: 1,
-    name: "AWS Certified Solutions Architect",
-    organization: "Amazon Web Services",
-    date: "January 2023",
+    name: "Python",
+    organization: "Innovista (Learn Easy)",
+    date: "December 2024",
     logo: "https://images.pexels.com/photos/11343088/pexels-photo-11343088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     verificationUrl: "https://www.credly.com/badges/aws-certified-solutions-architect"
   },
   {
     id: 2,
-    name: "Microsoft Azure Fundamentals (AZ-900)",
-    organization: "Microsoft",
-    date: "March 2023",
+    name: "Cybersecurity Fundamentals",
+    organization: "Innovista (Learn Easy)",
+    date: "November 2024",
     logo: "https://images.pexels.com/photos/11343088/pexels-photo-11343088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     verificationUrl: "https://www.credly.com/badges/microsoft-certified-azure-fundamentals"
   },

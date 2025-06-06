@@ -3,11 +3,11 @@ import { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 1,
-    title: "AI-Powered Image Recognition System",
-    description: "A deep learning-based image recognition system built with TensorFlow and Keras, achieving 95% accuracy on the CIFAR-10 dataset.",
-    image: "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    tags: ["Python", "TensorFlow", "Keras", "Computer Vision"],
-    githubUrl: "https://github.com/fahad-khalid/image-recognition",
+    title: "Cafe Sales Analysis",
+    description: "This project explores the sales of different menu items using a dataset. We perform data cleaning, Exploratory Data Analysis (EDA) analyze the sales report of the cafe.",
+    image: "/Images/cafe_project.png",
+    tags: ["Python", "Matplotlib", "Numpy", "Pandas"],
+    githubUrl: "https://github.com/fahadkhalid695/Cafe-Sales-Analysis.git",
     demoUrl: "https://demo.fahad-khalid.com/image-recognition"
   },
   {
