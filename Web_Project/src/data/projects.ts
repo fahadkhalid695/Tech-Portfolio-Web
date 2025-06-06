@@ -5,7 +5,7 @@ export const projects: Project[] = [
     id: 1,
     title: "Cafe Sales Analysis",
     description: "This project explores the sales of different menu items using a dataset. We perform data cleaning, Exploratory Data Analysis (EDA) analyze the sales report of the cafe.",
-    image: "/images/cafe_project.png",
+    image: "/image/cafe_project.png",
     tags: ["Python", "Matplotlib", "Numpy", "Pandas"],
     githubUrl: "https://github.com/fahadkhalid695/Cafe-Sales-Analysis.git",
     demoUrl: "https://demo.fahad-khalid.com/image-recognition"
