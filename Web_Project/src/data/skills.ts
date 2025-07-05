@@ -16,20 +16,8 @@ export const skills: Skill[] = [
     level: "Intermediate",
     icon: "CppIcon"
   },
-  {
-    id: 3,
-    category: "Programming",
-    name: "JavaScript",
-    level: "Advanced",
-    icon: "JavaScriptIcon"
-  },
-  {
-    id: 4,
-    category: "Programming",
-    name: "Java",
-    level: "Intermediate",
-    icon: "JavaIcon"
-  },
+
+
   
   // Cloud
   {
