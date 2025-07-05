@@ -23,7 +23,7 @@ export const projects: Project[] = [
     id: 3,
     title: "EcoGuard Pro",
     description: "EcoGuard Pro is an AI-powered environmental monitoring system that delivers real-time insights on air, water, noise, and energy. It features predictive analytics, automated alerts, and smart optimization suggestions.",
-    image: "/image/dashboard.png",
+    image: "/image/ecoguard.png",
     tags: ["IoT", "AI/ML", "Arduino"],
     githubUrl: "https://github.com/fahadkhalid695/EcoGuard",
     demoUrl: "https://rococo-ganache-6f0e7e.netlify.app/"
