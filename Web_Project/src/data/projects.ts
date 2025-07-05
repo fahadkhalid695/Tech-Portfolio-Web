@@ -21,7 +21,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "EcoGuard AI Powered Environmental Monitering System",
+    title: "EcoGuard Pro",
     description: "EcoGuard Pro is an AI-powered environmental monitoring system that delivers real-time insights on air, water, noise, and energy. It features predictive analytics, automated alerts, and smart optimization suggestions.",
     image: "/image/dashboard.png",
     tags: ["IoT", "AI/ML", "Arduino"],
