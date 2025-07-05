@@ -12,7 +12,7 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Survivors Prediction using Logistic Regression",
+    title: "Survivors Prediction",
     description: "This project predicts the survival of persons who faced an accident using a dataset. We performed data cleaning, Exploratory Data Analysis (EDA), and trained our model on the data.",
     image: "/image/lg.png",
     tags: ["Python", "AI/ML", "Numpy", "Scikit-Learn"],
