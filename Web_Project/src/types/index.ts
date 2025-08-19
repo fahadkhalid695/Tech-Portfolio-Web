@@ -31,3 +31,23 @@ export interface SocialLink {
   url: string;
   icon: string;
 }
+
+export interface Hackathon {
+  id: number;
+  name: string;
+  date: string;
+  location: string;
+  position: string;
+  project: string;
+  description: string;
+  technologies: string[];
+  teamSize: number;
+  prize: string;
+  image: string;
+}
+
+export interface Hackathon {
+  id: number;
+  name: string;
+  date: string;
+  l
