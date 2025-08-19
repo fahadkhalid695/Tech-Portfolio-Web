@@ -68,22 +68,22 @@ const Contact: React.FC = () => {
               Have a question or want to work together? Feel free to reach out using the contact form or through any of my social media profiles.
             </p>
             
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {socialLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-light/80 hover:text-primary-500 transition-colors duration-300"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  className="flex items-center p-4 bg-dark/50 hover:bg-primary-500/20 border border-dark-light hover:border-primary-500/30 rounded-lg text-light/80 hover:text-primary-400 transition-all duration-300 group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 >
-                  <span className="bg-dark-light p-2 rounded-lg mr-4">
+                  <span className="bg-primary-500/20 p-2 rounded-lg mr-3 group-hover:bg-primary-500/30 transition-colors duration-300">
                     {link.icon}
                   </span>
-                  <span>{link.name}</span>
+                  <span className="font-medium">{link.name}</span>
                 </motion.a>
               ))}
             </div>

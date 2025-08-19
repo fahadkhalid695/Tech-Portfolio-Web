@@ -98,25 +98,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           alt={project.title} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-          <div className="p-4 w-full flex justify-between">
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="flex gap-4">
             <a 
               href={project.githubUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-2 bg-dark/80 rounded-full text-light hover:text-primary-500 transition-colors duration-300"
+              className="p-3 bg-dark/90 backdrop-blur-sm rounded-full text-light hover:text-primary-500 hover:bg-primary-500/20 transition-all duration-300 transform hover:scale-110"
               aria-label="View GitHub Repository"
             >
-              <Github size={20} />
+              <Github size={24} />
             </a>
             <a 
               href={project.demoUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-2 bg-dark/80 rounded-full text-light hover:text-primary-500 transition-colors duration-300"
+              className="p-3 bg-dark/90 backdrop-blur-sm rounded-full text-light hover:text-success-400 hover:bg-success-500/20 transition-all duration-300 transform hover:scale-110"
               aria-label="View Live Demo"
             >
-              <ExternalLink size={20} />
+              <ExternalLink size={24} />
             </a>
           </div>
         </div>
@@ -139,22 +139,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         
         <p className="text-light/70 text-sm mb-4 flex-grow">{project.description}</p>
         
-        <div className="flex justify-between mt-auto">
+        <div className="flex gap-4 mt-auto pt-4 border-t border-dark-light/30">
           <a 
             href={project.githubUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-sm text-primary-500 hover:text-primary-400 transition-colors duration-300 flex items-center"
+            className="flex-1 btn btn-outline text-sm py-2 px-4 flex items-center justify-center gap-2 hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-all duration-300"
           >
-            <Github size={16} className="mr-1" /> GitHub
+            <Github size={16} />
+            <span>GitHub</span>
           </a>
           <a 
             href={project.demoUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-sm text-primary-500 hover:text-primary-400 transition-colors duration-300 flex items-center"
+            className="flex-1 btn btn-primary text-sm py-2 px-4 flex items-center justify-center gap-2 hover:bg-primary-600 transition-all duration-300"
           >
-            Live Demo <ExternalLink size={16} className="ml-1" />
+            <span>Live Demo</span>
+            <ExternalLink size={16} />
           </a>
         </div>
       </div>
