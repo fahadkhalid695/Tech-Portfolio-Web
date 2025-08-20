@@ -45,9 +45,3 @@ export interface Hackathon {
   prize: string;
   image: string;
 }
-
-export interface Hackathon {
-  id: number;
-  name: string;
-  date: string;
-  l

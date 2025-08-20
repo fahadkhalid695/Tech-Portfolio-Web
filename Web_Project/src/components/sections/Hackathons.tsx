@@ -115,11 +115,20 @@ const Hackathons: React.FC = () => {
               <div className="text-sm text-light/60">Hackathons</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-success-400">3</div>
-              <div className="text-sm text-light/60">Wins</div>
+              <div className="text-2xl font-bold text-success-400">
+                {hackathons.filter(h => 
+                  h.position.toLowerCase().includes('1st') || 
+                  h.position.toLowerCase().includes('winner') ||
+                  h.position.toLowerCase().includes('first') ||
+                  h.position.toLowerCase().includes('place')
+                ).length}
+              </div>
+              <div className="text-sm text-light/60">Wins & Placements</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-primary-300">15+</div>
+              <div className="text-2xl font-bold text-primary-300">
+                {new Set(hackathons.flatMap(h => h.technologies)).size}
+              </div>
               <div className="text-sm text-light/60">Technologies</div>
             </div>
           </div>

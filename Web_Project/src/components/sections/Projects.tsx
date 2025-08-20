@@ -81,7 +81,7 @@ const Projects: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Projects summary */}
+        {/* Dynamic Projects summary */}
         <motion.div 
           className="mt-20 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,9 @@ const Projects: React.FC = () => {
               <div className="text-sm text-light/60">Technologies Used</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary-300 mb-2">100%</div>
+              <div className="text-3xl font-bold text-primary-300 mb-2">
+                {Math.round((projects.filter(p => p.githubUrl.includes('github.com')).length / projects.length) * 100)}%
+              </div>
               <div className="text-sm text-light/60">Open Source</div>
             </div>
           </div>
