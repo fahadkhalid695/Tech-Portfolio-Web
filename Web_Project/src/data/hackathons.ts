@@ -38,7 +38,7 @@ export const hackathons: Hackathon[] = [
     technologies: ["Cybersecurity", "Web Exploitation", "Reverse Engineering", "Forensics", "Cryptography", "Python", "Linux"],
     teamSize: 1,
     prize: "Participation Certificate",
-    image: "/image/kaspersky-ctf-2025-certificate.png"
+    image: "/image/kaspersky-ctf-participation-certificate.png"
   },
   {
     id: 4,
