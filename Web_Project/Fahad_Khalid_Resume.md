@@ -1,0 +1,104 @@
+# FAHAD KHALID
+**Computer Science Undergraduate | AI/ML Enthusiast | Cloud Computing Specialist**
+
+📧 fahadkhalid695@gmail.com | 📱 +92 300 4343753 | 📍 Muridke, Pakistan  
+🔗 LinkedIn: linkedin.com/in/fahad-khalid-aa674430a | 💻 GitHub: github.com/fahadkhalid695
+
+---
+
+## PROFESSIONAL SUMMARY
+
+Dedicated Computer Science undergraduate with a passion for Artificial Intelligence, Machine Learning, and Cloud Computing. Proven track record in developing innovative solutions through hands-on projects and competitive programming. Experienced in building AI-powered applications, environmental monitoring systems, and data analysis tools. Strong foundation in Python, cloud platforms (AWS, Azure), and modern development practices. Actively participating in hackathons and coding competitions to enhance problem-solving skills and stay current with emerging technologies.
+
+---
+
+## EDUCATION
+
+**Bachelor of Science in Computer Science**  
+Punjab College Muridke | 2023 - 2027  
+CGPA: 3.38/4.0  
+*Relevant Coursework: Data Structures, Algorithms, Machine Learning, Database Systems, Software Engineering*
+
+---
+
+## TECHNICAL SKILLS
+
+**Programming Languages:** Python (Advanced), C++ (Intermediate)  
+**AI/ML Technologies:** TensorFlow (Advanced), PyTorch (Intermediate), Scikit-learn (Advanced), NumPy, Pandas  
+**Cloud Platforms:** AWS (Advanced), Microsoft Azure (Intermediate), Google Cloud Platform (Beginner)  
+**Development Tools:** Git (Advanced), Docker (Intermediate), Linux (Advanced), Kubernetes (Intermediate)  
+**IoT & Hardware:** Arduino, Sensor Integration, Environmental Monitoring Systems  
+**Data Analysis:** Matplotlib, Data Visualization, Statistical Analysis, Exploratory Data Analysis (EDA)  
+**Other Technologies:** React, Node.js, MongoDB, Web Development, API Integration  
+**Languages:** English (Fluent), Urdu (Native)
+
+---
+
+## PROJECTS
+
+**EcoGuard Pro** | *AI-Powered Environmental Monitoring System*  
+*Technologies: IoT, AI/ML, Arduino, Python, React*  
+• Developed comprehensive environmental monitoring system delivering real-time insights on air quality, water purity, noise levels, and energy consumption  
+• Implemented predictive analytics and automated alert systems for proactive environmental management  
+• Created smart optimization suggestions to help organizations make data-driven environmental decisions  
+• Deployed live demo showcasing system capabilities and user interface  
+
+**Survivors Prediction Model** | *Machine Learning Application*  
+*Technologies: Python, AI/ML, NumPy, Scikit-Learn*  
+• Built predictive model to analyze survival rates using comprehensive dataset analysis  
+• Performed extensive data cleaning and Exploratory Data Analysis (EDA) to identify key survival factors  
+• Implemented machine learning algorithms achieving high accuracy in survival predictions  
+• Documented complete methodology and results in interactive Jupyter notebook  
+
+**Cafe Sales Analysis** | *Data Analytics Project*  
+*Technologies: Python, Matplotlib, NumPy, Pandas*  
+• Conducted comprehensive analysis of cafe sales data to identify trends and patterns in menu item performance  
+• Performed data cleaning, statistical analysis, and created detailed visualizations  
+• Generated actionable insights for business optimization and revenue enhancement  
+• Presented findings through interactive data visualizations and comprehensive reporting  
+
+---
+
+## COMPETITIVE PROGRAMMING & HACKATHONS
+
+**Kaspersky CTF 2025** | *Cybersecurity Competition* | August 2025  
+• Competed in prestigious Capture The Flag cybersecurity competition  
+• Solved complex challenges in web exploitation, reverse engineering, digital forensics, and cryptography  
+• Demonstrated advanced problem-solving skills and deep understanding of cybersecurity principles  
+
+**Ignite Coding Competition** | *National Programming Contest* | July 2025  
+• Participated in Pakistan's premier coding competition focusing on algorithmic problem-solving  
+• Tackled complex computational problems involving dynamic programming, optimization, and graph theory  
+• Collaborated in team of 3 to solve advanced data structure challenges using efficient algorithms  
+
+**Bolt Hackathon** | *Innovation Challenge* | June 2025  
+• Developed EcoGuard Pro as solo project, showcasing full-stack development and IoT integration skills  
+• Demonstrated ability to create complete solutions from concept to deployment within time constraints  
+
+---
+
+## CERTIFICATIONS
+
+**Python Programming** | Innovista (Learn Easy) | December 2024  
+**Cybersecurity Fundamentals** | Innovista (Learn Easy) | November 2024  
+
+---
+
+## KEY ACHIEVEMENTS
+
+• **3 Major Projects** completed with live demonstrations and GitHub repositories  
+• **3 Competitive Programming** events participated, demonstrating algorithmic thinking  
+• **Advanced proficiency** in 6+ programming languages and frameworks  
+• **Cloud computing expertise** across multiple platforms (AWS, Azure, GCP)  
+• **AI/ML specialization** with hands-on experience in TensorFlow, PyTorch, and Scikit-learn  
+• **Strong academic performance** maintaining 3.38 CGPA while actively participating in extracurricular activities  
+
+---
+
+## ADDITIONAL INFORMATION
+
+• **Problem Solver:** Experienced in breaking down complex technical challenges into manageable solutions  
+• **Team Collaboration:** Proven ability to work effectively in team environments and solo projects  
+• **Continuous Learning:** Actively pursuing new technologies and industry best practices  
+• **Open Source Contributor:** All projects available on GitHub with comprehensive documentation  
+• **Innovation Focus:** Passionate about developing solutions that address real-world environmental and social challenges

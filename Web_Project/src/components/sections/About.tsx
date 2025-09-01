@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Download, MapPin, Calendar, GraduationCap } from 'lucide-react';
+import { Download, MapPin, Calendar, GraduationCap, ExternalLink } from 'lucide-react';
+import { getResumeUrl, getResumeAction } from '../../data/personalInfo';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({
@@ -114,10 +115,24 @@ const About: React.FC = () => {
               <a href="#projects" className="btn btn-outline flex items-center gap-2">
                 View Projects
               </a>
-              <button className="btn btn-outline flex items-center gap-2 hover:bg-success-500 hover:border-success-500">
-                <Download size={16} />
-                Resume
-              </button>
+              <a 
+                href={getResumeUrl()}
+                target={getResumeAction().target}
+                rel="noopener noreferrer"
+                className="btn btn-outline flex items-center gap-2 hover:bg-success-500 hover:border-success-500 hover:text-white transition-all duration-300"
+              >
+                {getResumeAction().action === 'view' ? (
+                  <>
+                    <ExternalLink size={16} />
+                    View Resume
+                  </>
+                ) : (
+                  <>
+                    <Download size={16} />
+                    Download Resume
+                  </>
+                )}
+              </a>
             </div>
           </motion.div>
         </div>
