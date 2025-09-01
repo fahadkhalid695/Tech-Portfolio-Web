@@ -29,7 +29,8 @@ const Hero: React.FC = () => {
                 "Computer Science Undergraduate",
                 "Tech Enthusiast",
                 "AI/ML Developer",
-                "Cloud Architect"
+                "Cloud Architect",
+                "Cybersecurity Engineer"
               ]} 
             />
           </div>
