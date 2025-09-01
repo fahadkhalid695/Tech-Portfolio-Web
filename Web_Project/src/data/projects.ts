@@ -27,32 +27,5 @@ export const projects: Project[] = [
     tags: ["IoT", "AI/ML", "Arduino"],
     githubUrl: "https://github.com/fahadkhalid695/EcoGuard",
     demoUrl: "https://rococo-ganache-6f0e7e.netlify.app/"
-  },
-  {
-    id: 4,
-    title: "Blockchain-Based Supply Chain Tracker",
-    description: "A transparent supply chain tracking system built with Ethereum smart contracts to ensure authenticity and traceability.",
-    image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    tags: ["Blockchain", "Ethereum", "Solidity", "Web3.js"],
-    githubUrl: "https://github.com/fahad-khalid/blockchain-supply",
-    demoUrl: "https://demo.fahad-khalid.com/blockchain-supply"
-  },
-  {
-    id: 5,
-    title: "ML-Powered Financial Analyzer",
-    description: "A machine learning application that analyzes financial data to predict market trends and provide investment recommendations.",
-    image: "https://images.pexels.com/photos/7567444/pexels-photo-7567444.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    tags: ["Python", "Scikit-learn", "Pandas", "Finance"],
-    githubUrl: "https://github.com/fahad-khalid/financial-analyzer",
-    demoUrl: "https://demo.fahad-khalid.com/financial-analyzer"
-  },
-  {
-    id: 6,
-    title: "Cybersecurity Training Platform",
-    description: "An interactive platform for learning cybersecurity concepts through gamified challenges and hands-on exercises.",
-    image: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    tags: ["Security", "Vue.js", "Node.js", "Docker"],
-    githubUrl: "https://github.com/fahad-khalid/cyber-training",
-    demoUrl: "https://demo.fahad-khalid.com/cyber-training"
   }
 ];
