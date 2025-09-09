@@ -10,13 +10,13 @@ export const personalInfo = {
 
         // Option 2: Direct PDF download from Google Drive
         // Replace YOUR_FILE_ID with your actual Google Drive file ID
-        directDownloadUrl: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID",
+        directDownloadUrl: "https://drive.google.com/uc?export=download&id=1KrP3dfPX8Q7POVfAihQOYTBh9dHAwjUQ",
 
         // Option 3: Local file (if you want to host it locally)
         localPath: "/resume/fahad-khalid-resume.pdf",
 
         // Current active resume URL (change this to switch between options)
-        activeUrl: "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing"
+        activeUrl: "https://drive.google.com/file/d/1KrP3dfPX8Q7POVfAihQOYTBh9dHAwjUQ/view?usp=sharing"
     },
 
     // Contact Information
