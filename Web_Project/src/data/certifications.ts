@@ -19,7 +19,7 @@ export const certifications: Certification[] = [
   },
   {
     id: 3,
-    name: "HELM K8s Packaing Manager",
+    name: "HELM k8s Packaing Manager",
     organization: "Udemy",
     date: "September 2025",
     logo: "https://images.pexels.com/photos/11343088/pexels-photo-11343088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
