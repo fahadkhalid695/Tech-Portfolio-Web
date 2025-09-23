@@ -36,5 +36,14 @@ export const projects: Project[] = [
     tags: ["Agentic AI", "AI/ML", "Automation", "Business", "React", "WebSocket", "NodeJS", "Docker", "Kubernetes", "CI/CD"],
     githubUrl: "https://github.com/fahadkhalid695/Business-task-automation",
     demoUrl: "https://github.com/fahadkhalid695/Business-task-automation"
-  }
+  },
+  {
+    id: 5,
+    title: "Titanic Survival Analysis",
+    description: "This project explores the survival patterns of Titanic passengers using the authentic Seaborn dataset. We perform data cleaning, professional EDA, and build a baseline machine learning model to predict survival probability.",
+    image: "/image/Titanic.jpg",
+    tags: ["Python", "AI/ML", "Matplotlib", "Seaborn", "Pandas", "Numpy", "Scikit-learn", "Regression"],
+    githubUrl: "https://github.com/fahadkhalid695/Titanic-Survival-Analysis",
+    demoUrl: "https://colab.research.google.com/drive/1ugTW5BEVKy-DLlAgNlo_ci5FUF3zIf0F?usp=sharing"
+  }  
 ];
