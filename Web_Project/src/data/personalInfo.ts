@@ -6,17 +6,17 @@ export const personalInfo = {
     resume: {
         // Option 1: Google Drive Link (Recommended)
         // Make sure to set sharing to "Anyone with the link can view"
-        googleDriveUrl: "https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing",
+        googleDriveUrl: "https://drive.google.com/file/d/1yv4SDFcVSEYxuq_Y81Oig-xnEsbesY7V/view?usp=sharing",
 
         // Option 2: Direct PDF download from Google Drive
         // Replace YOUR_FILE_ID with your actual Google Drive file ID
-        directDownloadUrl: "https://drive.google.com/uc?export=download&id=1KrP3dfPX8Q7POVfAihQOYTBh9dHAwjUQ",
+        directDownloadUrl: "https://drive.google.com/file/d/1yv4SDFcVSEYxuq_Y81Oig-xnEsbesY7V/view?usp=sharing",
 
         // Option 3: Local file (if you want to host it locally)
         localPath: "/resume/fahad-khalid-resume.pdf",
 
         // Current active resume URL (change this to switch between options)
-        activeUrl: "https://drive.google.com/file/d/1KrP3dfPX8Q7POVfAihQOYTBh9dHAwjUQ/view?usp=sharing"
+        activeUrl: "https://drive.google.com/file/d/1yv4SDFcVSEYxuq_Y81Oig-xnEsbesY7V/view?usp=sharing"
     },
 
     // Contact Information

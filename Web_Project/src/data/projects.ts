@@ -27,5 +27,14 @@ export const projects: Project[] = [
     tags: ["IoT", "AI/ML", "Arduino"],
     githubUrl: "https://github.com/fahadkhalid695/EcoGuard",
     demoUrl: "https://rococo-ganache-6f0e7e.netlify.app/"
+  },
+  {
+    id: 4,
+    title: "OfficeOS",
+    description: "Empowering businesses to focus on innovation by automating the routine, optimizing the complex, and intelligently managing the essential.",
+    image: "/image/officeos.png",
+    tags: ["Agentic AI", "AI/ML", "Automation", "Business", "React", "WebSocket", "NodeJS", "Docker", "Kubernetes", "CI/CD"],
+    githubUrl: "https://github.com/fahadkhalid695/Business-task-automation",
+    demoUrl: "https://github.com/fahadkhalid695/Business-task-automation"
   }
 ];
