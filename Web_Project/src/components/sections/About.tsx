@@ -11,8 +11,8 @@ const About: React.FC = () => {
   });
 
   const stats = [
-    { label: 'Years of Study', value: '3+', icon: <Calendar size={20} /> },
-    { label: 'Projects Completed', value: '15+', icon: <GraduationCap size={20} /> },
+    { label: 'Years of Study', value: '2+', icon: <Calendar size={20} /> },
+    { label: 'Projects Completed', value: '5+', icon: <GraduationCap size={20} /> },
     { label: 'Technologies', value: '20+', icon: <MapPin size={20} /> },
   ];
 
