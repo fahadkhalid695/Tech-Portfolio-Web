@@ -35,7 +35,7 @@ export const projects: Project[] = [
     image: "/image/officeos.png",
     tags: ["Agentic AI", "AI/ML", "Automation", "Business", "React", "WebSocket", "NodeJS", "Docker", "Kubernetes", "CI/CD"],
     githubUrl: "https://github.com/fahadkhalid695/Business-task-automation",
-    demoUrl: "https://github.com/fahadkhalid695/Business-task-automation"
+    demoUrl: "https://business-task-automation.vercel.app/"
   },
   {
     id: 5,
