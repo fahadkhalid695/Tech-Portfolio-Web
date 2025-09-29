@@ -45,5 +45,14 @@ export const projects: Project[] = [
     tags: ["Python", "AI/ML", "Matplotlib", "Seaborn", "Pandas", "Numpy", "Scikit-learn", "Regression"],
     githubUrl: "https://github.com/fahadkhalid695/Titanic-Survival-Analysis",
     demoUrl: "https://colab.research.google.com/drive/1ugTW5BEVKy-DLlAgNlo_ci5FUF3zIf0F?usp=sharing"
-  }  
+  },
+  {
+    id: 6,
+    title: "Frontline Workers Support AI",
+    description: "AI-powered emergency coordination platform with real-time symptom analysis, smart service routing, and automated scheduling",
+    image: "/image/frontline.png",
+    tags: ["Python", "AI/ML", "Agentic AI", "Google Cloud", "React", "Rull Based Fallback System", "Pattern Base Recognition"],
+    githubUrl: "https://github.com/fahadkhalid695/frontline-ai-hackathon",
+    demoUrl: "https://frontline-ai-hackathon.vercel.app/"
+  } 
 ];
