@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Send, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import MagneticButton from '../ui/MagneticButton';
 
 const Contact: React.FC = () => {
   const [ref, inView] = useInView({
@@ -15,6 +16,7 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -70,21 +72,27 @@ const Contact: React.FC = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {socialLinks.map((link, index) => (
-                <motion.a
+                <MagneticButton
                   key={link.name}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center p-4 bg-dark/50 hover:bg-primary-500/20 border border-dark-light hover:border-primary-500/30 rounded-lg text-light/80 hover:text-primary-400 transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  className="flex items-center p-4 bg-dark/50 hover:bg-primary-500/20 border border-dark-light hover:border-primary-500/30 rounded-lg text-light/80 hover:text-primary-400 transition-all duration-300 group w-full"
+                  strength={0.2}
                 >
-                  <span className="bg-primary-500/20 p-2 rounded-lg mr-3 group-hover:bg-primary-500/30 transition-colors duration-300">
-                    {link.icon}
-                  </span>
-                  <span className="font-medium">{link.name}</span>
-                </motion.a>
+                  <motion.div
+                    className="flex items-center w-full"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  >
+                    <motion.span 
+                      className="bg-primary-500/20 p-2 rounded-lg mr-3 group-hover:bg-primary-500/30 transition-colors duration-300"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      {link.icon}
+                    </motion.span>
+                    <span className="font-medium">{link.name}</span>
+                  </motion.div>
+                </MagneticButton>
               ))}
             </div>
           </motion.div>
@@ -112,51 +120,85 @@ const Contact: React.FC = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                  >
                     <label htmlFor="name" className="block text-light/90 mb-1">Name</label>
-                    <input
+                    <motion.input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField('name')}
+                      onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full px-4 py-2 bg-dark-light border border-dark-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-light"
+                      className="w-full px-4 py-3 bg-dark-light border border-dark-light rounded-lg focus:outline-none text-light transition-all duration-300"
+                      style={{
+                        borderColor: focusedField === 'name' ? '#00fff0' : undefined,
+                        boxShadow: focusedField === 'name' ? '0 0 20px rgba(0, 255, 240, 0.3)' : undefined,
+                      }}
+                      whileFocus={{ scale: 1.02 }}
                     />
-                  </div>
+                  </motion.div>
                   
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                  >
                     <label htmlFor="email" className="block text-light/90 mb-1">Email</label>
-                    <input
+                    <motion.input
                       type="email"
                       id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField('email')}
+                      onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full px-4 py-2 bg-dark-light border border-dark-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-light"
+                      className="w-full px-4 py-3 bg-dark-light border border-dark-light rounded-lg focus:outline-none text-light transition-all duration-300"
+                      style={{
+                        borderColor: focusedField === 'email' ? '#00fff0' : undefined,
+                        boxShadow: focusedField === 'email' ? '0 0 20px rgba(0, 255, 240, 0.3)' : undefined,
+                      }}
+                      whileFocus={{ scale: 1.02 }}
                     />
-                  </div>
+                  </motion.div>
                   
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                  >
                     <label htmlFor="message" className="block text-light/90 mb-1">Message</label>
-                    <textarea
+                    <motion.textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField('message')}
+                      onBlur={() => setFocusedField(null)}
                       required
                       rows={5}
-                      className="w-full px-4 py-2 bg-dark-light border border-dark-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-light resize-none"
-                    ></textarea>
-                  </div>
+                      className="w-full px-4 py-3 bg-dark-light border border-dark-light rounded-lg focus:outline-none text-light resize-none transition-all duration-300"
+                      style={{
+                        borderColor: focusedField === 'message' ? '#00fff0' : undefined,
+                        boxShadow: focusedField === 'message' ? '0 0 20px rgba(0, 255, 240, 0.3)' : undefined,
+                      }}
+                      whileFocus={{ scale: 1.02 }}
+                    />
+                  </motion.div>
                   
-                  <button
-                    type="submit"
+                  <MagneticButton
+                    onClick={handleSubmit}
                     disabled={formStatus === 'submitting'}
                     className={`btn btn-primary w-full flex items-center justify-center ${
                       formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
                     }`}
+                    strength={0.3}
                   >
                     {formStatus === 'submitting' ? (
                       <>
@@ -172,7 +214,7 @@ const Contact: React.FC = () => {
                         <Send size={18} className="ml-2" />
                       </>
                     )}
-                  </button>
+                  </MagneticButton>
                 </form>
               )}
             </div>

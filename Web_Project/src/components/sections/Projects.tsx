@@ -119,7 +119,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <motion.div
-      className="bg-dark-lighter border border-dark-light/50 rounded-2xl overflow-hidden group h-full flex flex-col hover:border-primary-500/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary-500/10"
+      className="relative bg-dark-lighter border border-dark-light/50 rounded-2xl overflow-hidden group h-full flex flex-col transition-all duration-500"
       variants={{
         hidden: { opacity: 0, y: 30 },
         visible: { 
@@ -128,20 +128,74 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           transition: { duration: 0.6 }
         }
       }}
-      whileHover={{ y: -5 }}
+      whileHover={{ 
+        y: -8,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
+      style={{
+        background: 'rgba(255, 255, 255, 0.05)',
+        backdropFilter: 'blur(10px)',
+      }}
     >
+      {/* Animated border */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'linear-gradient(45deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+          padding: '1px',
+        }}
+        initial={false}
+        animate={{
+          background: [
+            'linear-gradient(0deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+            'linear-gradient(90deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+            'linear-gradient(180deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+            'linear-gradient(270deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+            'linear-gradient(360deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
+          ],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      
+      {/* Card content */}
+      <div className="relative z-10 h-full flex flex-col bg-dark-lighter/90 rounded-2xl"
+      >
       <div className="relative overflow-hidden h-56">
-        <img 
+        <motion.img 
           src={project.image} 
           alt={project.title} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         />
         
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
         
-        {/* Hover overlay with buttons */}
-        <div className="absolute inset-0 bg-dark/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+        {/* Shimmer effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+          animate={{
+            x: ['100%', '-100%'],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatDelay: 3,
+            ease: "easeInOut",
+          }}
+        />
+        
+        {/* Enhanced hover overlay with buttons */}
+        <motion.div 
+          className="absolute inset-0 bg-dark/60 backdrop-blur-sm flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           <div className="flex gap-4">
             <motion.a 
               href={project.githubUrl} 
@@ -229,6 +283,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <span className="relative z-10">Demo</span>
           </a>
         </div>
+      </div>
       </div>
     </motion.div>
   );

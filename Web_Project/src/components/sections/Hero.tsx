@@ -1,22 +1,66 @@
 import React from 'react';
 import { ChevronDown, BrainCircuit, Cloud, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import MagneticButton from '../ui/MagneticButton';
 
 const Hero: React.FC = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 300], [0, -50]);
+  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-dark to-dark-lighter px-4 sm:px-0"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-0"
     >
-      <div className="container-custom text-center z-10">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-light mb-6"
+      <motion.div 
+        className="container-custom text-center z-10"
+        style={{ y: y1, opacity }}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ 
+            duration: 1.2, 
+            ease: [0.6, -0.05, 0.01, 0.99],
+            type: "spring",
+            stiffness: 100
+          }}
         >
-          Fahad Khalid
-        </motion.h1>
+          <motion.h1 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-light mb-6 relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.span
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+              className="inline-block"
+            >
+              Fahad
+            </motion.span>
+            {' '}
+            <motion.span
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+              className="inline-block gradient-text"
+            >
+              Khalid
+            </motion.span>
+            
+            {/* Animated underline */}
+            <motion.div
+              className="absolute -bottom-2 left-1/2 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"
+              initial={{ width: 0, x: "-50%" }}
+              animate={{ width: "60%", x: "-50%" }}
+              transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
+            />
+          </motion.h1>
+        </motion.div>
         
         <motion.div
           initial={{ opacity: 0 }}
@@ -85,19 +129,28 @@ const Hero: React.FC = () => {
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="mt-8 sm:mt-16"
         >
-          <a 
+          <MagneticButton 
             href="#projects" 
-            className="btn btn-primary text-sm sm:text-base"
+            className="btn btn-primary text-sm sm:text-base group relative overflow-hidden"
+            strength={0.4}
           >
-            View My Work
-          </a>
+            <span className="relative z-10 flex items-center gap-2">
+              View My Work
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                →
+              </motion.div>
+            </span>
+          </MagneticButton>
         </motion.div>
-      </div>
+      </motion.div>
       
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
@@ -113,10 +166,51 @@ const Hero: React.FC = () => {
         </a>
       </motion.div>
       
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.15),transparent_70%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(37,99,235,0.1),transparent_50%)]"></div>
+      {/* Enhanced Background effects with parallax */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-dark via-dark-lighter to-dark"
+        style={{ y: y2 }}
+      />
+      
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: y1 }}
+      >
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 240, 0.3) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-15"
+          style={{
+            background: 'radial-gradient(circle, rgba(110, 68, 255, 0.3) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+      </motion.div>
       
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

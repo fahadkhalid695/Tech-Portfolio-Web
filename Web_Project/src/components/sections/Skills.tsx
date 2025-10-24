@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Cloud, Brain, Wrench } from 'lucide-react';
 import { skills } from '../../data/skills';
+import MagneticButton from '../ui/MagneticButton';
 
 const Skills: React.FC = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  
+  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
   const skillCategories = skills.reduce((acc, skill) => {
     if (!acc[skill.category]) {
@@ -110,10 +113,16 @@ const Skills: React.FC = () => {
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.id}
-                      className="group/skill"
+                      className="group/skill relative p-3 rounded-lg transition-all duration-300 hover:bg-dark/30"
                       initial={{ opacity: 0, x: -20 }}
                       animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.4, delay: (categoryIndex * 0.15) + (skillIndex * 0.1) }}
+                      onHoverStart={() => setHoveredSkill(skill.id)}
+                      onHoverEnd={() => setHoveredSkill(null)}
+                      whileHover={{ 
+                        scale: 1.02,
+                        transition: { duration: 0.2 }
+                      }}
                     >
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-light font-medium group-hover/skill:text-primary-300 transition-colors">
@@ -135,8 +144,20 @@ const Skills: React.FC = () => {
                               delay: (categoryIndex * 0.15) + (skillIndex * 0.1) + 0.3,
                               ease: "easeOut"
                             }}
+                            whileHover={{ 
+                              boxShadow: `0 0 20px ${skill.level === 'Advanced' ? 'rgba(16, 185, 129, 0.5)' : 'rgba(0, 255, 240, 0.5)'}`,
+                            }}
                           >
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                            <motion.div 
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                              animate={hoveredSkill === skill.id ? {
+                                x: ['-100%', '100%'],
+                              } : {}}
+                              transition={{
+                                duration: 1,
+                                ease: "easeInOut",
+                              }}
+                            />
                           </motion.div>
                         </div>
                         

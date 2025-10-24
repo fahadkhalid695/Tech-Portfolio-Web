@@ -8,6 +8,9 @@ import Projects from './components/sections/Projects';
 import Hackathons from './components/sections/Hackathons';
 import Certifications from './components/sections/Certifications';
 import Contact from './components/sections/Contact';
+import CustomCursor from './components/ui/CustomCursor';
+import ScrollAnimations from './components/ui/ScrollAnimations';
+import LoadingAnimation from './components/ui/LoadingAnimation';
 
 function App() {
   useEffect(() => {
@@ -17,19 +20,23 @@ function App() {
 
   return (
     <div className="min-h-screen bg-dark text-light">
-      <Header />
-      
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Hackathons />
-        <Certifications />
-        <Contact />
-      </main>
-      
-      <Footer />
+      <LoadingAnimation />
+      <CustomCursor />
+      <ScrollAnimations>
+        <Header />
+        
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Hackathons />
+          <Certifications />
+          <Contact />
+        </main>
+        
+        <Footer />
+      </ScrollAnimations>
     </div>
   );
 }
