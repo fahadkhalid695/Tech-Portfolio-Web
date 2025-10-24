@@ -163,7 +163,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       
       {/* Card content */}
       <div className="relative z-10 h-full flex flex-col bg-dark-lighter/90 rounded-2xl">
-      <div className="relative overflow-hidden h-56">
+        <div className="relative overflow-hidden h-56">
         <motion.img 
           src={project.image} 
           alt={project.title} 
@@ -222,16 +222,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </div>
         </motion.div>
 
-        {/* Featured badge for first 3 projects */}
-        {project.id <= 3 && (
-          <div className="absolute top-4 right-4">
-            <div className="flex items-center gap-1 bg-primary-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-              <Star size={12} />
-              Featured
+          {/* Featured badge for first 3 projects */}
+          {project.id <= 3 && (
+            <div className="absolute top-4 right-4">
+              <div className="flex items-center gap-1 bg-primary-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
+                <Star size={12} />
+                Featured
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
       
       <div className="p-6 flex-grow flex flex-col">
         <div className="flex items-start justify-between mb-3">
@@ -283,6 +283,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <span className="relative z-10">Demo</span>
           </a>
         </div>
+      </div>
       </div>
     </motion.div>
   );
