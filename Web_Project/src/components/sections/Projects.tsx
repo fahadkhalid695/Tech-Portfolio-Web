@@ -162,8 +162,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       />
       
       {/* Card content */}
-      <div className="relative z-10 h-full flex flex-col bg-dark-lighter/90 rounded-2xl"
-      >
+      <div className="relative z-10 h-full flex flex-col bg-dark-lighter/90 rounded-2xl">
       <div className="relative overflow-hidden h-56">
         <motion.img 
           src={project.image} 
@@ -196,6 +195,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
+        >
           <div className="flex gap-4">
             <motion.a 
               href={project.githubUrl} 
@@ -220,7 +220,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <ExternalLink size={24} />
             </motion.a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Featured badge for first 3 projects */}
         {project.id <= 3 && (
@@ -283,7 +283,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <span className="relative z-10">Demo</span>
           </a>
         </div>
-      </div>
       </div>
     </motion.div>
   );
