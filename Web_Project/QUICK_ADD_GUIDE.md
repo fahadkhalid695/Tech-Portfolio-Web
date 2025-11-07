@@ -119,4 +119,4 @@ Want to change colors, fonts, or layout? Check:
 
 ---
 
-**That's it!** Your portfolio is now fully data-driven. Just edit the data files and watch your portfolio update automatically! 🎉
+**That it!** Your portfolio is now fully data-driven. Just edit the data files and watch your portfolio update automatically! 🎉
