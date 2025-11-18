@@ -355,7 +355,6 @@ const About: React.FC = () => {
             </span>
           </MagneticButton>
         </motion.div>
-        </div>
       </div>
     </section>
   );
