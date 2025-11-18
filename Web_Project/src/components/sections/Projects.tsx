@@ -65,13 +65,13 @@ const Projects: React.FC = () => {
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.15
               }
             }
           }}
@@ -234,55 +234,94 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
       
       <div className="p-6 flex-grow flex flex-col">
-        <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-light group-hover:text-primary-400 transition-colors duration-300">
+        <motion.div 
+          className="flex items-start justify-between mb-3"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <motion.h3 
+            className="text-xl font-bold text-light group-hover:text-primary-400 transition-colors duration-300"
+            whileHover={{ x: 5 }}
+          >
             {project.title}
-          </h3>
-        </div>
+          </motion.h3>
+        </motion.div>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <motion.div 
+          className="flex flex-wrap gap-2 mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
           {project.tags.slice(0, 3).map((tag, index) => (
-            <span 
+            <motion.span 
               key={index} 
               className="inline-flex items-center px-3 py-1 bg-primary-500/15 text-primary-300 text-xs rounded-full font-medium border border-primary-500/20"
+              whileHover={{ 
+                scale: 1.1, 
+                backgroundColor: 'rgba(34, 211, 238, 0.25)',
+                borderColor: 'rgba(34, 211, 238, 0.4)'
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
           {project.tags.length > 3 && (
-            <span className="inline-flex items-center px-3 py-1 bg-light/10 text-light/60 text-xs rounded-full font-medium">
+            <motion.span 
+              className="inline-flex items-center px-3 py-1 bg-light/10 text-light/60 text-xs rounded-full font-medium"
+              whileHover={{ scale: 1.1 }}
+            >
               +{project.tags.length - 3} more
-            </span>
+            </motion.span>
           )}
-        </div>
+        </motion.div>
         
-        <p className="text-light/70 text-sm leading-relaxed mb-6 flex-grow">
+        <motion.p 
+          className="text-light/70 text-sm leading-relaxed mb-6 flex-grow"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          whileHover={{ scale: 1.01 }}
+        >
           {project.description}
-        </p>
+        </motion.p>
         
         {/* Enhanced buttons */}
-        <div className="flex gap-3 mt-auto">
-          <a 
+        <motion.div 
+          className="flex gap-3 mt-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        >
+          <motion.a 
             href={project.githubUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex-1 group/btn relative overflow-hidden bg-dark border border-dark-light hover:border-primary-500/50 text-light hover:text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
+            className="flex-1 group/btn relative overflow-hidden bg-dark border border-dark-light hover:border-cyan-500/50 text-light hover:text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <div className="absolute inset-0 bg-primary-500/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+            <div className="absolute inset-0 bg-cyan-500/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
             <Github size={16} className="relative z-10" />
             <span className="relative z-10">Code</span>
-          </a>
-          <a 
+          </motion.a>
+          <motion.a 
             href={project.demoUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="flex-1 group/btn relative overflow-hidden bg-primary-500 hover:bg-primary-600 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25"
+            className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500 translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></div>
             <Eye size={16} className="relative z-10" />
             <span className="relative z-10">Demo</span>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
       </div>
     </motion.div>

@@ -117,6 +117,7 @@ const Skills: React.FC = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.4, delay: (categoryIndex * 0.15) + (skillIndex * 0.1) }}
+                      whileHover={{ scale: 1.02, x: 5 }}
                       onHoverStart={() => setHoveredSkill(skill.id)}
                       onHoverEnd={() => setHoveredSkill(null)}
                       whileHover={{ 

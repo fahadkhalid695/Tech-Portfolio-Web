@@ -218,27 +218,6 @@ const Hackathons: React.FC = () => {
                       <span className="text-sm">Hackathon</span>
                     </div>
                   </div>
-                  
-                  {/* Action buttons */}
-                  <div className="flex gap-2">
-                    <MagneticButton
-                      className="flex-1 group/btn relative overflow-hidden bg-dark border border-dark-light hover:border-primary-500/50 text-light hover:text-white py-2 px-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2"
-                      strength={0.2}
-                    >
-                      <div className="absolute inset-0 bg-primary-500/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
-                      <Github size={14} className="relative z-10" />
-                      <span className="relative z-10 text-xs">Code</span>
-                    </MagneticButton>
-                    
-                    <MagneticButton
-                      className="flex-1 group/btn relative overflow-hidden bg-primary-500 hover:bg-primary-600 text-white py-2 px-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25"
-                      strength={0.2}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500 translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300"></div>
-                      <ExternalLink size={14} className="relative z-10" />
-                      <span className="relative z-10 text-xs">Details</span>
-                    </MagneticButton>
-                  </div>
                 </div>
               </div>
               </div>
