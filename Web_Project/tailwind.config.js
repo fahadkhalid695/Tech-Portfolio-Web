@@ -6,9 +6,9 @@ export default {
     extend: {
       colors: {
         // Light theme colors
-        'light-bg': '#F5F7FA',
-        'light-bg-secondary': '#FFFFFF',
-        'light-bg-tertiary': '#E8EDF2',
+        'light-bg': '#EDF2F7',
+        'light-bg-secondary': '#F7FAFC',
+        'light-bg-tertiary': '#E2E8F0',
         'light-text': '#0F172A',
         'light-text-secondary': '#475569',
         'light-text-tertiary': '#64748B',

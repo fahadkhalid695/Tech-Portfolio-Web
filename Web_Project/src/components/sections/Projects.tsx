@@ -135,7 +135,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     >
       {/* Animated border */}
       <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ borderRadius: '24px' }}
         style={{
           background: 'linear-gradient(45deg, transparent, rgba(0, 255, 240, 0.3), transparent)',
           padding: '1px',
@@ -158,7 +159,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       />
       
       {/* Card content */}
-      <div className="relative z-10 h-full flex flex-col rounded-2xl">
+      <div className="relative z-10 h-full flex flex-col" style={{ borderRadius: '24px' }}>
         <div className="relative overflow-hidden h-56">
         <motion.img 
           src={project.image} 
@@ -297,7 +298,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             href={project.githubUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex-1 group/btn relative overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary hover:border-cyan-500/50 text-light-text dark:text-dark-text hover:text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
+            className="flex-1 group/btn relative overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary hover:border-cyan-500/50 text-light-text dark:text-dark-text hover:text-white py-3 px-4 font-medium transition-all duration-300 flex items-center justify-center gap-2"
+            style={{ borderRadius: '16px' }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -309,7 +311,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             href={project.demoUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25"
+            className="flex-1 group/btn relative overflow-hidden bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white py-3 px-4 font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25"
+            style={{ borderRadius: '16px' }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
