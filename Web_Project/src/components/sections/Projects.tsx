@@ -160,7 +160,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       
       {/* Card content */}
       <div className="relative z-10 h-full flex flex-col" style={{ borderRadius: '24px' }}>
-        <div className="relative overflow-hidden h-56">
+        <div className="relative overflow-hidden h-56" style={{ borderRadius: '24px 24px 0 0' }}>
         <motion.img 
           src={project.image} 
           alt={project.title} 
