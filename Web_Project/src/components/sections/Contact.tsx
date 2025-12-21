@@ -47,7 +47,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="section bg-dark-lighter">
+    <section id="contact" className="section section-dark">
       <div className="container-custom">
         <motion.h2 
           className="section-title text-light mb-16 pb-4"

@@ -43,7 +43,7 @@
   }
   
   p {
-    @apply leading-relaxed text-sm sm:text-base text-light-secondary;
+    @apply leading-relaxed text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary;
   }
 }
 
@@ -221,7 +221,7 @@
 }
 
 *::-webkit-scrollbar-track {
-  @apply bg-dark;
+  @apply bg-light-bg-secondary dark:bg-dark-bg-secondary;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -378,11 +378,11 @@ input:focus, textarea:focus {
 
 /* Custom selection colors */
 ::selection {
-  @apply bg-primary-500/30 text-light;
+  @apply bg-primary-500/30 text-light-text dark:text-dark-text;
 }
 
 ::-moz-selection {
-  @apply bg-primary-500/30 text-light;
+  @apply bg-primary-500/30 text-light-text dark:text-dark-text;
 }
 
 /* Mobile-first media queries */

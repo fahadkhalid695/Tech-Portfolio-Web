@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
           }}
         >
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-light mb-6 relative"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-light-text dark:text-dark-text mb-6 relative gradient-text-premium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -96,7 +96,7 @@ const Hero: React.FC = () => {
             }}
           >
             <BrainCircuit size={32} sm:size={48} className="text-primary-500" />
-            <span className="mt-2 text-sm sm:text-base text-light/80">AI/ML</span>
+            <span className="mt-2 text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">AI/ML</span>
           </motion.div>
           
           <motion.div
@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
             }}
           >
             <Cloud size={32} sm:size={48} className="text-success-500" />
-            <span className="mt-2 text-sm sm:text-base text-light/80">Cloud</span>
+            <span className="mt-2 text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">Cloud</span>
           </motion.div>
           
           <motion.div
@@ -124,7 +124,7 @@ const Hero: React.FC = () => {
             }}
           >
             <Shield size={32} sm:size={48} className="text-primary-300" />
-            <span className="mt-2 text-sm sm:text-base text-light/80">Security</span>
+            <span className="mt-2 text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary">Security</span>
           </motion.div>
         </motion.div>
         
@@ -161,14 +161,14 @@ const Hero: React.FC = () => {
           ease: "easeInOut" 
         }}
       >
-        <a href="#about" className="text-light/50 hover:text-primary-500 transition-colors duration-300">
+        <a href="#about" className="text-light-text-tertiary dark:text-dark-text-tertiary hover:text-primary-500 transition-colors duration-300">
           <ChevronDown size={24} sm:size={32} />
         </a>
       </motion.div>
       
       {/* Enhanced Background effects with parallax */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-dark via-dark-lighter to-dark"
+        className="absolute inset-0 bg-gradient-to-br from-light-bg via-light-bg-secondary to-light-bg-tertiary dark:from-dark-bg dark:via-dark-bg-secondary dark:to-dark-bg-tertiary"
         style={{ y: y2 }}
       />
       
@@ -271,7 +271,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ texts }) => {
   }, [currentText, currentTextIndex, isDeleting, texts]);
   
   return (
-    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-light/90 inline-block">
+    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-light-text-secondary dark:text-dark-text-secondary inline-block">
       {currentText}
       <span className="animate-pulse text-primary-500">|</span>
     </h2>

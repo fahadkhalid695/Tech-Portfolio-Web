@@ -30,7 +30,7 @@ const Skills: React.FC = () => {
       case 'AI/ML':
         return <Brain size={24} className="text-primary-300" />;
       case 'Tools':
-        return <Wrench size={24} className="text-light/70" />;
+        return <Wrench size={24} className="text-light-text-tertiary dark:text-dark-text-tertiary" />;
       default:
         return <Code size={24} className="text-primary-400" />;
     }
@@ -78,10 +78,10 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="section bg-dark-lighter">
+    <section id="skills" className="section section-light">
       <div className="container-custom">
         <motion.h2 
-          className="section-title text-light mb-16"
+          className="section-title text-light-text dark:text-dark-text mb-16 gradient-text-premium"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -101,10 +101,10 @@ const Skills: React.FC = () => {
             >
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-dark/30">
+                  <div className="p-2 rounded-lg bg-light-bg-tertiary/30 dark:bg-dark-bg-tertiary/30">
                     {getCategoryIcon(category)}
                   </div>
-                  <h3 className="text-xl font-bold text-light group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-xl font-bold text-light-text dark:text-dark-text group-hover:text-primary-400 transition-colors">
                     {category}
                   </h3>
                 </div>
@@ -113,7 +113,7 @@ const Skills: React.FC = () => {
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.id}
-                      className="group/skill relative p-3 rounded-lg transition-all duration-300 hover:bg-dark/30"
+                      className="group/skill relative p-3 rounded-lg transition-all duration-300 hover:bg-light-bg-tertiary/30 dark:hover:bg-dark-bg-tertiary/30"
                       initial={{ opacity: 0, x: -20 }}
                       animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.4, delay: (categoryIndex * 0.15) + (skillIndex * 0.1) }}
@@ -126,16 +126,16 @@ const Skills: React.FC = () => {
                       }}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-light font-medium group-hover/skill:text-primary-300 transition-colors">
+                        <span className="text-light-text dark:text-dark-text font-medium group-hover/skill:text-primary-300 transition-colors">
                           {skill.name}
                         </span>
-                        <span className="text-xs text-light/60 font-medium">
+                        <span className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary font-medium">
                           {skill.level}
                         </span>
                       </div>
                       
                       <div className="relative">
-                        <div className="w-full bg-dark/50 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-light-bg-tertiary/50 dark:bg-dark-bg-tertiary/50 rounded-full h-2 overflow-hidden">
                           <motion.div
                             className={`h-full ${getLevelColor(skill.level)} rounded-full relative overflow-hidden`}
                             initial={{ width: 0 }}
@@ -198,25 +198,25 @@ const Skills: React.FC = () => {
               <div className="text-3xl font-bold text-primary-400 mb-2">
                 {skills.filter(s => s.level === 'Advanced').length}
               </div>
-              <div className="text-sm text-light/60">Advanced Skills</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Advanced Skills</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-success-400 mb-2">
                 {skills.filter(s => s.level === 'Intermediate').length}
               </div>
-              <div className="text-sm text-light/60">Intermediate</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Intermediate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-light/70 mb-2">
+              <div className="text-3xl font-bold text-light-text-secondary dark:text-dark-text-secondary mb-2">
                 {Object.keys(skillCategories).length}
               </div>
-              <div className="text-sm text-light/60">Categories</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Categories</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-primary-300 mb-2">
                 {skills.length}
               </div>
-              <div className="text-sm text-light/60">Total Skills</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Total Skills</div>
             </div>
           </div>
         </motion.div>

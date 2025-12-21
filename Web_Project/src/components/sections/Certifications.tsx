@@ -14,7 +14,7 @@ const Certifications: React.FC = () => {
   const [hoveredCert, setHoveredCert] = useState<number | null>(null);
 
   return (
-    <section id="certifications" className="section bg-dark-lighter">
+    <section id="certifications" className="section section-light">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"

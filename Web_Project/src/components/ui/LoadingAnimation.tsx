@@ -16,7 +16,7 @@ const LoadingAnimation: React.FC = () => {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-dark"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-light-bg dark:bg-dark-bg"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}

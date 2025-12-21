@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-dark border-t border-dark-light relative">
+    <footer className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-bg-tertiary dark:border-dark-bg-tertiary relative">
       {/* Back to top button */}
       <motion.button
         onClick={scrollToTop}
@@ -43,9 +43,9 @@ const Footer: React.FC = () => {
           >
             <div className="flex items-center gap-2">
               <span className="text-primary-500 text-2xl font-bold">FK</span>
-              <span className="text-light text-xl font-semibold">Fahad Khalid</span>
+              <span className="text-light-text dark:text-dark-text text-xl font-semibold">Fahad Khalid</span>
             </div>
-            <p className="text-light/70 leading-relaxed">
+            <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
               Computer Science Undergraduate passionate about AI/ML, Cloud Computing, and Cybersecurity. 
               Building innovative solutions for tomorrow's challenges.
             </p>
@@ -59,13 +59,13 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-4"
           >
-            <h4 className="text-light font-semibold text-lg">Quick Links</h4>
+            <h4 className="text-light-text dark:text-dark-text font-semibold text-lg">Quick Links</h4>
             <div className="grid grid-cols-2 gap-2">
               {['About', 'Skills', 'Projects', 'Hackathons', 'Certifications', 'Contact'].map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
-                  className="text-light/70 hover:text-primary-400 transition-colors duration-300 text-sm"
+                  className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-400 transition-colors duration-300 text-sm"
                 >
                   {link}
                 </a>
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-4"
           >
-            <h4 className="text-light font-semibold text-lg">Connect With Me</h4>
+            <h4 className="text-light-text dark:text-dark-text font-semibold text-lg">Connect With Me</h4>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link) => (
                 <a
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-dark-lighter hover:bg-primary-500/20 border border-dark-light hover:border-primary-500/30 rounded-lg text-light/70 hover:text-primary-400 transition-all duration-300 group"
+                  className="p-2 bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-primary-500/20 border border-light-bg-tertiary dark:border-dark-bg-tertiary hover:border-primary-500/30 rounded-lg text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-400 transition-all duration-300 group"
                   aria-label={link.name}
                 >
                   <span className="group-hover:scale-110 transition-transform duration-300 inline-block">
@@ -98,13 +98,13 @@ const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
-            <p className="text-light/60 text-sm">
+            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm">
               Open to collaboration and new opportunities
             </p>
           </motion.div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-dark-light">
+        <div className="mt-12 pt-8 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary">
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -112,12 +112,12 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col md:flex-row justify-between items-center gap-4"
           >
-            <p className="text-light/50 text-sm flex items-center gap-1">
+            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm flex items-center gap-1">
               &copy; {currentYear} Fahad Khalid. Made with 
               <Heart size={14} className="text-red-500 animate-pulse" /> 
               and lots of coffee
             </p>
-            <p className="text-light/50 text-sm">
+            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm">
               Built with React, TypeScript & Tailwind CSS
             </p>
           </motion.div>

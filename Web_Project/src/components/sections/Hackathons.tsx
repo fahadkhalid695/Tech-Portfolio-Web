@@ -14,7 +14,7 @@ const Hackathons: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <section id="hackathons" className="section bg-dark">
+    <section id="hackathons" className="section section-light">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"

@@ -21,10 +21,10 @@ const Projects: React.FC = () => {
     : projects.filter(project => project.tags.includes(filter));
 
   return (
-    <section id="projects" className="section bg-dark">
+    <section id="projects" className="section section-dark">
       <div className="container-custom">
         <motion.h2 
-          className="section-title text-light mb-8"
+          className="section-title text-light-text dark:text-dark-text mb-8 gradient-text-premium"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -34,7 +34,7 @@ const Projects: React.FC = () => {
         </motion.h2>
         
         <motion.p
-          className="text-center text-light/70 mb-12 max-w-2xl mx-auto"
+          className="text-center text-light-text-secondary dark:text-dark-text-secondary mb-12 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -56,7 +56,7 @@ const Projects: React.FC = () => {
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 border ${
                 filter === tag 
                   ? 'bg-primary-500 text-white border-primary-500 shadow-lg shadow-primary-500/25' 
-                  : 'bg-dark-lighter text-light/70 border-dark-light hover:bg-primary-500/10 hover:text-primary-400 hover:border-primary-500/30'
+                  : 'bg-light-bg-secondary dark:bg-dark-bg-secondary text-light-text-secondary dark:text-dark-text-secondary border-light-bg-tertiary dark:border-dark-bg-tertiary hover:bg-primary-500/10 hover:text-primary-400 hover:border-primary-500/30'
               }`}
             >
               {tag}
@@ -91,19 +91,19 @@ const Projects: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-3xl font-bold text-primary-400 mb-2">{projects.length}</div>
-              <div className="text-sm text-light/60">Projects Completed</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Projects Completed</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-success-400 mb-2">
                 {new Set(projects.flatMap(p => p.tags)).size}
               </div>
-              <div className="text-sm text-light/60">Technologies Used</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Technologies Used</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-primary-300 mb-2">
                 {Math.round((projects.filter(p => p.githubUrl.includes('github.com')).length / projects.length) * 100)}%
               </div>
-              <div className="text-sm text-light/60">Open Source</div>
+              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Open Source</div>
             </div>
           </div>
         </motion.div>
@@ -119,7 +119,7 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <motion.div
-      className="relative bg-dark-lighter border border-dark-light/50 rounded-2xl overflow-hidden group h-full flex flex-col transition-all duration-500"
+      className="card-incredible h-full flex flex-col transition-all duration-500"
       variants={{
         hidden: { opacity: 0, y: 30 },
         visible: { 
@@ -162,7 +162,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       />
       
       {/* Card content */}
-      <div className="relative z-10 h-full flex flex-col bg-dark-lighter/90 rounded-2xl">
+      <div className="relative z-10 h-full flex flex-col bg-light-bg/90 dark:bg-dark-bg-secondary/90 rounded-2xl">
         <div className="relative overflow-hidden h-56">
         <motion.img 
           src={project.image} 
@@ -191,7 +191,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         
         {/* Enhanced hover overlay with buttons */}
         <motion.div 
-          className="absolute inset-0 bg-dark/60 backdrop-blur-sm flex items-center justify-center"
+          className="absolute inset-0 bg-light-text/60 dark:bg-dark-text/60 backdrop-blur-sm flex items-center justify-center"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -241,7 +241,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           transition={{ duration: 0.4 }}
         >
           <motion.h3 
-            className="text-xl font-bold text-light group-hover:text-primary-400 transition-colors duration-300"
+            className="text-xl font-bold text-light-text dark:text-dark-text group-hover:text-primary-400 transition-colors duration-300"
             whileHover={{ x: 5 }}
           >
             {project.title}
@@ -272,7 +272,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           ))}
           {project.tags.length > 3 && (
             <motion.span 
-              className="inline-flex items-center px-3 py-1 bg-light/10 text-light/60 text-xs rounded-full font-medium"
+              className="inline-flex items-center px-3 py-1 bg-light-bg-tertiary/50 dark:bg-dark-bg-tertiary/50 text-light-text-tertiary dark:text-dark-text-tertiary text-xs rounded-full font-medium"
               whileHover={{ scale: 1.1 }}
             >
               +{project.tags.length - 3} more
@@ -281,7 +281,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </motion.div>
         
         <motion.p 
-          className="text-light/70 text-sm leading-relaxed mb-6 flex-grow"
+          className="text-light-text-secondary dark:text-dark-text-secondary text-sm leading-relaxed mb-6 flex-grow"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
@@ -301,7 +301,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             href={project.githubUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex-1 group/btn relative overflow-hidden bg-dark border border-dark-light hover:border-cyan-500/50 text-light hover:text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
+            className="flex-1 group/btn relative overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-bg-tertiary dark:border-dark-bg-tertiary hover:border-cyan-500/50 text-light-text dark:text-dark-text hover:text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
