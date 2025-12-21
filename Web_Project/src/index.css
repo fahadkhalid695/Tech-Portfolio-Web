@@ -304,7 +304,7 @@
 .btn:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-dark;
+  @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
 }
 
 /* Smooth transitions for all interactive elements */
