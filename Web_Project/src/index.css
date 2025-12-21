@@ -112,7 +112,7 @@
   
   .btn-primary {
     background: linear-gradient(45deg, #00fff0, #6e44ff);
-    @apply text-dark font-semibold;
+    @apply text-white font-semibold;
     box-shadow: 0 10px 30px rgba(0, 255, 240, 0.3);
   }
   
