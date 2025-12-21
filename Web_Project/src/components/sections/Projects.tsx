@@ -132,10 +132,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         y: -8,
         transition: { duration: 0.3, ease: "easeOut" }
       }}
-      style={{
-        background: 'rgba(255, 255, 255, 0.05)',
-        backdropFilter: 'blur(10px)',
-      }}
     >
       {/* Animated border */}
       <motion.div
@@ -162,7 +158,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       />
       
       {/* Card content */}
-      <div className="relative z-10 h-full flex flex-col bg-light-bg/90 dark:bg-dark-bg-secondary/90 rounded-2xl">
+      <div className="relative z-10 h-full flex flex-col rounded-2xl">
         <div className="relative overflow-hidden h-56">
         <motion.img 
           src={project.image} 

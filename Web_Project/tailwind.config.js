@@ -6,16 +6,16 @@ export default {
     extend: {
       colors: {
         // Light theme colors
-        'light-bg': '#F8FAFC',
-        'light-bg-secondary': '#F1F5F9',
-        'light-bg-tertiary': '#E2E8F0',
+        'light-bg': '#F5F7FA',
+        'light-bg-secondary': '#FFFFFF',
+        'light-bg-tertiary': '#E8EDF2',
         'light-text': '#0F172A',
         'light-text-secondary': '#475569',
         'light-text-tertiary': '#64748B',
         
         // Dark theme colors
-        'dark-bg': '#0A192F',
-        'dark-bg-secondary': '#112240',
+        'dark-bg': '#0B1929',
+        'dark-bg-secondary': '#132337',
         'dark-bg-tertiary': '#1E3A5F',
         'dark-text': '#E6F1FF',
         'dark-text-secondary': '#A8B2D1',

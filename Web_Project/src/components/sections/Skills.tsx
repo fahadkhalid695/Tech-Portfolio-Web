@@ -94,7 +94,7 @@ const Skills: React.FC = () => {
           {Object.entries(skillCategories).map(([category, categorySkills], categoryIndex) => (
             <motion.div
               key={category}
-              className={`card bg-gradient-to-br ${getCategoryGradient(category)} border border-dark-light/50 hover:border-primary-500/30 transition-all duration-300 group`}
+              className="card-incredible bg-gradient-to-br from-light-bg-secondary/50 to-light-bg-tertiary/50 dark:from-dark-bg-secondary/50 dark:to-dark-bg-tertiary/50 border-light-bg-tertiary/50 dark:border-dark-bg-tertiary/50 hover:border-primary-500/30 transition-all duration-300 group"
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: categoryIndex * 0.15 }}
