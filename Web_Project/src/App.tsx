@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/sections/Hero';
@@ -19,25 +20,27 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark text-light">
-      <LoadingAnimation />
-      <CustomCursor />
-      <ScrollAnimations>
-        <Header />
-        
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Hackathons />
-          <Certifications />
-          <Contact />
-        </main>
-        
-        <Footer />
-      </ScrollAnimations>
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors duration-300">
+        <LoadingAnimation />
+        <CustomCursor />
+        <ScrollAnimations>
+          <Header />
+          
+          <main>
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <Hackathons />
+            <Certifications />
+            <Contact />
+          </main>
+          
+          <Footer />
+        </ScrollAnimations>
+      </div>
+    </ThemeProvider>
   );
 }
 

@@ -27,7 +27,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="section bg-dark-lighter">
+    <section id="about" className="section section-dark">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"
@@ -36,11 +36,11 @@ const About: React.FC = () => {
           transition={{ duration: 0.6 }}
           ref={ref}
         >
-          <motion.h2 className="section-title text-light mb-4">
+          <motion.h2 className="section-title text-light-text dark:text-dark-text mb-4 gradient-text-premium">
             About Me
           </motion.h2>
           <motion.p
-            className="text-light/70 max-w-2xl mx-auto text-lg"
+            className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}

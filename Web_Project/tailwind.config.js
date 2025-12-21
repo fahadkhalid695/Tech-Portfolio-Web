@@ -1,55 +1,75 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class', // Enable class-based dark mode
   theme: {
     extend: {
       colors: {
-        // Premium color palette - "Confident Minimalism"
+        // Light theme colors
+        'light-bg': '#F8FAFC',
+        'light-bg-secondary': '#F1F5F9',
+        'light-bg-tertiary': '#E2E8F0',
+        'light-text': '#0F172A',
+        'light-text-secondary': '#475569',
+        'light-text-tertiary': '#64748B',
+        
+        // Dark theme colors
+        'dark-bg': '#0A192F',
+        'dark-bg-secondary': '#112240',
+        'dark-bg-tertiary': '#1E3A5F',
+        'dark-text': '#E6F1FF',
+        'dark-text-secondary': '#A8B2D1',
+        'dark-text-tertiary': '#8892B0',
+        
+        // Accent colors (work in both themes)
         primary: {
-          50: '#e6ffff',
-          100: '#ccffff',
-          200: '#99ffff',
-          300: '#66ffff',
-          400: '#33ffff',
-          500: '#00fff0', // Electric Cyan - main accent
-          600: '#00ccbf',
-          700: '#00998f',
-          800: '#00665f',
-          900: '#003330',
+          50: '#E6F7FF',
+          100: '#CCEFFF',
+          200: '#99DFFF',
+          300: '#66CFFF',
+          400: '#33BFFF',
+          500: '#00BFFF', // Electric Blue
+          600: '#0099CC',
+          700: '#007399',
+          800: '#004D66',
+          900: '#002633',
         },
-        secondary: {
-          50: '#f3f0ff',
-          100: '#e6e0ff',
-          200: '#ccc2ff',
-          300: '#b3a3ff',
-          400: '#9985ff',
-          500: '#6e44ff', // Soft Purple - secondary accent
-          600: '#5833cc',
-          700: '#422699',
-          800: '#2c1a66',
-          900: '#160d33',
+        cyan: {
+          50: '#E6FBFF',
+          100: '#CCF7FF',
+          200: '#99EFFF',
+          300: '#66E7FF',
+          400: '#33DFFF',
+          500: '#22D3EE', // Cyan
+          600: '#1BA9BE',
+          700: '#147F8F',
+          800: '#0E555F',
+          900: '#072A30',
+        },
+        purple: {
+          50: '#F5E6FF',
+          100: '#EBCCFF',
+          200: '#D799FF',
+          300: '#C366FF',
+          400: '#AF33FF',
+          500: '#9333EA', // Purple
+          600: '#7629BB',
+          700: '#591F8C',
+          800: '#3C145E',
+          900: '#1E0A2F',
+        },
+        success: {
+          500: '#10B981',
+          400: '#34D399',
         },
         coral: {
-          50: '#fff5f5',
-          100: '#ffebeb',
-          200: '#ffd6d6',
-          300: '#ffc2c2',
-          400: '#ffadad',
-          500: '#ff6b6b', // Vibrant Coral - energy accent
-          600: '#cc5555',
-          700: '#994040',
-          800: '#662a2a',
-          900: '#331515',
+          500: '#FF6B6B',
+          400: '#FF8787',
         },
-        // Background colors - Deep & Rich
-        dark: '#0a192f', // Rich Navy - primary background
-        'dark-lighter': '#112240', // Secondary background for depth
-        'dark-light': '#1e2a4a', // Tertiary background
-        'dark-accent': '#233554', // For subtle highlights
-        // Text colors - High contrast
-        light: '#e6f1ff', // Off-white primary text
-        'light-secondary': '#8892b0', // Light gray secondary text
-        'light-accent': '#a8b2d1', // Accent text color
+        secondary: {
+          500: '#9333EA',
+          400: '#A855F7',
+        },
       },
       fontFamily: {
         sans: [
