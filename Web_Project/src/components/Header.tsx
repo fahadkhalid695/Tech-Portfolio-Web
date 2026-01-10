@@ -19,10 +19,12 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '#home', icon: <Home size={20} /> },
     { name: 'About', href: '#about', icon: <User size={20} /> },
+    { name: 'Experience', href: '#experience', icon: <Briefcase size={20} /> },
     { name: 'Skills', href: '#skills', icon: <Code size={20} /> },
     { name: 'Projects', href: '#projects', icon: <Briefcase size={20} /> },
     { name: 'Hackathons', href: '#hackathons', icon: <Trophy size={20} /> },
-    { name: 'Certifications', href: '#certifications', icon: <Award size={20} /> },
+    { name: 'Certificates', href: '#certifications', icon: <Award size={20} /> },
+    { name: 'Platforms', href: '#platforms', icon: <Trophy size={20} /> },
     { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
   ];
 
@@ -42,7 +44,7 @@ const Header: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="flex items-center"
           >
-            <span className="text-primary-500 text-2xl font-bold">FK</span>
+            <span className="text-accent-500 text-2xl font-bold">FK</span>
             <span className="ml-2 text-light text-xl font-semibold hidden sm:inline-block">Fahad Khalid</span>
           </motion.div>
 
@@ -52,7 +54,7 @@ const Header: React.FC = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300 font-medium text-sm px-2 py-1 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary"
+                className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-300 font-medium text-sm px-2 py-1 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -70,7 +72,7 @@ const Header: React.FC = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-light-text dark:text-dark-text hover:text-primary-500 transition-colors duration-300 p-2 hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary rounded-lg"
+              className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-300 p-2 hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary rounded-lg"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close Menu" : "Open Menu"}
             >
@@ -97,7 +99,7 @@ const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="flex items-center text-light-text dark:text-dark-text hover:text-primary-500 py-2 px-3 rounded-lg hover:bg-light-bg dark:hover:bg-dark-bg transition-colors duration-300"
+                className="flex items-center text-light-text dark:text-dark-text hover:text-accent-500 py-2 px-3 rounded-lg hover:bg-light-bg dark:hover:bg-dark-bg transition-colors duration-300"
                 onClick={() => setIsOpen(false)}
               >
                 <span className="mr-2">{link.icon}</span>

@@ -1,224 +1,237 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, Cloud, Brain, Wrench } from 'lucide-react';
+import { Code, Cloud, Brain, Shield, Layers, ChevronDown } from 'lucide-react';
 import { skills } from '../../data/skills';
-import MagneticButton from '../ui/MagneticButton';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const Skills: React.FC = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
-  const skillCategories = skills.reduce((acc, skill) => {
-    if (!acc[skill.category]) {
-      acc[skill.category] = [];
-    }
-    acc[skill.category].push(skill);
-    return acc;
-  }, {} as Record<string, typeof skills>);
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Group skills by category
+  const skillGroups = {
+    'Frontend': skills.filter(s => ['React', 'TypeScript', 'JavaScript', 'HTML/CSS', 'Tailwind'].includes(s.name)),
+    'Backend': skills.filter(s => ['Python', 'Node.js', 'FastAPI', 'REST APIs'].includes(s.name)),
+    'Cloud': skills.filter(s => ['AWS', 'Azure', 'Docker', 'Kubernetes', 'CI/CD'].includes(s.name)),
+    'Security': skills.filter(s => ['Cybersecurity', 'Penetration Testing', 'Network Security'].includes(s.name)),
+    'AI/ML': skills.filter(s => ['Machine Learning', 'TensorFlow', 'PyTorch', 'Data Analysis', 'Pandas', 'NumPy'].includes(s.name)),
+  };
 
   const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'Programming':
-        return <Code size={24} className="text-primary-400" />;
-      case 'Cloud':
-        return <Cloud size={24} className="text-success-400" />;
-      case 'AI/ML':
-        return <Brain size={24} className="text-primary-300" />;
-      case 'Tools':
-        return <Wrench size={24} className="text-light-text-tertiary dark:text-dark-text-tertiary" />;
-      default:
-        return <Code size={24} className="text-primary-400" />;
-    }
+    const icons: Record<string, JSX.Element> = {
+      'Frontend': <Code className="w-6 h-6" />,
+      'Backend': <Layers className="w-6 h-6" />,
+      'Cloud': <Cloud className="w-6 h-6" />,
+      'Security': <Shield className="w-6 h-6" />,
+      'AI/ML': <Brain className="w-6 h-6" />,
+    };
+    return icons[category] || <Code className="w-6 h-6" />;
   };
 
-  const getCategoryGradient = (category: string) => {
-    switch (category) {
-      case 'Programming':
-        return 'from-primary-500/20 to-primary-600/10';
-      case 'Cloud':
-        return 'from-success-500/20 to-success-600/10';
-      case 'AI/ML':
-        return 'from-primary-300/20 to-primary-400/10';
-      case 'Tools':
-        return 'from-light/10 to-light/5';
-      default:
-        return 'from-primary-500/20 to-primary-600/10';
-    }
+  const getCategoryColor = (category: string) => {
+    const colors: Record<string, string> = {
+      'Frontend': 'accent',
+      'Backend': 'purple',
+      'Cloud': 'cyan',
+      'Security': 'yellow',
+      'AI/ML': 'pink',
+    };
+    return colors[category] || 'accent';
   };
 
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case 'Advanced':
-        return 'bg-success-500';
-      case 'Intermediate':
-        return 'bg-primary-500';
-      case 'Beginner':
-        return 'bg-light/40';
-      default:
-        return 'bg-light/40';
-    }
-  };
-
-  const getLevelPercentage = (level: string) => {
-    switch (level) {
-      case 'Advanced':
-        return 90;
-      case 'Intermediate':
-        return 70;
-      case 'Beginner':
-        return 40;
-      default:
-        return 40;
-    }
+  const getProficiencyWidth = (level: string) => {
+    const widths: Record<string, string> = {
+      'Advanced': '90%',
+      'Intermediate': '70%',
+      'Beginner': '40%',
+    };
+    return widths[level] || '50%';
   };
 
   return (
     <section id="skills" className="section section-light">
       <div className="container-custom">
-        <motion.h2 
-          className="section-title text-light-text dark:text-dark-text mb-16 gradient-text-premium"
+        <motion.div
+          ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          ref={ref}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
+          className="text-center mb-12"
         >
-          Skills & Technologies
-        </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {Object.entries(skillCategories).map(([category, categorySkills], categoryIndex) => (
-            <motion.div
-              key={category}
-              className="card-incredible bg-gradient-to-br from-light-bg-secondary/50 to-light-bg-tertiary/50 dark:from-dark-bg-secondary/50 dark:to-dark-bg-tertiary/50 border-light-bg-tertiary/50 dark:border-dark-bg-tertiary/50 hover:border-primary-500/30 transition-all duration-300 group"
-              style={{ borderRadius: '24px' }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.15 }}
-            >
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-light-bg-tertiary/30 dark:bg-dark-bg-tertiary/30">
-                    {getCategoryIcon(category)}
+          <h2 className="gradient-text-premium mb-4">Skills & Expertise</h2>
+          <p className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
+            Depth over breadth. These are the tools I actually use to build real solutions.
+          </p>
+        </motion.div>
+
+        {/* Interactive skill group cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Object.entries(skillGroups).map(([category, categorySkills], index) => {
+            const isExpanded = expandedCard === category;
+            const color = getCategoryColor(category);
+
+            return (
+              <motion.div
+                key={category}
+                className={`relative card-incredible p-6 cursor-pointer transition-all duration-500 ${
+                  activeSkill === category ? 'ring-2 ring-accent-500' : ''
+                }`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: prefersReducedMotion ? 0 : 0.5,
+                  delay: index * 0.1,
+                }}
+                whileHover={prefersReducedMotion ? {} : {
+                  y: -8,
+                  scale: 1.02,
+                }}
+                onClick={() => setExpandedCard(isExpanded ? null : category)}
+                onMouseEnter={() => setActiveSkill(category)}
+                onMouseLeave={() => setActiveSkill(null)}
+              >
+                {/* Subtle background glow for active card */}
+                {activeSkill === category && (
+                  <motion.div
+                    className="absolute inset-0 bg-accent-500/5 rounded-3xl"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+
+                {/* Header */}
+                <div className="relative z-10 flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-12 h-12 rounded-xl bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-${color}-500`}>
+                      {getCategoryIcon(category)}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-light-text dark:text-dark-text">
+                        {category}
+                      </h3>
+                      <p className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
+                        {categorySkills.length} skills
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-light-text dark:text-dark-text group-hover:text-primary-400 transition-colors">
-                    {category}
-                  </h3>
+                  <motion.div
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-light-text-secondary dark:text-dark-text-secondary" />
+                  </motion.div>
                 </div>
-                
-                <div className="space-y-4">
+
+                {/* Skills list - expands on hover/click */}
+                <motion.div
+                  className="relative z-10 space-y-3 overflow-hidden"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: isExpanded ? 'auto' : 0,
+                    opacity: isExpanded ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.id}
-                      className="group/skill relative p-3 rounded-lg transition-all duration-300 hover:bg-light-bg-tertiary/30 dark:hover:bg-dark-bg-tertiary/30"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={inView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.4, delay: (categoryIndex * 0.15) + (skillIndex * 0.1) }}
-                      whileHover={{ scale: 1.02, x: 5 }}
-                      onHoverStart={() => setHoveredSkill(skill.id)}
-                      onHoverEnd={() => setHoveredSkill(null)}
-                      whileHover={{ 
-                        scale: 1.02,
-                        transition: { duration: 0.2 }
-                      }}
+                      className="group/skill"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={isExpanded ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: skillIndex * 0.05 }}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-light-text dark:text-dark-text font-medium group-hover/skill:text-primary-300 transition-colors">
+                        <span className="text-sm font-medium text-light-text dark:text-dark-text group-hover/skill:text-accent-500 transition-colors">
                           {skill.name}
                         </span>
-                        <span className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary font-medium">
+                        <span className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary">
                           {skill.level}
                         </span>
                       </div>
                       
-                      <div className="relative">
-                        <div className="w-full bg-light-bg-tertiary/50 dark:bg-dark-bg-tertiary/50 rounded-full h-2 overflow-hidden">
-                          <motion.div
-                            className={`h-full ${getLevelColor(skill.level)} rounded-full relative overflow-hidden`}
-                            initial={{ width: 0 }}
-                            animate={inView ? { width: `${getLevelPercentage(skill.level)}%` } : {}}
-                            transition={{ 
-                              duration: 1.2, 
-                              delay: (categoryIndex * 0.15) + (skillIndex * 0.1) + 0.3,
-                              ease: "easeOut"
-                            }}
-                            whileHover={{ 
-                              boxShadow: `0 0 20px ${skill.level === 'Advanced' ? 'rgba(16, 185, 129, 0.5)' : 'rgba(0, 255, 240, 0.5)'}`,
-                            }}
-                          >
-                            <motion.div 
-                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                              animate={hoveredSkill === skill.id ? {
-                                x: ['-100%', '100%'],
-                              } : {}}
-                              transition={{
-                                duration: 1,
-                                ease: "easeInOut",
-                              }}
-                            />
-                          </motion.div>
-                        </div>
-                        
-                        {/* Skill level indicator dots */}
-                        <div className="flex justify-between mt-1">
-                          {[1, 2, 3].map((dot) => (
-                            <div
-                              key={dot}
-                              className={`w-1 h-1 rounded-full transition-colors duration-300 ${
-                                (skill.level === 'Advanced') ||
-                                (skill.level === 'Intermediate' && dot <= 2) ||
-                                (skill.level === 'Beginner' && dot <= 1)
-                                  ? getLevelColor(skill.level).replace('bg-', 'bg-')
-                                  : 'bg-dark/50'
-                              }`}
-                            />
-                          ))}
-                        </div>
+                      {/* Visual proficiency indicator */}
+                      <div className="relative h-2 bg-light-bg-tertiary dark:bg-dark-bg-tertiary rounded-full overflow-hidden">
+                        <motion.div
+                          className={`absolute inset-y-0 left-0 bg-gradient-to-r from-${color}-500 to-${color}-400 rounded-full`}
+                          initial={{ width: 0 }}
+                          animate={inView && isExpanded ? { width: getProficiencyWidth(skill.level) } : {}}
+                          transition={{
+                            duration: 1,
+                            delay: skillIndex * 0.1,
+                            ease: 'easeOut',
+                          }}
+                        />
                       </div>
+
+                      {/* Context on hover */}
+                      <motion.div
+                        className="mt-1 text-xs text-light-text-tertiary dark:text-dark-text-tertiary opacity-0 group-hover/skill:opacity-100 transition-opacity"
+                      >
+                        Used in 3+ projects
+                      </motion.div>
                     </motion.div>
                   ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                </motion.div>
+
+                {/* Collapsed preview - show top 3 skills */}
+                {!isExpanded && (
+                  <motion.div
+                    className="relative z-10 flex flex-wrap gap-2"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: isExpanded ? 0 : 1 }}
+                  >
+                    {categorySkills.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill.id}
+                        className="px-3 py-1 text-xs font-medium bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text dark:text-dark-text rounded-full"
+                      >
+                        {skill.name}
+                      </span>
+                    ))}
+                    {categorySkills.length > 3 && (
+                      <span className="px-3 py-1 text-xs font-medium bg-accent-500/10 text-accent-500 rounded-full">
+                        +{categorySkills.length - 3}
+                      </span>
+                    )}
+                  </motion.div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
-        
-        {/* Skills Summary */}
-        <motion.div 
-          className="mt-16 text-center"
+
+        {/* Stats */}
+        <motion.div
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.6 }}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-400 mb-2">
-                {skills.filter(s => s.level === 'Advanced').length}
-              </div>
-              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Advanced Skills</div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-accent-500 mb-2">{skills.length}</div>
+            <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Total Skills</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-purple-500 mb-2">
+              {skills.filter(s => s.level === 'Advanced').length}
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-success-400 mb-2">
-                {skills.filter(s => s.level === 'Intermediate').length}
-              </div>
-              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Intermediate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-light-text-secondary dark:text-dark-text-secondary mb-2">
-                {Object.keys(skillCategories).length}
-              </div>
-              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Categories</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-300 mb-2">
-                {skills.length}
-              </div>
-              <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Total Skills</div>
-            </div>
+            <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Advanced</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-cyan-500 mb-2">5</div>
+            <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Categories</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-yellow-500 mb-2">2+</div>
+            <div className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">Years Learning</div>
           </div>
         </motion.div>
       </div>
