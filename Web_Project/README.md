@@ -1,60 +1,97 @@
-# 🚀 Fahad Khalid - Portfolio v2.0
+# 🚀 Fahad Khalid - Portfolio Website
 
-A modern, professional, and highly interactive portfolio website showcasing expertise in Computer Science, AI/ML, Cloud Computing, and Cybersecurity.
+A modern, minimalistic, and futuristic portfolio website showcasing expertise in Computer Science, AI/ML, Cloud Computing, and Cybersecurity.
 
-![Portfolio Version](https://img.shields.io/badge/version-2.0.0-blue.svg)
-![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.1-38B2AC?logo=tailwind-css)
+## ✨ Features
 
-## ✨ What's New in v2.0
+- **Minimalistic Design**: Clean, professional interface with deep navy background and cyan-purple gradient accents
+- **Glassmorphism UI**: Subtle glass effects with backdrop blur for modern aesthetics
+- **Smooth Animations**: Framer Motion powered transitions and scroll animations
+- **Fully Responsive**: Optimized for all devices from mobile to desktop
+- **Interactive Components**: Magnetic buttons, custom cursor, and hover effects
+- **Performance Optimized**: Fast loading with Vite and React
+- **Type Safe**: Built with TypeScript for reliability
 
-### Complete Redesign
-Every section has been completely redesigned with modern aesthetics, smooth animations, and enhanced interactivity.
+## 🎨 Design System
 
-### New Features
-- 🎯 **Scroll Progress Bar** - Visual reading progress indicator
-- 📄 **Floating Resume Button** - Appears at 80% scroll with pulse animation
-- 💼 **Experience Timeline** - Professional work history with achievements
-- 🌐 **Platform Profiles** - Interactive cards showcasing online presence
-- 🎨 **Project Modals** - Click projects to see detailed Problem→Solution→Impact
-- 🏆 **Horizontal Hackathons** - Swipeable cards with flip interaction
-- 📜 **Certificate Carousel** - Horizontal scrolling with category grouping
-- ♿ **Full Accessibility** - Respects `prefers-reduced-motion` and keyboard navigation
+### Color Palette
+- **Primary Background**: Deep Navy (#0A192F)
+- **Accent Colors**: Electric Blue (#00BFFF), Cyan (#22D3EE)
+- **Gradient**: Cyan → Purple (#22D3EE → #9333EA)
+- **Text**: Off-white (#EAEAEA)
 
-## 🎨 Design Philosophy
+### Typography
+- **Headings**: Poppins (Bold, Confident)
+- **Body**: Roboto (Readable, Modern)
+- **Code**: Space Grotesk
 
-### Visual Goals
-- **Hero**: Authority + curiosity - calm but powerful
-- **About**: Human, not boring - skilled and self-aware
-- **Skills**: Proof, not claims - depth over breadth
-- **Projects**: Your strongest weapon - alive and real
-- **Certificates**: Credibility, not clutter - learning consistency
-- **Hackathons**: Pressure. Teamwork. Impact. - energetic and competitive
+### Design Elements
+- Rounded corners (12-16px)
+- Glassmorphism cards with backdrop blur
+- Subtle shadow depth for hierarchy
+- Smooth transitions (300ms cubic-bezier)
 
-### Design System
-- **Color Palette**: Modern Dark with cyan accent (#00D4FF)
-- **Animation Easing**: `cubic-bezier(0.2, 0.9, 0.2, 1)` everywhere
-- **Border Radius**: 24px cards, 16px buttons, full rounded pills
-- **Hover Depth**: Consistent -8px lift with scale
-- **Glassmorphism**: Subtle depth with backdrop blur
+## 📊 Project Statistics
+
+- **Total Lines of Code**: ~4,100 lines
+  - Source Files (src/): 3,896 lines
+  - Configuration: 206 lines
+- **Components**: 19 React components
+- **Sections**: 7 main sections
+- **UI Components**: 5 reusable components
+- **Data Files**: 6 structured data modules
 
 ## 🛠️ Tech Stack
 
 ### Core
-- **React 18.3.1** - UI library with hooks
-- **TypeScript 5.5.3** - Type safety
-- **Vite 5.4.2** - Lightning-fast build tool
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool & dev server
 
 ### Styling
-- **Tailwind CSS 3.4.1** - Utility-first CSS
-- **Framer Motion 11.0.5** - Smooth animations
+- **Tailwind CSS** - Utility-first CSS
+- **Framer Motion** - Animation library
 - **Custom CSS** - Glassmorphism & gradients
 
-### Features
-- **React Intersection Observer 9.8.1** - Scroll-triggered animations
-- **Lucide React 0.344.0** - Beautiful icons
-- **Custom Hooks** - useScrollProgress, useReducedMotion, use3DTilt
+### Icons & Assets
+- **Lucide React** - Icon library
+- **Google Fonts** - Poppins, Roboto, Inter
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── sections/          # Main page sections
+│   │   ├── Hero.tsx       # Landing section
+│   │   ├── About.tsx      # About me
+│   │   ├── Skills.tsx     # Technical skills
+│   │   ├── Projects.tsx   # Portfolio projects
+│   │   ├── Hackathons.tsx # Competition history
+│   │   ├── Certifications.tsx # Certificates
+│   │   └── Contact.tsx    # Contact form
+│   ├── ui/                # Reusable UI components
+│   │   ├── MagneticButton.tsx
+│   │   ├── CustomCursor.tsx
+│   │   ├── LoadingAnimation.tsx
+│   │   ├── ScrollAnimations.tsx
+│   │   └── HorizontalScroll.tsx
+│   ├── Header.tsx         # Navigation
+│   └── Footer.tsx         # Footer
+├── data/                  # Content data
+│   ├── personalInfo.ts
+│   ├── skills.ts
+│   ├── projects.ts
+│   ├── hackathons.ts
+│   ├── certifications.ts
+│   ├── socialLinks.ts
+│   └── templates/         # Data templates
+├── types/                 # TypeScript types
+├── utils/                 # Helper functions
+├── App.tsx               # Main app component
+├── main.tsx              # Entry point
+└── index.css             # Global styles
+```
 
 ## 🚀 Getting Started
 
@@ -64,82 +101,72 @@ Every section has been completely redesigned with modern aesthetics, smooth anim
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository
 ```bash
-git clone "https://github.com/fahadkhalid695/tech-portfolio-web.git"
-cd /tech-portfolio-web/Web_Project
+git clone <repository-url>
+cd Web_Project
 ```
 
-2. **Install dependencies**
+2. Install dependencies
 ```bash
 npm install
 ```
 
-3. **Start development server**
+3. Start development server
 ```bash
 npm run dev
 ```
 
-4. **Build for production**
+4. Build for production
 ```bash
 npm run build
 ```
 
-5. **Preview production build**
+5. Preview production build
 ```bash
 npm run preview
 ```
 
-## 📝 Customization Guide
+## 📝 Customization
 
-### 1. Update Personal Information
-Edit `src/data/personalInfo.ts`
+### Update Personal Information
+Edit `src/data/personalInfo.ts`:
+```typescript
+export const personalInfo = {
+  name: "Your Name",
+  title: "Your Title",
+  // ... more fields
+};
+```
 
-### 2. Add Your Experience
-Edit `src/data/experience.ts`
+### Add Projects
+Use the template in `src/data/templates/project-template.ts`:
+```typescript
+{
+  id: 'unique-id',
+  title: 'Project Name',
+  description: 'Description',
+  // ... more fields
+}
+```
 
-### 3. Update Platform Profiles
-Edit `src/data/platforms.ts`
+### Add Skills
+Edit `src/data/skills.ts` to add new skills with categories.
 
-### 4. Add Projects
-Edit `src/data/projects.ts`
+### Modify Colors
+Update `tailwind.config.js` to change the color scheme.
 
-### 5. Modify Colors
-Edit `tailwind.config.js`
+## 🎯 Sections Overview
 
-## ♿ Accessibility Features
+1. **Hero** - Eye-catching landing with animated text and icons
+2. **About** - Personal introduction with downloadable resume
+3. **Skills** - Technical expertise organized by category
+4. **Projects** - Portfolio showcase with live demos and GitHub links
+5. **Hackathons** - Competition achievements and team projects
+6. **Certifications** - Professional certificates and credentials
+7. **Contact** - Terminal-style contact form with social links
 
-- Reduced motion support
-- Keyboard navigation
-- Screen reader support
-- ARIA labels
-- Focus states
-
-## 🎯 Performance Optimizations
-
-- Lazy loading for images
-- Passive event listeners
-- Hardware-accelerated animations
-- Efficient re-renders
-- Code splitting
-- Optimized bundle size
-
-## 📱 Responsive Design
-
-- Mobile First approach
-- Touch-friendly interactions
-- Adaptive layouts
-- Swipe gestures
-
-## 🌐 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
-
-## 🚀 Deployment
+## 🌐 Deployment
 
 ### Vercel (Recommended)
 ```bash
@@ -150,47 +177,29 @@ vercel
 ### Netlify
 ```bash
 npm run build
-# Drag and drop 'dist' folder
+# Drag and drop 'dist' folder to Netlify
 ```
 
 ### GitHub Pages
 ```bash
 npm run build
-# Deploy 'dist' to gh-pages branch
+# Deploy 'dist' folder to gh-pages branch
 ```
 
-## 📊 Project Statistics
+## 📱 Browser Support
 
-- **Total Lines of Code**: ~6,500+ lines
-- **Components**: 25+ React components
-- **Sections**: 9 main sections
-- **Custom Hooks**: 3 hooks
-- **No New Dependencies**: Uses existing packages efficiently
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
+## 🤝 Contributing
 
-## 📈 Changelog
+This is a personal portfolio project, but suggestions and feedback are welcome!
 
-### Version 2.0.0 (January 2026)
-- ✨ Complete redesign of all sections
-- ✨ New Hero section with two-column layout
-- ✨ Interactive About section with modal
-- ✨ Expandable Skills section
-- ✨ Projects with detailed modals
-- ✨ Horizontal scrolling Hackathons
-- ✨ Certificate carousel with grouping
-- ✨ New Experience timeline
-- ✨ New Platforms section
-- ✨ Scroll progress indicator
-- ✨ Floating resume button
-- ✨ Full accessibility support
-- ✨ Custom hooks for scroll, motion, tilt
-- 🎨 Modern Dark color palette
-- 🎨 Consistent design system
-- ♿ Reduced motion support
-- 📱 Enhanced mobile experience
+## 📄 License
 
-### Version 1.0.0
-- Initial release
+MIT License - feel free to use this as a template for your own portfolio.
 
 ## 👤 Author
 
@@ -199,12 +208,13 @@ npm run build
 - LinkedIn: [Fahad Khalid](https://www.linkedin.com/in/fahad-khalid-aa674430a/)
 - Email: fahadkhalid695@gmail.com
 
-## 📄 License
+## 🙏 Acknowledgments
 
-MIT License - feel free to use this as a template for your own portfolio.
+- Design inspiration from modern tech portfolios
+- Framer Motion for smooth animations
+- Tailwind CSS for rapid styling
+- React community for excellent tools and libraries
 
 ---
 
 **Built with ❤️ using React, TypeScript, and Tailwind CSS**
-
-**Version 2.0.0** - A complete redesign focused on modern aesthetics, smooth animations, and exceptional user experience.

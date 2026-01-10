@@ -5,47 +5,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern Dark Palette (Primary)
-        'dark-bg': '#0F172A',        // Very dark navy
-        'dark-bg-secondary': '#0B1220', // Card bg
-        'dark-bg-tertiary': '#1E293B',
-        'dark-text': '#E6EEF8',      // Off-white
-        'dark-text-secondary': '#94A3B8',
-        'dark-text-tertiary': '#6B7280', // Muted gray
-        
         // Light theme colors
-        'light-bg': '#FFFFFF',
-        'light-bg-secondary': '#F6F9FF',
-        'light-bg-tertiary': '#EEF2FF',
+        'light-bg': '#EDF2F7',
+        'light-bg-secondary': '#F7FAFC',
+        'light-bg-tertiary': '#E2E8F0',
         'light-text': '#0F172A',
         'light-text-secondary': '#475569',
         'light-text-tertiary': '#64748B',
         
-        // Accent colors
-        accent: {
-          DEFAULT: '#00D4FF',        // Cyan accent
-          50: '#E6FBFF',
-          100: '#CCF7FF',
-          200: '#99EFFF',
-          300: '#66E7FF',
-          400: '#33DFFF',
-          500: '#00D4FF',
-          600: '#00A8CC',
-          700: '#007D99',
-          800: '#005366',
-          900: '#002933',
-        },
+        // Dark theme colors
+        'dark-bg': '#0B1929',
+        'dark-bg-secondary': '#132337',
+        'dark-bg-tertiary': '#1E3A5F',
+        'dark-text': '#E6F1FF',
+        'dark-text-secondary': '#A8B2D1',
+        'dark-text-tertiary': '#8892B0',
+        
+        // Accent colors (work in both themes)
         primary: {
           50: '#E6F7FF',
           100: '#CCEFFF',
           200: '#99DFFF',
           300: '#66CFFF',
           400: '#33BFFF',
-          500: '#00D4FF',
-          600: '#00A8CC',
-          700: '#007D99',
-          800: '#005366',
-          900: '#002933',
+          500: '#00BFFF', // Electric Blue
+          600: '#0099CC',
+          700: '#007399',
+          800: '#004D66',
+          900: '#002633',
         },
         cyan: {
           50: '#E6FBFF',
@@ -53,7 +40,7 @@ export default {
           200: '#99EFFF',
           300: '#66E7FF',
           400: '#33DFFF',
-          500: '#22D3EE',
+          500: '#22D3EE', // Cyan
           600: '#1BA9BE',
           700: '#147F8F',
           800: '#0E555F',
@@ -65,7 +52,7 @@ export default {
           200: '#D799FF',
           300: '#C366FF',
           400: '#AF33FF',
-          500: '#9333EA',
+          500: '#9333EA', // Purple
           600: '#7629BB',
           700: '#591F8C',
           800: '#3C145E',
@@ -127,10 +114,6 @@ export default {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'draw': 'draw 2s ease-out forwards',
         'magnetic': 'magnetic 0.3s ease-out',
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'slide-up': 'slideUp 0.6s ease-out forwards',
-        'scale-in': 'scaleIn 0.4s ease-out forwards',
-        'tilt': 'tilt 10s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -146,8 +129,8 @@ export default {
           '100%': { transform: 'translateX(100%)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 20px rgba(0, 212, 255, 0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(0, 212, 255, 0.6)' },
+          '0%': { boxShadow: '0 0 20px rgba(0, 255, 240, 0.3)' },
+          '100%': { boxShadow: '0 0 40px rgba(0, 255, 240, 0.6)' },
         },
         draw: {
           '0%': { strokeDashoffset: '1000' },
@@ -157,23 +140,6 @@ export default {
           '0%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.05)' },
           '100%': { transform: 'scale(1)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(12px) scale(0.995)', opacity: '0' },
-          '100%': { transform: 'translateY(0) scale(1)', opacity: '1' },
-        },
-        scaleIn: {
-          '0%': { transform: 'scale(0.95)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
-        },
-        tilt: {
-          '0%, 100%': { transform: 'rotate(0deg)' },
-          '25%': { transform: 'rotate(1deg)' },
-          '75%': { transform: 'rotate(-1deg)' },
         },
       },
       screens: {
