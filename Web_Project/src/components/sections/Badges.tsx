@@ -383,7 +383,7 @@ const BadgeCard: React.FC<BadgeCardProps> = ({ badge }) => {
               >
                 <Award size={40} style={{ color }} />
               </div>
-            )}}
+            )}
 
             {/* Verified indicator */}
             {badge.verificationUrl && (

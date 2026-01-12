@@ -137,6 +137,23 @@ export const badges: Badge[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
+  // INTRO TO CLOUD COMPUTING
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 9,
+    name: 'Intro to Cloud Computing',
+    issuer: 'Credly',
+    platform: 'credly',
+    earnedDate: 'January 2026',
+    imageUrl: 'https://images.credly.com/size/220x220/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob',
+    verificationUrl: 'https://www.credly.com/badges/2cc3722e-a42f-419e-b8d1-4c8c73b20068/public_url',
+    category: 'Cloud',
+    skills: ['Cloud Computing', 'Cloud Fundamentals'],
+    featured: true,
+    priority: 9,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
   // ADD MORE BADGES HERE
   // Copy any template above and fill in your actual badge details
   // Replace imageUrl with your actual badge image URLs from Credly
