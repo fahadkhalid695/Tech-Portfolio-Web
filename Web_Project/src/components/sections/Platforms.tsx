@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -9,7 +9,8 @@ import {
   BookOpen, 
   Cloud, 
   Award, 
-  Layers
+  Layers,
+  ExternalLink
 } from 'lucide-react';
 import { sortedPlatforms } from '../../data/platforms';
 import { PlatformStat } from '../../types';
@@ -22,7 +23,8 @@ import {
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PLATFORMS SECTION
-// Display platform tiles with live stats (GitHub API) and static badges
+// Display platform tiles with live stats and embedded badges
+// NO HOVER OVERLAYS - Clean simple cards that link directly
 // ═══════════════════════════════════════════════════════════════════════════
 
 const PlatformsSection: React.FC = () => {
@@ -32,6 +34,20 @@ const PlatformsSection: React.FC = () => {
   });
   
   const prefersReducedMotion = useReducedMotion();
+
+  // Load LinkedIn badge script on mount
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      const existingScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
+      if (existingScript) existingScript.remove();
+    };
+  }, []);
 
   return (
     <section 
@@ -91,13 +107,81 @@ const PlatformsSection: React.FC = () => {
             />
           ))}
         </motion.div>
+
+        {/* Featured Live Badges Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="mt-20"
+        >
+          <h3 className="text-xl font-semibold text-light-text dark:text-dark-text text-center mb-8">
+            Live Profile Badges
+          </h3>
+          
+          <div className="flex flex-wrap justify-center gap-8 items-start">
+            {/* TryHackMe Badge */}
+            <motion.div 
+              className="card-glass p-6 rounded-xl text-center"
+              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            >
+              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
+                <Shield size={16} style={{ color: '#1C2538' }} />
+                TryHackMe Profile
+              </h4>
+              <iframe 
+                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371" 
+                style={{ border: 'none', width: '320px', height: '180px', borderRadius: '8px' }}
+                title="TryHackMe Badge"
+                loading="lazy"
+              />
+              <a 
+                href="https://tryhackme.com/p/fahadkhalid695"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 mt-4 text-sm text-accent-500 hover:underline"
+              >
+                <ExternalLink size={14} />
+                View Full Profile
+              </a>
+            </motion.div>
+
+            {/* LinkedIn Badge */}
+            <motion.div 
+              className="card-glass p-6 rounded-xl text-center"
+              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            >
+              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
+                <Linkedin size={16} style={{ color: '#0A66C2' }} />
+                LinkedIn Profile
+              </h4>
+              <div 
+                className="badge-base LI-profile-badge" 
+                data-locale="en_US" 
+                data-size="medium" 
+                data-theme="dark" 
+                data-type="VERTICAL" 
+                data-vanity="fahadkhalid695" 
+                data-version="v1"
+              >
+                <a 
+                  className="badge-base__link LI-simple-link" 
+                  href="https://pk.linkedin.com/in/fahadkhalid695?trk=profile-badge"
+                >
+                  Fahad Khalid
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PLATFORM TILE - Individual platform card
+// PLATFORM TILE - Simple card with NO hover overlay/popup
+// Just a clean link card that takes you to the profile
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface PlatformTileProps {
@@ -105,72 +189,66 @@ interface PlatformTileProps {
   prefersReducedMotion: boolean;
 }
 
-const PlatformTile: React.FC<PlatformTileProps> = ({ platform }) => {
+const PlatformTile: React.FC<PlatformTileProps> = ({ platform, prefersReducedMotion }) => {
   const stats = useAllPlatformStats(platform);
   
   const Icon = getIconComponent(platform.icon);
   const hasLiveData = stats.some(s => s.source === 'api' && s.isLive);
 
   return (
-    <motion.div
+    <motion.a
+      href={platform.profileUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       variants={staggerItem}
-      className="relative group"
+      whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="block card-glass p-5 hover:border-accent-500/30 transition-all duration-300 group"
     >
-      <a
-        href={platform.profileUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block card-glass p-5 h-full hover:border-accent-500/30 transition-all duration-300"
-      >
-        {/* Header */}
-        <div className="flex items-start justify-between mb-3">
-          <div 
-            className="w-12 h-12 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: `${platform.color}20` }}
-          >
-            <Icon className="w-6 h-6" style={{ color: platform.color }} />
-          </div>
-            
-          {/* Live indicator for GitHub */}
-          {hasLiveData && (
-            <span className="flex items-center gap-1 text-xs text-success-500">
-              <span className="w-2 h-2 rounded-full bg-success-500 animate-pulse" />
-              Live
-            </span>
-          )}
+      {/* Header */}
+      <div className="flex items-start justify-between mb-3">
+        <div 
+          className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+          style={{ backgroundColor: `${platform.color}20` }}
+        >
+          <Icon className="w-6 h-6" style={{ color: platform.color }} />
         </div>
-
-        {/* Title & Username */}
-        <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-1">
-          {platform.displayName}
-        </h3>
-        <p className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary mb-3">
-          @{platform.username}
-        </p>
-        
-        {/* Stats */}
-        <div className="flex flex-wrap gap-2 mb-3">
-          {stats.map((stat, index) => (
-            <span 
-              key={index}
-              className="px-2 py-1 text-xs rounded-md bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-secondary dark:text-dark-text-secondary"
-            >
-              {stat.loading ? '...' : stat.value} {platform.stats[index]?.label}
-            </span>
-          ))}
-        </div>
-
-        {/* TryHackMe Badge */}
-        {platform.badgeImageUrl && (
-          <img 
-            src={platform.badgeImageUrl}
-            alt={`${platform.displayName} badge`}
-            className="w-24 h-auto object-contain opacity-70 mt-2"
-            loading="lazy"
-          />
+          
+        {/* Live indicator for GitHub */}
+        {hasLiveData && (
+          <span className="flex items-center gap-1 text-xs text-success-500">
+            <span className="w-2 h-2 rounded-full bg-success-500 animate-pulse" />
+            Live
+          </span>
         )}
-      </a>
-    </motion.div>
+      </div>
+
+      {/* Title & Username */}
+      <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-1 group-hover:text-accent-500 transition-colors">
+        {platform.displayName}
+      </h3>
+      <p className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary mb-3">
+        @{platform.username}
+      </p>
+      
+      {/* Stats */}
+      <div className="flex flex-wrap gap-2">
+        {stats.map((stat, index) => (
+          <span 
+            key={index}
+            className="px-2 py-1 text-xs rounded-md bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-secondary dark:text-dark-text-secondary"
+          >
+            {stat.loading ? '...' : stat.value} {platform.stats[index]?.label}
+          </span>
+        ))}
+      </div>
+
+      {/* View Profile hint on hover */}
+      <div className="mt-4 flex items-center gap-1 text-xs text-accent-500 opacity-0 group-hover:opacity-100 transition-opacity">
+        <ExternalLink size={12} />
+        View Profile
+      </div>
+    </motion.a>
   );
 };
 

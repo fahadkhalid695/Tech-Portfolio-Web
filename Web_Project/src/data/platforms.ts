@@ -54,7 +54,7 @@ export const platforms: PlatformStat[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // TRYHACKME - Badge Image
+  // TRYHACKME - Live badge shown in Featured section via iframe
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 3,
@@ -64,7 +64,7 @@ export const platforms: PlatformStat[] = [
     profileUrl: `https://tryhackme.com/p/${USERNAME}`,
     icon: 'Shield',
     color: '#1C2538',
-    badgeImageUrl: `https://tryhackme-badges.s3.amazonaws.com/${USERNAME}.png`,
+    // Badge is now shown via iframe in Featured section
     stats: [
       { label: 'Rooms Completed', value: 25, lastUpdated: 'January 2026' },
       { label: 'Rank', value: 'Hacker', lastUpdated: 'January 2026' },
