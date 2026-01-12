@@ -169,3 +169,45 @@ export interface MotionConfig {
 
 // Theme type for context
 export type ThemeMode = 'light' | 'dark';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BADGE TYPES - Digital badges from Credly, Google, Microsoft, etc.
+// ═══════════════════════════════════════════════════════════════════════════
+
+export type BadgePlatform = 
+  | 'credly'
+  | 'google'
+  | 'microsoft'
+  | 'aws'
+  | 'cisco'
+  | 'oracle'
+  | 'ibm'
+  | 'linkedin'
+  | 'coursera'
+  | 'tryhackme'
+  | 'other';
+
+export interface Badge {
+  id: number;
+  name: string;                    // Badge title
+  issuer: string;                  // "Amazon Web Services", "Google", etc.
+  platform: BadgePlatform;         // Platform that hosts the badge
+  earnedDate: string;              // "January 2026"
+  
+  // Badge display - use ONE of these:
+  imageUrl?: string;               // Direct image URL (PNG/SVG)
+  embedUrl?: string;               // Embed/iframe URL (for Credly, TryHackMe, etc.)
+  embedHeight?: string;            // Height for iframe (default: "180px")
+  credlyBadgeId?: string;          // Credly badge ID for their embed widget
+  
+  // Links
+  verificationUrl?: string;        // URL to verify the badge
+  
+  // Categorization
+  category?: 'Cloud' | 'Security' | 'AI/ML' | 'Development' | 'Data' | 'Networking' | 'Other';
+  skills?: string[];               // Skills this badge represents
+  
+  // Display
+  featured?: boolean;              // Highlight this badge
+  priority?: number;               // Display order (lower = first)
+}

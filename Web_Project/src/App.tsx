@@ -10,6 +10,7 @@ import Skills from './components/sections/Skills';
 import Projects from './components/sections/Projects';
 import Hackathons from './components/sections/Hackathons';
 import Certifications from './components/sections/Certifications';
+import Badges from './components/sections/Badges';
 import Platforms from './components/sections/Platforms';
 import Contact from './components/sections/Contact';
 import CustomCursor from './components/ui/CustomCursor';
@@ -94,7 +95,10 @@ function App() {
             {/* Certifications Section */}
             <Certifications />
             
-            {/* Platforms Section (NEW) */}
+            {/* Badges Section (NEW) - Auto-scrolling marquee */}
+            <Badges />
+            
+            {/* Platforms Section */}
             <Platforms />
             
             {/* Contact Section */}
