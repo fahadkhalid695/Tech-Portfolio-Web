@@ -153,8 +153,13 @@ const Hackathons: React.FC = () => {
         <div
           ref={scrollContainerRef}
           onWheel={handleWheel}
-          className="horizontal-scroll pb-4 -mx-4 px-4"
-          style={{ scrollSnapType: 'x mandatory' }}
+          className="flex flex-row gap-6 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
+          style={{ 
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
         >
           {hackathons.map((hackathon, index) => (
             <HackathonCard

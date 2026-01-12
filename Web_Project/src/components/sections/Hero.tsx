@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 lg:pt-24"
       aria-label="Hero section"
     >
       {/* Background gradient */}

@@ -242,28 +242,28 @@ const CertificationCard: React.FC<CertificationCardProps> = ({
 
       <div className="p-6 relative z-10">
         {/* Header */}
-        <div className="flex items-start gap-4 mb-4">
+        <div className="flex items-start gap-3 mb-4">
           <motion.div
-            className="p-3 rounded-xl"
+            className="p-2.5 rounded-xl flex-shrink-0"
             style={{ background: config.bgColor }}
             whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
           >
-            <Award size={24} style={{ color: config.color }} />
+            <Award size={20} style={{ color: config.color }} />
           </motion.div>
 
-          <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-light-text dark:text-dark-text mb-1 group-hover:text-accent-500 transition-colors line-clamp-2">
+          <div className="flex-1">
+            <h3 className="text-base font-bold text-light-text dark:text-dark-text mb-1 group-hover:text-accent-500 transition-colors">
               {cert.name}
             </h3>
             <div className="flex items-center gap-2 text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
-              <Building size={14} style={{ color: config.color }} />
-              <span className="truncate">{cert.organization}</span>
+              <Building size={14} style={{ color: config.color }} className="flex-shrink-0" />
+              <span>{cert.organization}</span>
             </div>
           </div>
 
           {/* Verified badge */}
           <motion.div
-            className="flex items-center gap-1 px-2 py-1 rounded-full bg-success-500/10 text-success-500 text-xs font-medium"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-500/10 text-success-500 text-[10px] font-medium flex-shrink-0"
             animate={
               !prefersReducedMotion
                 ? { y: [0, -2, 0] }
@@ -271,8 +271,8 @@ const CertificationCard: React.FC<CertificationCardProps> = ({
             }
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <CheckCircle size={10} />
-            <span className="hidden sm:inline">Verified</span>
+            <CheckCircle size={8} />
+            <span>Verified</span>
           </motion.div>
         </div>
 
