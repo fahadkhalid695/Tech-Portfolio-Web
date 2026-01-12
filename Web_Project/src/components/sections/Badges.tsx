@@ -11,8 +11,8 @@ import { staggerContainer, staggerItem, useReducedMotion } from '../../utils/ani
 // Features: Infinite scroll, pause on hover, trackpad/touch gestures
 // ═══════════════════════════════════════════════════════════════════════════
 
-const SCROLL_SPEED = 40; // pixels per second
-const BADGE_WIDTH = 180; // approximate badge card width + gap
+const SCROLL_SPEED = 35; // pixels per second (slightly slower for larger cards)
+const BADGE_WIDTH = 280; // badge card width + gap (increased for better visibility)
 
 const BadgesSection: React.FC = () => {
   const [ref, inView] = useInView({
@@ -89,7 +89,7 @@ const BadgesSection: React.FC = () => {
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-light-bg dark:from-dark-bg to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-light-bg dark:from-dark-bg to-transparent z-10 pointer-events-none" />
 
-          {/* First Row - Scrolls Left */}
+          {/* Single Row - Scrolls Left */}
           <MarqueeTrack
             badges={duplicatedBadges}
             isPaused={isPaused || isUserPaused || prefersReducedMotion}
@@ -97,18 +97,6 @@ const BadgesSection: React.FC = () => {
             onHoverEnd={() => setIsPaused(false)}
             direction="left"
           />
-
-          {/* Second Row - Scrolls Right (if enough badges) */}
-          {sortedBadges.length > 5 && (
-            <MarqueeTrack
-              badges={[...duplicatedBadges].reverse()}
-              isPaused={isPaused || isUserPaused || prefersReducedMotion}
-              onHoverStart={() => setIsPaused(true)}
-              onHoverEnd={() => setIsPaused(false)}
-              direction="right"
-              className="mt-6"
-            />
-          )}
         </div>
 
         {/* Stats */}
@@ -337,13 +325,13 @@ const BadgeCard: React.FC<BadgeCardProps> = ({ badge }) => {
 
   return (
     <motion.div
-      className={`flex-shrink-0 group ${hasEmbed ? 'w-72' : 'w-40'} ${!hasEmbed ? 'cursor-pointer' : ''}`}
-      whileHover={hasEmbed ? {} : { y: -8, scale: 1.05 }}
+      className={`flex-shrink-0 group ${hasEmbed ? 'w-80' : 'w-64'} ${!hasEmbed ? 'cursor-pointer' : ''}`}
+      whileHover={hasEmbed ? {} : { y: -8, scale: 1.02 }}
       transition={{ duration: 0.2 }}
       onClick={handleClick}
     >
       <div
-        className="card-glass p-4 h-full flex flex-col items-center text-center transition-all duration-300 hover:border-accent-500/30"
+        className="card-glass p-5 h-full flex flex-col items-center text-center transition-all duration-300 hover:border-accent-500/30"
         style={{
           boxShadow: `0 0 0 1px ${color}20`,
         }}
@@ -351,13 +339,13 @@ const BadgeCard: React.FC<BadgeCardProps> = ({ badge }) => {
         {/* Badge Display - iframe OR image */}
         {hasEmbed ? (
           // Iframe embed for Credly, TryHackMe, etc.
-          <div className="w-full mb-3">
+          <div className="w-full mb-4">
             <iframe
               src={badge.embedUrl}
               style={{ 
                 border: 'none', 
                 width: '100%', 
-                height: badge.embedHeight || '180px',
+                height: badge.embedHeight || '200px',
                 borderRadius: '8px',
                 overflow: 'hidden'
               }}
@@ -367,13 +355,13 @@ const BadgeCard: React.FC<BadgeCardProps> = ({ badge }) => {
             />
           </div>
         ) : (
-          // Image display
-          <div className="relative w-24 h-24 mb-3 flex items-center justify-center">
+          // Image display - LARGER SIZE
+          <div className="relative w-36 h-36 mb-4 flex items-center justify-center">
             {badge.imageUrl && !imageError ? (
               <>
                 {!imageLoaded && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-light-bg-tertiary dark:bg-dark-bg-tertiary animate-pulse" />
+                    <div className="w-24 h-24 rounded-full bg-light-bg-tertiary dark:bg-dark-bg-tertiary animate-pulse" />
                   </div>
                 )}
                 <img
@@ -390,12 +378,12 @@ const BadgeCard: React.FC<BadgeCardProps> = ({ badge }) => {
               </>
             ) : (
               <div
-                className="w-20 h-20 rounded-full flex items-center justify-center"
+                className="w-28 h-28 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: `${color}20` }}
               >
-                <Award size={32} style={{ color }} />
+                <Award size={40} style={{ color }} />
               </div>
-            )}
+            )}}
 
             {/* Verified indicator */}
             {badge.verificationUrl && (

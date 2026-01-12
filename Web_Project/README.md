@@ -4,93 +4,117 @@ A modern, minimalistic, and futuristic portfolio website showcasing expertise in
 
 ## ✨ Features
 
-- **Minimalistic Design**: Clean, professional interface with deep navy background and cyan-purple gradient accents
+- **Modern Dark Theme**: Deep navy background (#0F172A) with electric cyan (#00D4FF) accents
+- **Light/Dark Mode Toggle**: Seamlessly switch between themes
 - **Glassmorphism UI**: Subtle glass effects with backdrop blur for modern aesthetics
 - **Smooth Animations**: Framer Motion powered transitions and scroll animations
 - **Fully Responsive**: Optimized for all devices from mobile to desktop
 - **Interactive Components**: Magnetic buttons, custom cursor, and hover effects
+- **Auto-Scrolling Badge Marquee**: Showcase digital credentials with gesture support
 - **Performance Optimized**: Fast loading with Vite and React
 - **Type Safe**: Built with TypeScript for reliability
 
 ## 🎨 Design System
 
 ### Color Palette
-- **Primary Background**: Deep Navy (#0A192F)
-- **Accent Colors**: Electric Blue (#00BFFF), Cyan (#22D3EE)
-- **Gradient**: Cyan → Purple (#22D3EE → #9333EA)
-- **Text**: Off-white (#EAEAEA)
+**Dark Theme:**
+- **Primary Background**: Deep Navy (#0F172A)
+- **Secondary Background**: Slate (#1E293B)
+- **Accent Color**: Electric Cyan (#00D4FF)
+- **Text**: Off-white (#F1F5F9)
+
+**Light Theme:**
+- **Primary Background**: Light Gray (#FAFAFA)
+- **Secondary Background**: White (#FFFFFF)
+- **Accent Color**: Deep Cyan (#00B4D8)
+- **Text**: Dark Slate (#0F172A)
 
 ### Typography
-- **Headings**: Poppins (Bold, Confident)
-- **Body**: Roboto (Readable, Modern)
-- **Code**: Space Grotesk
+- **Headings**: Inter (Bold, Modern)
+- **Body**: Inter (Readable, Clean)
+- **Code**: JetBrains Mono
 
 ### Design Elements
 - Rounded corners (12-16px)
 - Glassmorphism cards with backdrop blur
 - Subtle shadow depth for hierarchy
 - Smooth transitions (300ms cubic-bezier)
+- Animated gradient text effects
 
 ## 📊 Project Statistics
 
-- **Total Lines of Code**: ~4,100 lines
-  - Source Files (src/): 3,896 lines
-  - Configuration: 206 lines
-- **Components**: 19 React components
-- **Sections**: 7 main sections
-- **UI Components**: 5 reusable components
-- **Data Files**: 6 structured data modules
+- **Total Lines of Code**: ~6,500+ lines
+  - Source Files (src/): 5,800+ lines
+  - Configuration: 700+ lines
+- **Components**: 22 React components
+- **Sections**: 10 main sections
+- **UI Components**: 7 reusable components
+- **Data Files**: 7 structured data modules
 
 ## 🛠️ Tech Stack
 
 ### Core
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool & dev server
+- **React 18.3** - UI library
+- **TypeScript 5.5** - Type safety
+- **Vite 5.4** - Build tool & dev server
 
 ### Styling
-- **Tailwind CSS** - Utility-first CSS
-- **Framer Motion** - Animation library
+- **Tailwind CSS 3.4** - Utility-first CSS
+- **Framer Motion 11** - Animation library
 - **Custom CSS** - Glassmorphism & gradients
 
 ### Icons & Assets
 - **Lucide React** - Icon library
-- **Google Fonts** - Poppins, Roboto, Inter
+- **React Icons** - Extended icon sets
+- **Google Fonts** - Inter, JetBrains Mono
 
 ## 📁 Project Structure
 
 ```
 src/
 ├── components/
-│   ├── sections/          # Main page sections
-│   │   ├── Hero.tsx       # Landing section
-│   │   ├── About.tsx      # About me
-│   │   ├── Skills.tsx     # Technical skills
-│   │   ├── Projects.tsx   # Portfolio projects
-│   │   ├── Hackathons.tsx # Competition history
-│   │   ├── Certifications.tsx # Certificates
-│   │   └── Contact.tsx    # Contact form
-│   ├── ui/                # Reusable UI components
+│   ├── sections/              # Main page sections
+│   │   ├── Hero.tsx           # Landing section with animated text
+│   │   ├── About.tsx          # About me with stats
+│   │   ├── Experience.tsx     # Work experience timeline
+│   │   ├── Skills.tsx         # Technical skills grid
+│   │   ├── Projects.tsx       # Portfolio showcase
+│   │   ├── Hackathons.tsx     # Competition achievements
+│   │   ├── Certifications.tsx # Professional certificates
+│   │   ├── Badges.tsx         # Digital badges marquee
+│   │   ├── Platforms.tsx      # Developer profiles
+│   │   └── Contact.tsx        # Contact form
+│   ├── ui/                    # Reusable UI components
+│   │   ├── Card.tsx
 │   │   ├── MagneticButton.tsx
 │   │   ├── CustomCursor.tsx
 │   │   ├── LoadingAnimation.tsx
 │   │   ├── ScrollAnimations.tsx
-│   │   └── HorizontalScroll.tsx
-│   ├── Header.tsx         # Navigation
-│   └── Footer.tsx         # Footer
-├── data/                  # Content data
+│   │   ├── HorizontalScroll.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── Header.tsx             # Navigation with theme toggle
+│   └── Footer.tsx             # Footer
+├── contexts/
+│   └── ThemeContext.tsx       # Theme state management
+├── data/                      # Content data files
 │   ├── personalInfo.ts
 │   ├── skills.ts
 │   ├── projects.ts
 │   ├── hackathons.ts
 │   ├── certifications.ts
+│   ├── badges.ts
 │   ├── socialLinks.ts
-│   └── templates/         # Data templates
-├── types/                 # TypeScript types
-├── utils/                 # Helper functions
-├── App.tsx               # Main app component
-├── main.tsx              # Entry point
-└── index.css             # Global styles
+│   └── templates/             # Data templates for reference
+├── types/
+│   └── index.ts               # TypeScript interfaces
+├── utils/
+│   ├── animations.ts          # Animation utilities
+│   └── dataHelpers.ts         # Data helper functions
+├── styles/
+│   └── theme.css              # Custom theme styles
+├── App.tsx                    # Main app component
+├── main.tsx                   # Entry point
+└── index.css                  # Global styles
 ```
 
 ## 🚀 Getting Started
@@ -158,13 +182,24 @@ Update `tailwind.config.js` to change the color scheme.
 
 ## 🎯 Sections Overview
 
-1. **Hero** - Eye-catching landing with animated text and icons
-2. **About** - Personal introduction with downloadable resume
-3. **Skills** - Technical expertise organized by category
-4. **Projects** - Portfolio showcase with live demos and GitHub links
-5. **Hackathons** - Competition achievements and team projects
-6. **Certifications** - Professional certificates and credentials
-7. **Contact** - Terminal-style contact form with social links
+1. **Hero** - Eye-catching landing with animated text, role titles, and CTAs
+2. **About** - Personal introduction with statistics and downloadable resume
+3. **Experience** - Professional work experience timeline
+4. **Skills** - Technical expertise organized by category with proficiency levels
+5. **Projects** - Portfolio showcase with live demos and GitHub links
+6. **Hackathons** - Competition achievements with horizontal scroll
+7. **Certifications** - Professional certificates and credentials
+8. **Badges** - Auto-scrolling marquee of digital badges from Credly, TryHackMe, etc.
+9. **Platforms** - Developer profiles (GitHub, LeetCode, TryHackMe) with quick links
+10. **Contact** - Contact form with social links
+
+## 📝 Updating Content
+
+See [UPDATING_PORTFOLIO.md](./UPDATING_PORTFOLIO.md) for detailed instructions on:
+- Updating personal information
+- Adding projects, certifications, and badges
+- Customizing theme colors
+- Adding images and assets
 
 ## 🌐 Deployment
 
