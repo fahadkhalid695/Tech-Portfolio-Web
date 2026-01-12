@@ -111,7 +111,7 @@ export const badges: Badge[] = [
     platform: 'tryhackme',
     earnedDate: '2024',
     // Use the iframe embed URL from TryHackMe
-    embedUrl: 'https://tryhackme./api/v2/badges/public-profile?userPublicId=3888371',
+    embedUrl: 'https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371',
     embedHeight: '150px',
     verificationUrl: 'https://tryhackme.com/p/fahadkhalid695',
     category: 'Security',
