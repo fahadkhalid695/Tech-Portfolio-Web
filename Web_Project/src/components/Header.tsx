@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code, Home, User, Briefcase, Award, Mail, Trophy } from 'lucide-react';
+import { Menu, X, Code, Home, User, Briefcase, Award, Mail, Trophy, Globe, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from './ui/ThemeToggle';
 
@@ -19,10 +19,12 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '#home', icon: <Home size={20} /> },
     { name: 'About', href: '#about', icon: <User size={20} /> },
+    { name: 'Experience', href: '#experience', icon: <Briefcase size={20} /> },
     { name: 'Skills', href: '#skills', icon: <Code size={20} /> },
-    { name: 'Projects', href: '#projects', icon: <Briefcase size={20} /> },
+    { name: 'Projects', href: '#projects', icon: <GraduationCap size={20} /> },
     { name: 'Hackathons', href: '#hackathons', icon: <Trophy size={20} /> },
     { name: 'Certifications', href: '#certifications', icon: <Award size={20} /> },
+    { name: 'Platforms', href: '#platforms', icon: <Globe size={20} /> },
     { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
   ];
 

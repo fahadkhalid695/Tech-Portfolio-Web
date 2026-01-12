@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Download, MapPin, Calendar, GraduationCap, ExternalLink, Code, Brain, Shield, Cloud } from 'lucide-react';
+import { Download, MapPin, Calendar, GraduationCap, ExternalLink, Code, Brain, Shield, Cloud, Sparkles } from 'lucide-react';
 import { getResumeUrl, getResumeAction } from '../../data/personalInfo';
 import MagneticButton from '../ui/MagneticButton';
+import { 
+  staggerContainer, 
+  staggerItem, 
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  useReducedMotion 
+} from '../../utils/animations';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ABOUT SECTION - Two-column layout with glassmorphism card
+// Features: animated ring-glow portrait, staggered reveals, scroll-triggered
+// ═══════════════════════════════════════════════════════════════════════════
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({
@@ -11,349 +24,283 @@ const About: React.FC = () => {
     threshold: 0.1,
   });
   
+  const prefersReducedMotion = useReducedMotion();
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
 
   const stats = [
-    { label: 'Years of Study', value: '2+', icon: <Calendar size={20} />, color: 'primary' },
-    { label: 'Projects Completed', value: '5+', icon: <GraduationCap size={20} />, color: 'success' },
-    { label: 'Technologies', value: '20+', icon: <Code size={20} />, color: 'secondary' },
+    { label: 'Years Learning', value: '2+', icon: <Calendar size={20} />, color: 'accent' },
+    { label: 'Projects Built', value: '5+', icon: <GraduationCap size={20} />, color: 'purple' },
+    { label: 'Technologies', value: '20+', icon: <Code size={20} />, color: 'success' },
   ];
 
-  const interests = [
-    { name: 'AI & Machine Learning', icon: <Brain size={20} />, color: 'primary' },
-    { name: 'Cloud Computing', icon: <Cloud size={20} />, color: 'success' },
-    { name: 'Cybersecurity', icon: <Shield size={20} />, color: 'secondary' },
-    { name: 'Full-Stack Development', icon: <Code size={20} />, color: 'coral' },
+  const highlights = [
+    { text: 'AI/ML systems that solve real problems', icon: <Brain size={16} /> },
+    { text: 'Scalable cloud infrastructure on AWS & Azure', icon: <Cloud size={16} /> },
+    { text: 'Security-first development approach', icon: <Shield size={16} /> },
+    { text: 'Clean, maintainable code', icon: <Code size={16} /> },
   ];
 
   return (
-    <section id="about" className="section section-dark">
-      <div className="container-custom">
+    <section 
+      id="about" 
+      className="py-20 lg:py-32 section-secondary relative overflow-hidden"
+      aria-label="About me"
+    >
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-accent-500/5 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-purple-500/5 blur-3xl" />
+      </div>
+
+      <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
           ref={ref}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={staggerContainer(0.1)}
+          className="text-center mb-16"
         >
-          <motion.h2 className="section-title text-light-text dark:text-dark-text mb-4 gradient-text-premium">
-            About Me
-          </motion.h2>
-          <motion.p
-            className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <motion.span 
+            variants={staggerItem}
+            className="inline-block px-4 py-2 rounded-full bg-accent-500/10 text-accent-500 text-sm font-medium mb-4"
           >
-            Passionate about technology, innovation, and creating solutions that make a difference
+            Get to Know Me
+          </motion.span>
+          
+          <motion.h2 
+            variants={staggerItem}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-4"
+          >
+            About <span className="gradient-text">Me</span>
+          </motion.h2>
+          
+          <motion.p 
+            variants={staggerItem}
+            className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto"
+          >
+            Passionate about technology, innovation, and creating solutions that make a difference.
           </motion.p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mb-12">
-          {/* Profile Image - Takes 2 columns */}
+        {/* Main Content - Two Column */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+          
+          {/* Left Column - Portrait */}
           <motion.div 
-            className="lg:col-span-2 relative group"
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="relative flex justify-center lg:justify-start"
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            variants={fadeInLeft}
           >
-            <div className="relative w-full max-w-sm mx-auto lg:mx-0">
-              {/* Enhanced background decorative elements */}
+            <div className="relative">
+              {/* Background glow */}
               <motion.div 
-                className="absolute -inset-6 bg-gradient-to-r from-primary-500/20 via-secondary-500/20 to-success-500/20 rounded-3xl blur-2xl"
-                animate={{
+                className="absolute -inset-8 bg-gradient-to-r from-accent-500/20 via-purple-500/20 to-accent-500/20 rounded-full blur-3xl"
+                animate={prefersReducedMotion ? {} : {
                   scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.6, 0.3],
+                  opacity: [0.4, 0.6, 0.4],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 5,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
               />
               
-              {/* Glass morphism container */}
-              <div 
-                className="relative rounded-2xl p-2 transition-all duration-500 group-hover:scale-105"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(15px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                }}
-              >
-                <motion.img 
-                  src="/image/pic.jpg" 
-                  alt="Fahad Khalid" 
-                  className="w-full h-auto rounded-xl object-cover"
-                  whileHover={{ scale: 1.02 }}
+              {/* Portrait container with ring glow */}
+              <div className="relative">
+                <motion.div 
+                  className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden ring-glow"
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                   transition={{ duration: 0.3 }}
-                />
+                >
+                  <img 
+                    src="/image/pic.jpg" 
+                    alt="Fahad Khalid" 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
                 
-                {/* Shimmer effect */}
-                <motion.div
-                  className="absolute inset-2 rounded-xl bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
-                  animate={{
-                    x: ['100%', '-100%'],
+                {/* Floating badge */}
+                <motion.div 
+                  className="absolute -bottom-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-purple-500 flex items-center justify-center shadow-xl"
+                  animate={prefersReducedMotion ? {} : { 
+                    y: [0, -8, 0],
+                    rotate: [0, 5, 0],
                   }}
-                  transition={{
+                  transition={{ 
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <span className="text-white font-bold text-lg">CS</span>
+                </motion.div>
+                
+                {/* Second floating element */}
+                <motion.div 
+                  className="absolute -top-2 -left-2 w-12 h-12 rounded-xl bg-success-500/20 backdrop-blur-sm flex items-center justify-center border border-success-500/30"
+                  animate={prefersReducedMotion ? {} : { 
+                    y: [0, 8, 0],
+                  }}
+                  transition={{ 
                     duration: 3,
                     repeat: Infinity,
-                    repeatDelay: 2,
                     ease: "easeInOut",
+                    delay: 1
                   }}
-                />
-              </div>
-              
-              {/* Enhanced floating badge */}
-              <motion.div 
-                className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center shadow-2xl"
-                animate={{ 
-                  rotate: [0, 10, -10, 0],
-                  scale: [1, 1.1, 1],
-                  boxShadow: [
-                    '0 10px 30px rgba(0, 255, 240, 0.3)',
-                    '0 20px 40px rgba(0, 255, 240, 0.5)',
-                    '0 10px 30px rgba(0, 255, 240, 0.3)',
-                  ],
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                whileHover={{ scale: 1.2, rotate: 15 }}
-              >
-                <div className="text-white font-bold text-xl">CS</div>
-              </motion.div>
-              
-              {/* Floating particles around image */}
-              <div className="absolute inset-0 pointer-events-none">
-                {[...Array(6)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 bg-primary-500/40 rounded-full"
-                    style={{
-                      left: `${20 + Math.random() * 60}%`,
-                      top: `${20 + Math.random() * 60}%`,
-                    }}
-                    animate={{
-                      y: [0, -20, 0],
-                      opacity: [0.4, 1, 0.4],
-                      scale: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 3 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: Math.random() * 2,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
+                >
+                  <Sparkles className="w-5 h-5 text-success-500" />
+                </motion.div>
               </div>
             </div>
           </motion.div>
           
-          {/* Description - Takes 3 columns */}
+          {/* Right Column - Content */}
           <motion.div 
-            className="lg:col-span-3 space-y-6"
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            className="space-y-6"
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            variants={staggerContainer(0.1, 0.3)}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              <motion.h3 
-                className="text-3xl font-bold text-light mb-3"
-                whileHover={{ x: 5 }}
-              >
+            <motion.div variants={staggerItem}>
+              <h3 className="text-2xl sm:text-3xl font-bold text-light-text dark:text-dark-text mb-2">
                 Computer Science Undergraduate
-              </motion.h3>
-              <motion.p 
-                className="text-primary-400 font-medium text-lg mb-6"
-                whileHover={{ x: 3 }}
-              >
-                Passionate Tech Enthusiast & Problem Solver
-              </motion.p>
+              </h3>
+              <p className="text-accent-500 font-medium text-lg">
+                Tech Enthusiast & Problem Solver
+              </p>
             </motion.div>
             
-            <motion.div 
-              className="space-y-4 text-light/80 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.0 }}
+            <motion.p 
+              variants={staggerItem}
+              className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed"
             >
-              <motion.p
-                whileHover={{ x: 3, scale: 1.01 }}
-                transition={{ duration: 0.2 }}
+              I'm a dedicated Computer Science student with a passion for exploring the intersection of 
+              technology and innovation. My journey has been focused on developing expertise in{' '}
+              <span className="text-accent-500 font-medium">AI/ML</span>,{' '}
+              <span className="text-purple-400 font-medium">cloud computing</span>, and{' '}
+              <span className="text-success-500 font-medium">cybersecurity</span>.
+            </motion.p>
+            
+            <motion.p 
+              variants={staggerItem}
+              className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed"
+            >
+              I believe in continuous learning and applying theoretical knowledge to practical solutions. 
+              My approach combines analytical thinking with creative problem-solving to develop efficient, 
+              scalable, and secure applications.
+            </motion.p>
+            
+            {/* Highlights with hover effect */}
+            <motion.div variants={staggerItem} className="space-y-3 pt-2">
+              <h4 className="text-sm font-semibold text-light-text dark:text-dark-text uppercase tracking-wider">
+                What I Build
+              </h4>
+              {highlights.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-3 text-light-text-secondary dark:text-dark-text-secondary group"
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="text-accent-500 group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </span>
+                  <span className="underline-grow">{item.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            {/* CTAs */}
+            <motion.div 
+              variants={staggerItem}
+              className="flex flex-wrap gap-4 pt-4"
+            >
+              <MagneticButton 
+                href="#contact" 
+                className="btn-premium"
+                strength={0.3}
+                aria-label="Get in touch"
               >
-                I'm a dedicated Computer Science student with a passion for exploring the intersection of technology and innovation. My academic journey has been focused on developing expertise in the cutting-edge fields of <span className="text-primary-400 font-medium">Artificial Intelligence and Machine Learning</span>.
-              </motion.p>
-              <motion.p
-                whileHover={{ x: 3, scale: 1.01 }}
-                transition={{ duration: 0.2 }}
+                <span className="relative z-10">Get In Touch</span>
+              </MagneticButton>
+              
+              <MagneticButton 
+                href={getResumeUrl()}
+                target={getResumeAction().target}
+                className="btn-secondary"
+                strength={0.3}
+                aria-label={getResumeAction().action === 'view' ? 'View resume' : 'Download resume'}
               >
-                Beyond the classroom, I've honed my skills in <span className="text-success-400 font-medium">cloud computing environments</span>, earning certifications in AWS and Azure platforms. My interest in cybersecurity has led me to explore robust security frameworks and ethical hacking techniques.
-              </motion.p>
-              <motion.p
-                whileHover={{ x: 3, scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
-                I believe in continuous learning and applying theoretical knowledge to practical solutions. My approach combines analytical thinking with creative problem-solving to develop efficient, scalable, and secure applications.
-              </motion.p>
+                <span className="flex items-center gap-2">
+                  {getResumeAction().action === 'view' ? (
+                    <>
+                      <ExternalLink size={16} />
+                      View Resume
+                    </>
+                  ) : (
+                    <>
+                      <Download size={16} />
+                      Download Resume
+                    </>
+                  )}
+                </span>
+              </MagneticButton>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Areas of Interest - Full Width Below */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.2 }}
-        >
-          <h4 className="text-xl font-semibold text-light mb-6 text-center">Areas of Interest</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {interests.map((interest, index) => (
-              <motion.div
-                key={interest.name}
-                className="flex flex-col items-center gap-3 p-6 rounded-xl bg-dark/30 border border-dark-light/30 hover:border-primary-500/30 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.05,
-                  y: -5,
-                  backgroundColor: 'rgba(34, 211, 238, 0.08)',
-                  boxShadow: '0 10px 30px rgba(34, 211, 238, 0.2)'
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 1.4 + index * 0.1 }}
-              >
-                <motion.div 
-                  className={`text-${interest.color}-400`}
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {interest.icon}
-                </motion.div>
-                <span className="text-sm font-medium text-light/90 text-center">{interest.name}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Stats - Full Width */}
+        {/* Stats Row */}
         <motion.div 
-          className="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.6 }}
+          className="grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={staggerContainer(0.1, 0.6)}
         >
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="text-center p-6 rounded-xl border border-dark-light/30 transition-all duration-300 relative overflow-hidden"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
-              }}
-              whileHover={{ 
-                y: -8,
-                scale: 1.05,
-                borderColor: `rgba(${stat.color === 'primary' ? '34, 211, 238' : stat.color === 'success' ? '16, 185, 129' : '147, 51, 234'}, 0.5)`,
-                boxShadow: `0 20px 40px rgba(${stat.color === 'primary' ? '34, 211, 238' : stat.color === 'success' ? '16, 185, 129' : '147, 51, 234'}, 0.3)`,
-              }}
-              onHoverStart={() => setHoveredStat(index)}
-              onHoverEnd={() => setHoveredStat(null)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1.8 + (index * 0.1) }}
+              variants={staggerItem}
+              className="card-glass text-center p-4 sm:p-6 group cursor-default"
+              onMouseEnter={() => setHoveredStat(index)}
+              onMouseLeave={() => setHoveredStat(null)}
+              whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.02 }}
+              transition={{ duration: 0.3 }}
             >
-              <motion.div
-                className="absolute inset-0 opacity-0"
-                style={{
-                  background: `linear-gradient(135deg, rgba(${stat.color === 'primary' ? '34, 211, 238' : stat.color === 'success' ? '16, 185, 129' : '147, 51, 234'}, 0.15), transparent)`,
-                }}
-                animate={{
-                  opacity: hoveredStat === index ? 1 : 0,
-                }}
-                transition={{ duration: 0.3 }}
-              />
-              
               <motion.div 
-                className={`flex justify-center mb-3 text-${stat.color}-400`}
-                animate={hoveredStat === index ? { 
-                  scale: 1.3, 
+                className={`flex justify-center mb-3 ${
+                  stat.color === 'accent' ? 'text-accent-500' :
+                  stat.color === 'purple' ? 'text-purple-400' : 'text-success-500'
+                }`}
+                animate={hoveredStat === index && !prefersReducedMotion ? { 
+                  scale: 1.2, 
                   rotate: 360 
                 } : { 
                   scale: 1, 
                   rotate: 0 
                 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
               >
                 {stat.icon}
               </motion.div>
               
               <motion.div 
-                className="text-3xl font-bold text-light mb-2"
-                animate={hoveredStat === index ? { 
-                  scale: 1.15,
-                } : { 
-                  scale: 1,
-                }}
-                transition={{ duration: 0.3 }}
+                className="text-2xl sm:text-3xl font-bold text-light-text dark:text-dark-text mb-1"
+                animate={hoveredStat === index && !prefersReducedMotion ? { scale: 1.1 } : { scale: 1 }}
+                transition={{ duration: 0.2 }}
               >
                 {stat.value}
               </motion.div>
               
-              <div className="text-sm text-light/60 relative z-10">{stat.label}</div>
+              <div className="text-xs sm:text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
+                {stat.label}
+              </div>
             </motion.div>
           ))}
-        </motion.div>
-        
-        {/* Action Buttons - Centered Below */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 2.0 }}
-        >
-          <MagneticButton 
-            href="#contact" 
-            className="btn btn-primary flex items-center gap-2"
-            strength={0.3}
-          >
-            <span>Get In Touch</span>
-          </MagneticButton>
-          
-          <MagneticButton 
-            href="#projects" 
-            className="btn btn-outline flex items-center gap-2"
-            strength={0.3}
-          >
-            <span>View Projects</span>
-          </MagneticButton>
-          
-          <MagneticButton 
-            href={getResumeUrl()}
-            className="btn btn-outline flex items-center gap-2 hover:bg-success-500 hover:border-success-500 hover:text-white transition-all duration-300"
-            strength={0.3}
-          >
-            <span className="flex items-center gap-2">
-              {getResumeAction().action === 'view' ? (
-                <>
-                  <ExternalLink size={16} />
-                  View Resume
-                </>
-              ) : (
-                <>
-                  <Download size={16} />
-                  Download Resume
-                </>
-              )}
-            </span>
-          </MagneticButton>
         </motion.div>
       </div>
     </section>
