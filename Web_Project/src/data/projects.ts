@@ -1,8 +1,26 @@
 import { Project } from '../types';
 
 export const projects: Project[] = [
-  {
+    {
     id: 1,
+    title: "Quizzy",
+    description: "A complete, production-ready quiz platform with AI-powered features, real-time leaderboards, and cheating detection.",
+    image: "/image/quizzy.png",
+    tags: ["Next JS", "React", "MongoDB", "Gemini API", "Tailwind CSS", "Typescript"],
+    githubUrl: "https://github.com/fahadkhalid695/Quizzy",
+    demoUrl: "https://quizzy-ffv2.vercel.app"
+  },
+    {
+    id: 3,
+    title: "PGC Muridke Website",
+    description: "A modern, fully-functional educational institution website built with React, Tailwind CSS, and Framer Motion. Features Google Forms integration, social media links, and complete responsiveness.",
+    image: "/image/pgc.png",
+    tags: ["React", "Vite", "Framer Motion", "Tailwind CSS", "React Router", "Google Forms"],
+    githubUrl: "https://github.com/fahadkhalid695/Pgc-Muridke",
+    demoUrl: "https://pgc-muridke.vercel.app"
+  },
+  {
+    id: 7,
     title: "Cafe Sales Analysis",
     description: "This project explores the sales of different menu items using a dataset. We perform data cleaning, Exploratory Data Analysis (EDA) analyze the sales report of the cafe.",
     image: "/image/cafe_project.png",
@@ -11,7 +29,7 @@ export const projects: Project[] = [
     demoUrl: "https://colab.research.google.com/drive/1U_nj9m1ZCnZn0YjguzsL2qc8Qz-A4cx1?usp=sharing"
   },
   {
-    id: 2,
+    id: 6,
     title: "Survivors Prediction",
     description: "This project predicts the survival of persons who faced an accident using a dataset. We performed data cleaning, Exploratory Data Analysis (EDA), and trained our model on the data.",
     image: "/image/lg.png",
@@ -20,7 +38,7 @@ export const projects: Project[] = [
     demoUrl: "https://colab.research.google.com/drive/13K8zoV3B0kvA43zT5Kwx-tnn8Z5NN91r?usp=sharing"
   },
   {
-    id: 3,
+    id: 2,
     title: "EcoGuard Pro",
     description: "EcoGuard Pro is an AI-powered environmental monitoring system that delivers real-time insights on air, water, noise, and energy. It features predictive analytics, automated alerts, and smart optimization suggestions.",
     image: "/image/ecoguard.png",
@@ -47,7 +65,7 @@ export const projects: Project[] = [
     demoUrl: "https://colab.research.google.com/drive/1ugTW5BEVKy-DLlAgNlo_ci5FUF3zIf0F?usp=sharing"
   },
   {
-    id: 6,
+    id: 8,
     title: "Frontline Workers Support AI",
     description: "AI-powered emergency coordination platform with real-time symptom analysis, smart service routing, and automated scheduling",
     image: "/image/frontline.png",

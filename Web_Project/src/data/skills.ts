@@ -41,6 +41,7 @@ export const skills: Skill[] = [
     level: "Beginner",
     icon: "GoogleCloudIcon"
   },
+
   
   // AI/ML
   {
@@ -93,5 +94,33 @@ export const skills: Skill[] = [
     name: "Kubernetes",
     level: "Intermediate",
     icon: "KubernetesIcon"
+  },
+    {
+    id: 15,
+    category: "Tools",
+    name: "Github Copilot",
+    level: "Advanced",
+    icon: "CopilotIcon"
+  },
+    {
+    id: 16,
+    category: "Tools",
+    name: "Gemini",
+    level: "Advanced",
+    icon: "GeminiIcon"
+  },
+    {
+    id: 17,
+    category: "Tools",
+    name: "Bolt",
+    level: "Advanced",
+    icon: "BoltIcon"
+  },
+    {
+    id: 18,
+    category: "Tools",
+    name: "Kiro",
+    level: "Advanced",
+    icon: "KiroIcon"
   }
 ];
