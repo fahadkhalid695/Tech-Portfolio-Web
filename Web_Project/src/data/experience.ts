@@ -9,27 +9,26 @@ import { Experience } from '../types';
 export const experiences: Experience[] = [
   {
     id: 1,
-    role: "Python Instructor",
-    company: "Teaching Position",
+    role: "Computer Science Teacher",
+    company: "Parasole Academy",
     type: "Teaching",
-    location: "Pakistan",
-    startDate: "January 2025",
+    location: "Muridke",
+    startDate: "December 2025",
     endDate: "Present",
-    description: "Teaching Python programming fundamentals and advanced concepts to students, helping them build strong foundations in software development and problem-solving skills.",
+    description: "I am currently serving as a Computer Science Teacher at a Parasole Academy, where I teach Matric and Intermediate-level students. My role involves delivering clear, concept-oriented instruction in core computer science subjects, helping students build a strong foundation in both theoretical concepts and practical understanding.",
     responsibilities: [
-      "Designing and delivering comprehensive Python curriculum covering basics to advanced topics",
-      "Creating hands-on coding exercises and real-world projects for practical learning",
-      "Mentoring students on best practices, debugging techniques, and code optimization",
-      "Evaluating student progress and providing personalized feedback for improvement",
-      "Introducing students to AI/ML concepts using Python libraries like NumPy and Pandas"
+      "Concept-based and student-centered teaching methodology",
+      "Excellent communication and classroom management skills",
+      "Ability to break down complex technical topics into simple explanations",
+      "Guidance in logical thinking, fundamentals of programming, and problem-solving",
+      "Commitment to student progress, discipline, and academic excellence"
     ],
     technologies: [
-      "Python",
-      "NumPy",
-      "Pandas",
-      "Jupyter Notebooks",
-      "VS Code",
-      "Git"
+      "Software Systems",
+      "Computer Networks",
+      "C Language",
+      "Algorithms",
+      "Web development"
     ],
     isCurrent: true
   },
