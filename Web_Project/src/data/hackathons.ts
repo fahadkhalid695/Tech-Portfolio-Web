@@ -3,7 +3,7 @@ import { Hackathon } from '../types';
 export const hackathons: Hackathon[] = [
   {
     id: 1,
-    name: "Bolt Hackathon",
+    name: "Bolt Vibe Coding Hackathon",
     date: "June 2025",
     location: "Virtual",
     position: "Participant",
@@ -50,7 +50,7 @@ export const hackathons: Hackathon[] = [
     description: "Solo participation in an innovative hackathon focused on building projects entirely through vibe coding platforms, developed a Business Task Automation Platform.",
     technologies: ["Business Automation", "Intelligent System", "Low/NO code", "", "React", "Typescript", "Python"],
     teamSize: 1,
-    prize: "Result Awaiting",
+    prize: "Participant",
     image: "/image/kiro.png"
   },
   {
@@ -65,5 +65,18 @@ export const hackathons: Hackathon[] = [
     teamSize: 1,
     prize: "Participation",
     image: "/image/innovista.jpeg"
+  },
+    {
+    id: 6,
+    name: "Advent of Cyber 2025",
+    date: "December 2025",
+    location: "Virtual",
+    position: "All Challenges Solved",
+    project: "Hacking challenges",
+    description: "Participated in a cybersecurity challenge where i solved all the 24 challenges of various domains of hacking like blue team, red team, SOC, Malware analysis, Logs analysis and many more.",
+    technologies: ["Cybersecurity", "Ethical Hacking", "Blue Team", "Red Team", "SOC analyst", "logs Monitoring", "Malware analysis"],
+    teamSize: 1,
+    prize: "Participation Certificate",
+    image: "/image/aoc.png"
   }
 ];
