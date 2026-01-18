@@ -48,7 +48,7 @@ export const certifications: Certification[] = [
     date: "January 2026",
     logo: "https://images.pexels.com/photos/11343088/pexels-photo-11343088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     verificationUrl: "https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21330858"
-  }
+  },
   {
     id: 3,
     name: "HELM k8s Packaing Manager",
