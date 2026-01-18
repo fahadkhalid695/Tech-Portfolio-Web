@@ -48,7 +48,7 @@ export const platforms: PlatformStat[] = [
     icon: 'Linkedin',
     color: '#0A66C2',
     stats: [
-      { label: 'Connections', value: '500+', lastUpdated: 'January 2026' },
+      { label: 'Followers', value: '100+', lastUpdated: 'January 2026' },
     ],
     priority: 2,
   },
@@ -66,7 +66,7 @@ export const platforms: PlatformStat[] = [
     color: '#1C2538',
     // Badge is now shown via iframe in Featured section
     stats: [
-      { label: 'Rooms Completed', value: 25, lastUpdated: 'January 2026' },
+      { label: 'Rooms Completed', value: '100+', lastUpdated: 'January 2026' },
       { label: 'Rank', value: 'Hacker', lastUpdated: 'January 2026' },
     ],
     priority: 3,
@@ -80,7 +80,7 @@ export const platforms: PlatformStat[] = [
     platform: 'google-skills',
     displayName: 'Google Skills',
     username: USERNAME,
-    profileUrl: `https://skillshop.credential.net/profile/${USERNAME}`,
+    profileUrl: `https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b`,
     icon: 'GraduationCap',
     color: '#4285F4',
     stats: [
@@ -101,7 +101,7 @@ export const platforms: PlatformStat[] = [
     icon: 'BookOpen',
     color: '#5E5E5E',
     stats: [
-      { label: 'XP Earned', value: '5,000+', lastUpdated: 'January 2026' },
+      { label: 'XP Earned', value: '1500+', lastUpdated: 'January 2026' },
       { label: 'Modules', value: 20, lastUpdated: 'January 2026' },
     ],
     priority: 5,
@@ -119,7 +119,7 @@ export const platforms: PlatformStat[] = [
     icon: 'Cloud',
     color: '#FF9900',
     stats: [
-      { label: 'Courses', value: 2, lastUpdated: 'January 2026' },
+      { label: 'Courses', value: 1, lastUpdated: 'January 2026' },
     ],
     priority: 6,
   },
@@ -136,7 +136,7 @@ export const platforms: PlatformStat[] = [
     icon: 'Award',
     color: '#FF9900',
     stats: [
-      { label: 'Badges', value: 5, lastUpdated: 'January 2026' },
+      { label: 'Badges', value: 3, lastUpdated: 'January 2026' },
     ],
     priority: 7,
   },
@@ -153,8 +153,8 @@ export const platforms: PlatformStat[] = [
     icon: 'Layers',
     color: '#FF9900',
     stats: [
-      { label: 'Learning Hours', value: '50+', lastUpdated: 'January 2026' },
-      { label: 'Courses', value: 10, lastUpdated: 'January 2026' },
+      { label: 'Learning Hours', value: '5+', lastUpdated: 'January 2026' },
+      { label: 'Courses', value: '1', lastUpdated: 'January 2026' },
     ],
     priority: 8,
   },
