@@ -20,11 +20,11 @@ export const badges: Badge[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 1,
-    name: 'Introduction to Cloud 101 - Training Badge',
+    name: 'Cloud Computing 101',
     issuer: 'Amazon Web Services',
     platform: 'aws',
     earnedDate: 'December 2025',
-    imageUrl: 'https://www.credly.com/badges/2cc3722e-a42f-419e-b8d1-4c8c73b20068/public_url',
+    imageUrl: 'https://images.credly.com/size/220x220/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob',
     verificationUrl: 'https://www.credly.com/badges/2cc3722e-a42f-419e-b8d1-4c8c73b20068/public_url',
     category: 'Cloud',
     skills: ['AWS', 'Cloud Computing', 'Cloud Fundamentals'],
@@ -37,12 +37,24 @@ export const badges: Badge[] = [
     issuer: 'Amazon Web Services',
     platform: 'aws',
     earnedDate: 'December 2025',
-    imageUrl: 'https://www.credly.com/badges/fd5dbe56-08c8-4688-a2d1-eb91dcab4ca1/public_url',
+    imageUrl: 'https://images.credly.com/size/680x680/images/e50c657a-edd9-4c93-b1cf-2b6634b54abf/blob',
     verificationUrl: 'https://www.credly.com/badges/fd5dbe56-08c8-4688-a2d1-eb91dcab4ca1/public_url',
     category: 'AI/ML',
     skills: ['AWS', 'Gen AI', 'Cloud Design'],
     featured: true,
     priority: 2,
+  },
+    {
+    id: 5,
+    name: 'AWS Student Community Member',
+    issuer: 'AWS',
+    platform: 'aws',
+    earnedDate: 'December 2025',
+    imageUrl: 'https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png',
+    verificationUrl: 'https://learn.microsoft.com/api/credentials/share/example',
+    category: 'Cloud',
+    skills: ['Community', 'Cloud Services', 'AWS'],
+    priority: 5,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -50,24 +62,24 @@ export const badges: Badge[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 3,
-    name: 'Google Cloud Digital Leader',
+    name: 'Cloud Security',
     issuer: 'Google Cloud',
     platform: 'google',
-    earnedDate: 'November 2024',
-    imageUrl: 'https://images.credly.com/size/340x340/images/44994cda-b5b0-44e3-b145-0b4e6b3c4f3d/image.png',
-    verificationUrl: 'https://www.credential.net/example',
+    earnedDate: 'December 2025',
+    imageUrl: 'https://cdn.qwiklabs.com/BSm15qJin6iYgcQpTDwsRFDxw25eEdpTreetqdZ%2Bm%2Bo%3D',
+    verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21440315',
     category: 'Cloud',
-    skills: ['Google Cloud', 'Cloud Fundamentals'],
+    skills: ['Google Cloud', 'Cloud Fundamentals', 'Cloud Analyst'],
     priority: 3,
   },
   {
     id: 4,
-    name: 'Google AI Essentials',
+    name: 'Gemini for Application Developers',
     issuer: 'Google',
     platform: 'google',
     earnedDate: 'October 2024',
-    imageUrl: 'https://images.credly.com/size/340x340/images/1d9d2448-1825-4a67-ade0-54c38a42be33/image.png',
-    verificationUrl: 'https://www.credential.net/example',
+    imageUrl: 'https://cdn.qwiklabs.com/mkdm%2BgBAjNifUkBRYiF0o%2BprE7C3LvFpTEe%2B39dP7rU%3D',
+    verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21330858',
     category: 'AI/ML',
     skills: ['AI', 'Machine Learning', 'Google AI'],
     priority: 4,
@@ -78,7 +90,7 @@ export const badges: Badge[] = [
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 5,
-    name: 'Azure Fundamentals',
+    name: 'Copilot',
     issuer: 'Microsoft',
     platform: 'microsoft',
     earnedDate: 'October 2024',
@@ -88,18 +100,7 @@ export const badges: Badge[] = [
     skills: ['Azure', 'Cloud Services', 'Microsoft Azure'],
     priority: 5,
   },
-  {
-    id: 6,
-    name: 'Azure AI Fundamentals',
-    issuer: 'Microsoft',
-    platform: 'microsoft',
-    earnedDate: 'September 2024',
-    imageUrl: 'https://images.credly.com/size/340x340/images/4136ced8-75d5-4afb-8677-c4f8a7df5b6c/image.png',
-    verificationUrl: 'https://learn.microsoft.com/api/credentials/share/example',
-    category: 'AI/ML',
-    skills: ['Azure AI', 'Machine Learning', 'Cognitive Services'],
-    priority: 6,
-  },
+
 
   // ─────────────────────────────────────────────────────────────────────────
   // TRYHACKME BADGES (using iframe embed)
@@ -119,39 +120,28 @@ export const badges: Badge[] = [
     featured: true,
     priority: 7,
   },
+    {
+    id: 5,
+    name: 'Copilot',
+    issuer: 'TryHackMe',
+    platform: 'microsoft',
+    earnedDate: 'October 2024',
+    imageUrl: 'https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png',
+    verificationUrl: 'https://learn.microsoft.com/api/credentials/share/example',
+    category: 'Cloud',
+    skills: ['Azure', 'Cloud Services', 'Microsoft Azure'],
+    priority: 5,
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // LINKEDIN LEARNING BADGES
   // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 8,
-    name: 'Career Essentials in Software Development',
-    issuer: 'LinkedIn Learning',
-    platform: 'linkedin',
-    earnedDate: 'May 2024',
-    imageUrl: 'https://images.credly.com/size/340x340/images/e8b7c1e1-0612-4474-b3ea-f1e4e1ca3d94/image.png',
-    verificationUrl: 'https://www.linkedin.com/learning/certificates/example',
-    category: 'Development',
-    skills: ['Software Development', 'Programming'],
-    priority: 8,
-  },
+
 
   // ─────────────────────────────────────────────────────────────────────────
   // INTRO TO CLOUD COMPUTING
   // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 9,
-    name: 'Intro to Cloud Computing',
-    issuer: 'Credly',
-    platform: 'credly',
-    earnedDate: 'January 2026',
-    imageUrl: 'https://images.credly.com/size/220x220/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob',
-    verificationUrl: 'https://www.credly.com/badges/2cc3722e-a42f-419e-b8d1-4c8c73b20068/public_url',
-    category: 'Cloud',
-    skills: ['Cloud Computing', 'Cloud Fundamentals'],
-    featured: true,
-    priority: 9,
-  },
+
 
   // ─────────────────────────────────────────────────────────────────────────
   // ADD MORE BADGES HERE
