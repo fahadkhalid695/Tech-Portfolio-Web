@@ -56,6 +56,18 @@ export const badges: Badge[] = [
     skills: ['Community', 'Cloud Services', 'AWS'],
     priority: 5,
   },
+      {
+    id: 7,
+    name: 'Cloud Foundations - Training Badge',
+    issuer: 'AWS',
+    platform: 'aws',
+    earnedDate: 'January 2025',
+    imageUrl: 'https://images.credly.com/size/220x220/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob',
+    verificationUrl: 'https://images.credly.com/size/220x220/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob',
+    category: 'Cloud',
+    skills: ['Clou Foundations', 'Cloud Services', 'AWS'],
+    priority: 5,
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // GOOGLE BADGES
@@ -84,13 +96,25 @@ export const badges: Badge[] = [
     skills: ['AI', 'Machine Learning', 'Google AI'],
     priority: 4,
   },
+    {
+    id: 11,
+    name: 'Create Your Own Retro Arcade Game',
+    issuer: 'Google',
+    platform: 'google',
+    earnedDate: 'October 2024',
+    imageUrl: 'https://cdn.qwiklabs.com/QOijoo%2BxhaGeYV6dLWSN7Vt6CjCsEStbvzKScBa6m%2FE%3D',
+    verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21310963',
+    category: 'AI/ML',
+    skills: ['AI', 'Machine Learning', 'Google AI'],
+    priority: 11,
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // MICROSOFT BADGES
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: 5,
-    name: 'Copilot',
+    name: 'Copilot for application Developers',
     issuer: 'Microsoft',
     platform: 'microsoft',
     earnedDate: 'October 2024',
@@ -120,18 +144,7 @@ export const badges: Badge[] = [
     featured: true,
     priority: 7,
   },
-    {
-    id: 5,
-    name: 'AOC 2025',
-    issuer: 'TryHackMe',
-    platform: 'tryhackme',
-    earnedDate: 'December 2025',
-    imageUrl: 'https://tryhackme.com/fahadkhalid695/badges/advent-of-cyber-2025?utm_campaign=social_share&utm_medium=social&utm_content=badge&utm_source=copy&sharerId=67501745da26783e73e2bf60',
-    verificationUrl: 'https://tryhackme.com/fahadkhalid695/badges/advent-of-cyber-2025?utm_campaign=social_share&utm_medium=social&utm_content=badge&utm_source=copy&sharerId=67501745da26783e73e2bf60',
-    category: 'Security',
-    skills: ['hacking', 'Cloud Services', 'Microsoft Azure'],
-    priority: 5,
-  },
+
 
   // ─────────────────────────────────────────────────────────────────────────
   // LINKEDIN LEARNING BADGES
