@@ -15,6 +15,7 @@ import {
 import { sortedPlatforms } from '../../data/platforms';
 import { PlatformStat } from '../../types';
 import { useAllPlatformStats } from '../../utils/usePlatformStats';
+import { useTheme } from '../../contexts/ThemeContext';
 import { 
   staggerContainer, 
   staggerItem,
@@ -34,9 +35,15 @@ const PlatformsSection: React.FC = () => {
   });
   
   const prefersReducedMotion = useReducedMotion();
+  const { theme } = useTheme();
 
-  // Load LinkedIn badge script for the embedded profile card.
+  // Load and re-run LinkedIn badge script when theme changes.
   useEffect(() => {
+    const existingScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
     const script = document.createElement('script');
     script.src = 'https://platform.linkedin.com/badges/js/profile.js';
     script.async = true;
@@ -44,10 +51,10 @@ const PlatformsSection: React.FC = () => {
     document.body.appendChild(script);
 
     return () => {
-      const existingScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
-      if (existingScript) existingScript.remove();
+      const cleanupScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
+      if (cleanupScript) cleanupScript.remove();
     };
-  }, []);
+  }, [theme]);
 
   return (
     <section 
@@ -119,12 +126,12 @@ const PlatformsSection: React.FC = () => {
             Live Profile Badges
           </h3>
           
-          <div className="flex flex-wrap justify-center gap-8 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
             <GitHubLiveProfileCard prefersReducedMotion={prefersReducedMotion} />
 
             {/* TryHackMe Live Badge */}
             <motion.div
-              className="card-glass p-6 rounded-xl text-center"
+              className="card-glass p-6 rounded-xl text-center w-full h-full"
               whileHover={prefersReducedMotion ? {} : { y: -4 }}
             >
               <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
@@ -133,7 +140,7 @@ const PlatformsSection: React.FC = () => {
               </h4>
               <iframe
                 src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371"
-                style={{ border: 'none', width: '320px', height: '180px', borderRadius: '8px' }}
+                style={{ border: 'none', width: '100%', maxWidth: '320px', height: '180px', borderRadius: '8px' }}
                 title="TryHackMe Badge"
                 loading="lazy"
               />
@@ -150,7 +157,7 @@ const PlatformsSection: React.FC = () => {
 
             {/* LinkedIn Live Badge */}
             <motion.div
-              className="card-glass p-6 rounded-xl text-center"
+              className="card-glass p-6 rounded-xl text-center w-full h-full"
               whileHover={prefersReducedMotion ? {} : { y: -4 }}
             >
               <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
@@ -158,10 +165,11 @@ const PlatformsSection: React.FC = () => {
                 LinkedIn Profile
               </h4>
               <div
+                key={`linkedin-${theme}`}
                 className="badge-base LI-profile-badge"
                 data-locale="en_US"
                 data-size="medium"
-                data-theme="dark"
+                data-theme={theme === 'light' ? 'light' : 'dark'}
                 data-type="VERTICAL"
                 data-vanity="fahadkhalid695"
                 data-version="v1"
@@ -204,9 +212,66 @@ interface GitHubProfileApi {
 }
 
 const GITHUB_USERNAME = 'fahadkhalid695';
+const GITHUB_COMMIT_CACHE_KEY = `github_commit_count_${GITHUB_USERNAME}`;
+const GITHUB_COMMIT_CACHE_TTL = 6 * 60 * 60 * 1000;
+
+interface GitHubRepoApi {
+  name: string;
+  default_branch: string;
+}
+
+const parseLastPageFromLink = (linkHeader: string | null): number | null => {
+  if (!linkHeader) return null;
+  const lastMatch = linkHeader.match(/[?&]page=(\d+)>;\s*rel="last"/);
+  if (!lastMatch) return null;
+  return Number(lastMatch[1]);
+};
+
+const getRepoCommitCount = async (repoName: string, defaultBranch: string): Promise<number> => {
+  const endpoint = `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/commits?sha=${encodeURIComponent(defaultBranch)}&per_page=1`;
+  const response = await fetch(endpoint, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
+
+  if (response.status === 409) {
+    return 0;
+  }
+
+  if (!response.ok) {
+    return 0;
+  }
+
+  const lastPage = parseLastPageFromLink(response.headers.get('Link'));
+  if (lastPage) {
+    return lastPage;
+  }
+
+  const commits = (await response.json()) as Array<unknown>;
+  return commits.length > 0 ? 1 : 0;
+};
+
+const fetchTotalCommitCount = async (): Promise<number> => {
+  const reposResponse = await fetch(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=updated&per_page=100`,
+    { headers: { Accept: 'application/vnd.github+json' } }
+  );
+
+  if (!reposResponse.ok) {
+    throw new Error(`GitHub repos API ${reposResponse.status}`);
+  }
+
+  const repos = (await reposResponse.json()) as GitHubRepoApi[];
+  const commitCounts = await Promise.all(
+    repos.map((repo) => getRepoCommitCount(repo.name, repo.default_branch))
+  );
+
+  return commitCounts.reduce((sum, count) => sum + count, 0);
+};
 
 const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ prefersReducedMotion }) => {
   const [profile, setProfile] = useState<GitHubProfileApi | null>(null);
+  const [commitCount, setCommitCount] = useState<number | null>(null);
+  const [commitsLoading, setCommitsLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -239,7 +304,43 @@ const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ pr
       }
     };
 
+    const fetchCommitStats = async () => {
+      try {
+        const cached = localStorage.getItem(GITHUB_COMMIT_CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached) as { value: number; timestamp: number };
+          if (Date.now() - parsed.timestamp < GITHUB_COMMIT_CACHE_TTL) {
+            if (isMounted) {
+              setCommitCount(parsed.value);
+              setCommitsLoading(false);
+            }
+            return;
+          }
+        }
+
+        const totalCommits = await fetchTotalCommitCount();
+
+        localStorage.setItem(
+          GITHUB_COMMIT_CACHE_KEY,
+          JSON.stringify({ value: totalCommits, timestamp: Date.now() })
+        );
+
+        if (isMounted) {
+          setCommitCount(totalCommits);
+        }
+      } catch {
+        if (isMounted) {
+          setCommitCount(null);
+        }
+      } finally {
+        if (isMounted) {
+          setCommitsLoading(false);
+        }
+      }
+    };
+
     fetchGithubProfile();
+    fetchCommitStats();
 
     return () => {
       isMounted = false;
@@ -251,7 +352,7 @@ const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ pr
       href={`https://github.com/${GITHUB_USERNAME}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="card-glass p-6 rounded-xl block w-full max-w-md"
+      className="card-glass p-6 rounded-xl block w-full h-full"
       whileHover={prefersReducedMotion ? {} : { y: -4 }}
     >
       <div className="flex items-center justify-between mb-4">
@@ -292,7 +393,7 @@ const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ pr
           { label: 'Repos', value: profile?.public_repos },
           { label: 'Followers', value: profile?.followers },
           { label: 'Following', value: profile?.following },
-          { label: 'Gists', value: profile?.public_gists },
+          { label: 'Commits', value: commitCount },
         ].map((item) => (
           <div
             key={item.label}
@@ -300,7 +401,7 @@ const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ pr
           >
             <p className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary">{item.label}</p>
             <p className="text-sm font-semibold text-light-text dark:text-dark-text">
-              {loading ? '...' : item.value ?? '--'}
+              {loading || (item.label === 'Commits' && commitsLoading) ? '...' : item.value ?? '--'}
             </p>
           </div>
         ))}
