@@ -48,7 +48,7 @@ export const platforms: PlatformStat[] = [
     icon: 'Linkedin',
     color: '#0A66C2',
     stats: [
-      { label: 'Followers', value: '100+', lastUpdated: 'January 2026' },
+      { label: 'Followers', value: '200+', lastUpdated: 'January 2026' },
     ],
     priority: 2,
   },
@@ -67,7 +67,7 @@ export const platforms: PlatformStat[] = [
     // Badge is now shown via iframe in Featured section
     stats: [
       { label: 'Rooms Completed', value: '100+', lastUpdated: 'January 2026' },
-      { label: 'Rank', value: 'Hacker', lastUpdated: 'January 2026' },
+      { label: 'Level', value: '9', lastUpdated: 'January 2026' },
     ],
     priority: 3,
   },

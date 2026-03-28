@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Award, ExternalLink, Pause, Play } from 'lucide-react';
-import { sortedBadges } from '../../data/badges';
+import { sortedBadges, learningBadges, communityBadges } from '../../data/badges';
 import { Badge } from '../../types';
 import { staggerContainer, staggerItem, useReducedMotion } from '../../utils/animations';
 
@@ -11,7 +11,7 @@ import { staggerContainer, staggerItem, useReducedMotion } from '../../utils/ani
 // Features: Infinite scroll, pause on hover, trackpad/touch gestures
 // ═══════════════════════════════════════════════════════════════════════════
 
-const SCROLL_SPEED = 35; // pixels per second (slightly slower for larger cards)
+const SCROLL_SPEED = 28; // pixels per second
 const BADGE_WIDTH = 280; // badge card width + gap (increased for better visibility)
 
 const BadgesSection: React.FC = () => {
@@ -24,8 +24,9 @@ const BadgesSection: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isUserPaused, setIsUserPaused] = useState(false);
 
-  // Duplicate badges for seamless infinite scroll (3x for smooth loop)
-  const duplicatedBadges = [...sortedBadges, ...sortedBadges, ...sortedBadges];
+  // Duplicate each track for seamless infinite scroll (3x for smooth loop)
+  const duplicatedLearningBadges = [...learningBadges, ...learningBadges, ...learningBadges];
+  const duplicatedCommunityBadges = [...communityBadges, ...communityBadges, ...communityBadges];
 
   return (
     <section
@@ -89,13 +90,32 @@ const BadgesSection: React.FC = () => {
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-light-bg dark:from-dark-bg to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-light-bg dark:from-dark-bg to-transparent z-10 pointer-events-none" />
 
-          {/* Single Row - Scrolls Left */}
+          <div className="mb-4 px-2 sm:px-4 text-xs sm:text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
+            Learning Badges
+          </div>
+
+          {/* Row 1 - Learning (Left Direction) */}
           <MarqueeTrack
-            badges={duplicatedBadges}
+            badges={duplicatedLearningBadges}
             isPaused={isPaused || isUserPaused || prefersReducedMotion}
             onHoverStart={() => setIsPaused(true)}
             onHoverEnd={() => setIsPaused(false)}
             direction="left"
+            speed={SCROLL_SPEED}
+          />
+
+          <div className="mt-8 mb-4 px-2 sm:px-4 text-xs sm:text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
+            Community & Membership Badges
+          </div>
+
+          {/* Row 2 - Community (Right Direction) */}
+          <MarqueeTrack
+            badges={duplicatedCommunityBadges}
+            isPaused={isPaused || isUserPaused || prefersReducedMotion}
+            onHoverStart={() => setIsPaused(true)}
+            onHoverEnd={() => setIsPaused(false)}
+            direction="right"
+            speed={SCROLL_SPEED - 2}
           />
         </div>
 
@@ -108,6 +128,8 @@ const BadgesSection: React.FC = () => {
         >
           {[
             { value: sortedBadges.length, label: 'Total Badges', color: 'text-yellow-500' },
+            { value: learningBadges.length, label: 'Learning', color: 'text-green-500' },
+            { value: communityBadges.length, label: 'Community', color: 'text-blue-500' },
             { value: new Set(sortedBadges.map(b => b.issuer)).size, label: 'Issuers', color: 'text-accent-500' },
             { value: new Set(sortedBadges.flatMap(b => b.skills || [])).size, label: 'Skills Verified', color: 'text-purple-400' },
           ].map((stat) => (
@@ -137,6 +159,7 @@ interface MarqueeTrackProps {
   onHoverStart: () => void;
   onHoverEnd: () => void;
   direction: 'left' | 'right';
+  speed: number;
   className?: string;
 }
 
@@ -146,6 +169,7 @@ const MarqueeTrack: React.FC<MarqueeTrackProps> = ({
   onHoverStart,
   onHoverEnd,
   direction,
+  speed,
   className = '',
 }) => {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -173,7 +197,7 @@ const MarqueeTrack: React.FC<MarqueeTrackProps> = ({
       const deltaTime = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
 
-      const movement = SCROLL_SPEED * deltaTime * (direction === 'left' ? 1 : -1);
+      const movement = speed * deltaTime * (direction === 'left' ? 1 : -1);
       scrollPositionRef.current += movement;
 
       // Reset position for seamless loop
@@ -198,7 +222,7 @@ const MarqueeTrack: React.FC<MarqueeTrackProps> = ({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isPaused, isDragging, direction, totalWidth]);
+  }, [isPaused, isDragging, direction, speed, totalWidth]);
 
   // Mouse drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {

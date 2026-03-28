@@ -205,6 +205,7 @@ export interface Badge {
   
   // Categorization
   category?: 'Cloud' | 'Security' | 'AI/ML' | 'Development' | 'Data' | 'Networking' | 'Other';
+  track?: 'Learning' | 'Community'; // Used for split marquee rows
   skills?: string[];               // Skills this badge represents
   
   // Display

@@ -2,22 +2,11 @@ import { Badge } from '../types';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // BADGES DATA
-// Add your badges from Credly, Google, Microsoft, AWS, etc.
-// 
-// For Credly badges:
-//   - Go to your badge on Credly
-//   - Click "Share" → Get the badge ID from the URL
-//   - Use credlyBadgeId OR imageUrl (the PNG link)
-//
-// For other platforms:
-//   - Use imageUrl with direct PNG/SVG link
-//   - Or use embedUrl for iframe embeds
+// track: Learning = skill-focused badges, Community = ecosystem/events/memberships
 // ═══════════════════════════════════════════════════════════════════════════
 
 export const badges: Badge[] = [
-  // ─────────────────────────────────────────────────────────────────────────
-  // AWS BADGES
-  // ─────────────────────────────────────────────────────────────────────────
+  // AWS + cloud learning badges
   {
     id: 1,
     name: 'Cloud Computing 101',
@@ -27,6 +16,7 @@ export const badges: Badge[] = [
     imageUrl: 'https://images.credly.com/size/220x220/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob',
     verificationUrl: 'https://www.credly.com/badges/2cc3722e-a42f-419e-b8d1-4c8c73b20068/public_url',
     category: 'Cloud',
+    track: 'Learning',
     skills: ['AWS', 'Cloud Computing', 'Cloud Fundamentals'],
     featured: true,
     priority: 1,
@@ -40,12 +30,26 @@ export const badges: Badge[] = [
     imageUrl: 'https://images.credly.com/size/680x680/images/e50c657a-edd9-4c93-b1cf-2b6634b54abf/blob',
     verificationUrl: 'https://www.credly.com/badges/fd5dbe56-08c8-4688-a2d1-eb91dcab4ca1/public_url',
     category: 'AI/ML',
+    track: 'Learning',
     skills: ['AWS', 'Gen AI', 'Cloud Design'],
     featured: true,
     priority: 2,
   },
-    {
-    id: 5,
+  {
+    id: 3,
+    name: 'Cloud Foundations - Training Badge',
+    issuer: 'AWS',
+    platform: 'aws',
+    earnedDate: 'January 2025',
+    imageUrl: 'https://images.credly.com/size/220x220/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob',
+    verificationUrl: 'https://www.credly.com/badges/4c9d1261-6f6c-4e9a-9f79-f2d9f5a3ff47/public_url',
+    category: 'Cloud',
+    track: 'Learning',
+    skills: ['Cloud Foundations', 'Cloud Services', 'AWS'],
+    priority: 3,
+  },
+  {
+    id: 4,
     name: 'AWS Student Community Member',
     issuer: 'AWS',
     platform: 'aws',
@@ -53,27 +57,14 @@ export const badges: Badge[] = [
     imageUrl: 'https://images.credly.com/size/680x680/images/346dd316-2bda-4465-a6d8-537b3ffa2920/blob',
     verificationUrl: 'https://www.credly.com/badges/82c00361-51c7-4cbc-a37f-56bb4a69d021/public_url',
     category: 'Cloud',
+    track: 'Community',
     skills: ['Community', 'Cloud Services', 'AWS'],
-    priority: 5,
-  },
-      {
-    id: 7,
-    name: 'Cloud Foundations - Training Badge',
-    issuer: 'AWS',
-    platform: 'aws',
-    earnedDate: 'January 2025',
-    imageUrl: 'https://images.credly.com/size/220x220/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob',
-    verificationUrl: 'https://images.credly.com/size/220x220/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob',
-    category: 'Cloud',
-    skills: ['Clou Foundations', 'Cloud Services', 'AWS'],
-    priority: 5,
+    priority: 4,
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // GOOGLE BADGES
-  // ─────────────────────────────────────────────────────────────────────────
+  // Existing Google Skills Boost learning badges
   {
-    id: 3,
+    id: 5,
     name: 'Cloud Security',
     issuer: 'Google Cloud',
     platform: 'google',
@@ -81,11 +72,12 @@ export const badges: Badge[] = [
     imageUrl: 'https://cdn.qwiklabs.com/BSm15qJin6iYgcQpTDwsRFDxw25eEdpTreetqdZ%2Bm%2Bo%3D',
     verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21440315',
     category: 'Cloud',
+    track: 'Learning',
     skills: ['Google Cloud', 'Cloud Fundamentals', 'Cloud Analyst'],
-    priority: 3,
+    priority: 5,
   },
   {
-    id: 4,
+    id: 6,
     name: 'Gemini for Application Developers',
     issuer: 'Google',
     platform: 'google',
@@ -93,92 +85,260 @@ export const badges: Badge[] = [
     imageUrl: 'https://cdn.qwiklabs.com/mkdm%2BgBAjNifUkBRYiF0o%2BprE7C3LvFpTEe%2B39dP7rU%3D',
     verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21330858',
     category: 'AI/ML',
+    track: 'Learning',
     skills: ['AI', 'Machine Learning', 'Google AI'],
-    priority: 4,
+    priority: 6,
   },
-    {
-    id: 11,
+  {
+    id: 7,
     name: 'Create Your Own Retro Arcade Game',
     issuer: 'Google',
     platform: 'google',
     earnedDate: 'October 2024',
     imageUrl: 'https://cdn.qwiklabs.com/QOijoo%2BxhaGeYV6dLWSN7Vt6CjCsEStbvzKScBa6m%2FE%3D',
     verificationUrl: 'https://www.skills.google/public_profiles/422b5228-a8eb-4a54-b6b4-6ffd34fcfd3b/badges/21310963',
-    category: 'AI/ML',
-    skills: ['AI', 'Machine Learning', 'Google AI'],
-    priority: 11,
+    category: 'Development',
+    track: 'Learning',
+    skills: ['Game Development', 'Google Cloud', 'Hands-on Labs'],
+    priority: 7,
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // MICROSOFT BADGES
-  // ─────────────────────────────────────────────────────────────────────────
+  // Existing Microsoft + TryHackMe
   {
-    id: 5,
-    name: 'Copilot for application Developers',
+    id: 8,
+    name: 'Copilot for Application Developers',
     issuer: 'Microsoft',
     platform: 'microsoft',
     earnedDate: 'October 2024',
     imageUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/fahadkhalid695/6EC762C274CFC226?sharingId=5FF9E4503AB95564',
     verificationUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/fahadkhalid695/6EC762C274CFC226?sharingId=5FF9E4503AB95564',
-    category: 'Cloud',
-    skills: ['Azure', 'Cloud Services', 'Microsoft Azure'],
-    priority: 5,
+    category: 'Development',
+    track: 'Learning',
+    skills: ['Copilot', 'Developer Productivity', 'Microsoft'],
+    priority: 8,
   },
-
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // TRYHACKME BADGES (using iframe embed)
-  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 7,
+    id: 9,
     name: 'TryHackMe Profile',
     issuer: 'TryHackMe',
     platform: 'tryhackme',
     earnedDate: '2024',
-    // Use the iframe embed URL from TryHackMe
     embedUrl: 'https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371',
     embedHeight: '150px',
     verificationUrl: 'https://tryhackme.com/p/fahadkhalid695',
     category: 'Security',
+    track: 'Learning',
     skills: ['Cybersecurity', 'Ethical Hacking', 'Penetration Testing'],
     featured: true,
-    priority: 7,
+    priority: 9,
   },
 
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // LINKEDIN LEARNING BADGES
-  // ─────────────────────────────────────────────────────────────────────────
-
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // INTRO TO CLOUD COMPUTING
-  // ─────────────────────────────────────────────────────────────────────────
-
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // ADD MORE BADGES HERE
-  // Copy any template above and fill in your actual badge details
-  // Replace imageUrl with your actual badge image URLs from Credly
-  // ─────────────────────────────────────────────────────────────────────────
+  // New Google Developer Profile badges (dates from provided image)
+  {
+    id: 10,
+    name: 'Joined the Google Developer Program',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'July 2024',
+    imageUrl: 'https://developers.google.com/profile/badges/profile/created-profile/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/profile/created-profile',
+    category: 'Other',
+    track: 'Community',
+    skills: ['Developer Ecosystem', 'Community'],
+    priority: 10,
+  },
+  {
+    id: 11,
+    name: 'Android Studio User',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'August 2024',
+    imageUrl: 'https://developers.google.com/profile/badges/activity/android/install-android-studio/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/activity/android/install-android-studio',
+    category: 'Development',
+    track: 'Learning',
+    skills: ['Android Studio', 'Android Development'],
+    priority: 11,
+  },
+  {
+    id: 12,
+    name: 'Google Developer Group Discovery',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'September 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/discovery/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/discovery',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDG', 'Community Discovery'],
+    priority: 12,
+  },
+  {
+    id: 13,
+    name: 'Google Developer Group on Campus Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'October 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/GDGoC/member/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/GDGoC/member',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDGoC', 'Campus Community'],
+    priority: 13,
+  },
+  {
+    id: 14,
+    name: 'Google Developer Group Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'October 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/member/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/member',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDG', 'Developer Community'],
+    priority: 14,
+  },
+  {
+    id: 15,
+    name: 'DevFest 2025 Attendee',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'December 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/events/community/devfest/2025/attendee/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/events/community/devfest/2025/attendee',
+    category: 'Development',
+    track: 'Community',
+    skills: ['DevFest', 'Tech Events', 'Networking'],
+    priority: 15,
+  },
+  {
+    id: 16,
+    name: 'Google Cloud Innovator',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'December 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/community/innovators/cloud/2021_member/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/innovators/cloud/2021_member',
+    category: 'Cloud',
+    track: 'Learning',
+    skills: ['Google Cloud', 'Innovation'],
+    priority: 16,
+  },
+  {
+    id: 17,
+    name: 'Firebase Studio Developer Community',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'December 2025',
+    imageUrl: 'https://developers.google.com/profile/badges/community/firebasestudio/firebase-studio/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/firebasestudio/firebase-studio',
+    category: 'Development',
+    track: 'Community',
+    skills: ['Firebase', 'Developer Community'],
+    priority: 17,
+  },
+  {
+    id: 18,
+    name: 'Google Skills Badge',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'January 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/skillsboost/earned-badge/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/skillsboost/earned-badge',
+    category: 'Development',
+    track: 'Learning',
+    skills: ['Skills Boost', 'Hands-on Learning'],
+    priority: 18,
+  },
+  {
+    id: 19,
+    name: 'GDG Lahore Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'February 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-lahore/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-lahore',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDG Lahore', 'Community'],
+    priority: 19,
+  },
+  {
+    id: 20,
+    name: 'GDG Cloud Lahore Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'February 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-cloud-lahore/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-cloud-lahore',
+    category: 'Cloud',
+    track: 'Community',
+    skills: ['GDG Cloud Lahore', 'Cloud Community'],
+    priority: 20,
+  },
+  {
+    id: 21,
+    name: 'GDG on Campus UMT Lahore Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'February 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-on-campus-university-of-management-and-technology-lahore-pakistan/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-on-campus-university-of-management-and-technology-lahore-pakistan',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDGoC UMT Lahore', 'Campus Leadership'],
+    priority: 21,
+  },
+  {
+    id: 22,
+    name: 'GDG Live Pakistan Member',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'February 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-live-pakistan/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/community/gdg/chapter/member/gdg-live-pakistan',
+    category: 'Other',
+    track: 'Community',
+    skills: ['GDG Live Pakistan', 'Developer Community'],
+    priority: 22,
+  },
+  {
+    id: 23,
+    name: 'Google I/O 2026 - Registered',
+    issuer: 'Google Developers',
+    platform: 'google',
+    earnedDate: 'March 2026',
+    imageUrl: 'https://developers.google.com/profile/badges/events/io/2026/registered/badge.svg',
+    verificationUrl: 'https://developers.google.com/profile/badges/events/io/2026/registered',
+    category: 'Development',
+    track: 'Community',
+    skills: ['Google I/O', 'Tech Events'],
+    featured: true,
+    priority: 23,
+  },
 ];
 
 // Sort badges by priority (lower number = higher priority)
 export const sortedBadges = [...badges].sort((a, b) => (a.priority || 99) - (b.priority || 99));
 
+// Two-row marquee groups
+export const learningBadges = sortedBadges.filter((badge) => badge.track === 'Learning');
+export const communityBadges = sortedBadges.filter((badge) => badge.track === 'Community');
+
 // Get badges by category
-export const getBadgesByCategory = (category: Badge['category']) => 
-  badges.filter(b => b.category === category);
+export const getBadgesByCategory = (category: Badge['category']) =>
+  badges.filter((badge) => badge.category === category);
 
 // Get featured badges
-export const featuredBadges = badges.filter(b => b.featured);
+export const featuredBadges = badges.filter((badge) => badge.featured);
 
 // Get badges by platform
 export const getBadgesByPlatform = (platform: Badge['platform']) =>
-  badges.filter(b => b.platform === platform);
+  badges.filter((badge) => badge.platform === platform);
 
 // Get unique issuers
-export const uniqueIssuers = [...new Set(badges.map(b => b.issuer))];
+export const uniqueIssuers = [...new Set(badges.map((badge) => badge.issuer))];
 
 // Get all skills from badges
-export const allBadgeSkills = [...new Set(badges.flatMap(b => b.skills || []))];
+export const allBadgeSkills = [...new Set(badges.flatMap((badge) => badge.skills || []))];

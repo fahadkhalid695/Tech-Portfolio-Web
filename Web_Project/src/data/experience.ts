@@ -32,6 +32,31 @@ export const experiences: Experience[] = [
     ],
     isCurrent: true
   },
+  {
+    id: 2,
+    role: "Founding Captain",
+    company: "AWS Cloud Club PGC",
+    type: "Volunteer",
+    location: "PGC Campus",
+    startDate: "February 2026",
+    endDate: "Present",
+    description: "Leading the establishment and growth of a student AWS Cloud Club, building a collaborative community where students learn and engage with cloud technologies.",
+    responsibilities: [
+      "Founded and currently lead the AWS Cloud Club",
+      "Recruited and managed the core club team",
+      "Planned and organized cloud-focused workshops and events",
+      "Promoted AWS and cloud computing awareness on campus",
+      "Coordinated meetings, activities, and student learning support"
+    ],
+    technologies: [
+      "AWS",
+      "Cloud Computing",
+      "Community Leadership",
+      "Event Management",
+      "Team Coordination"
+    ],
+    isCurrent: true
+  },
   
   // ═══════════════════════════════════════════════════════════════════════════
   // ADD MORE EXPERIENCES BELOW
