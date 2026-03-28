@@ -5,78 +5,18 @@ import { PlatformStat } from '../types';
 // Username: fahadkhalid695 (consistent across platforms)
 // 
 // Data Strategy:
-// - GitHub: Live API (with caching to respect rate limits)
-// - TryHackMe: Badge image + static stats
-// - Others: Profile links + static stats (update manually when needed)
+// - Platform tiles show profile links + key stats
+// - GitHub is shown below as dedicated live stat cards
 // ═══════════════════════════════════════════════════════════════════════════
 
 export const USERNAME = 'fahadkhalid695';
 
 export const platforms: PlatformStat[] = [
   // ─────────────────────────────────────────────────────────────────────────
-  // GITHUB - Live API Stats
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 1,
-    platform: 'github',
-    displayName: 'GitHub',
-    username: USERNAME,
-    profileUrl: `https://github.com/${USERNAME}`,
-    icon: 'Github',
-    color: '#181717',
-    apiConfig: {
-      endpoint: `https://api.github.com/users/${USERNAME}`,
-      valuePath: 'public_repos', // Can also use: followers, following, public_gists
-    },
-    stats: [
-      { label: 'Repositories', value: 15, lastUpdated: 'January 2026' },
-      { label: 'Followers', value: 10, lastUpdated: 'January 2026' },
-    ],
-    showLivePulse: true,
-    priority: 1,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // LINKEDIN - Profile Link Only
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 2,
-    platform: 'linkedin',
-    displayName: 'LinkedIn',
-    username: USERNAME,
-    profileUrl: `https://linkedin.com/in/${USERNAME}`,
-    icon: 'Linkedin',
-    color: '#0A66C2',
-    stats: [
-      { label: 'Followers', value: '200+', lastUpdated: 'January 2026' },
-    ],
-    priority: 2,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // TRYHACKME - Live badge shown in Featured section via iframe
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 3,
-    platform: 'tryhackme',
-    displayName: 'TryHackMe',
-    username: USERNAME,
-    profileUrl: `https://tryhackme.com/p/${USERNAME}`,
-    icon: 'Shield',
-    color: '#1C2538',
-    // Badge is now shown via iframe in Featured section
-    stats: [
-      { label: 'Rooms Completed', value: '100+', lastUpdated: 'January 2026' },
-      { label: 'Level', value: '9', lastUpdated: 'January 2026' },
-    ],
-    priority: 3,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
   // GOOGLE SKILLS / SKILLSHOP
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 4,
+    id: 1,
     platform: 'google-skills',
     displayName: 'Google Skills',
     username: USERNAME,
@@ -86,14 +26,14 @@ export const platforms: PlatformStat[] = [
     stats: [
       { label: 'Certifications', value: 3, lastUpdated: 'January 2026' },
     ],
-    priority: 4,
+    priority: 1,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
   // MICROSOFT LEARN
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 5,
+    id: 2,
     platform: 'microsoft-learn',
     displayName: 'Microsoft Learn',
     username: USERNAME,
@@ -104,14 +44,14 @@ export const platforms: PlatformStat[] = [
       { label: 'XP Earned', value: '1500+', lastUpdated: 'January 2026' },
       { label: 'Modules', value: 20, lastUpdated: 'January 2026' },
     ],
-    priority: 5,
+    priority: 2,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
   // AWS ACADEMY
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 6,
+    id: 3,
     platform: 'aws-academy',
     displayName: 'AWS Academy',
     username: USERNAME,
@@ -121,14 +61,14 @@ export const platforms: PlatformStat[] = [
     stats: [
       { label: 'Courses', value: 1, lastUpdated: 'January 2026' },
     ],
-    priority: 6,
+    priority: 3,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
   // AWS EDUCATE
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 7,
+    id: 4,
     platform: 'aws-educate',
     displayName: 'AWS Educate',
     username: USERNAME,
@@ -138,14 +78,14 @@ export const platforms: PlatformStat[] = [
     stats: [
       { label: 'Badges', value: 3, lastUpdated: 'January 2026' },
     ],
-    priority: 7,
+    priority: 4,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
   // AWS SKILL BUILDER
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: 8,
+    id: 5,
     platform: 'aws-skill-builder',
     displayName: 'AWS Skill Builder',
     username: USERNAME,
@@ -156,7 +96,7 @@ export const platforms: PlatformStat[] = [
       { label: 'Learning Hours', value: '5+', lastUpdated: 'January 2026' },
       { label: 'Courses', value: '1', lastUpdated: 'January 2026' },
     ],
-    priority: 8,
+    priority: 5,
   },
 ];
 

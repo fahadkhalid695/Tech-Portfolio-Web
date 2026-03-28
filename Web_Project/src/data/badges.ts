@@ -103,7 +103,7 @@ export const badges: Badge[] = [
     priority: 7,
   },
 
-  // Existing Microsoft + TryHackMe
+  // Existing Microsoft
   {
     id: 8,
     name: 'Copilot for Application Developers',
@@ -116,21 +116,6 @@ export const badges: Badge[] = [
     track: 'Learning',
     skills: ['Copilot', 'Developer Productivity', 'Microsoft'],
     priority: 8,
-  },
-  {
-    id: 9,
-    name: 'TryHackMe Profile',
-    issuer: 'TryHackMe',
-    platform: 'tryhackme',
-    earnedDate: '2024',
-    embedUrl: 'https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371',
-    embedHeight: '150px',
-    verificationUrl: 'https://tryhackme.com/p/fahadkhalid695',
-    category: 'Security',
-    track: 'Learning',
-    skills: ['Cybersecurity', 'Ethical Hacking', 'Penetration Testing'],
-    featured: true,
-    priority: 9,
   },
 
   // New Google Developer Profile badges (dates from provided image)
@@ -316,6 +301,19 @@ export const badges: Badge[] = [
     skills: ['Google I/O', 'Tech Events'],
     featured: true,
     priority: 23,
+  },
+  {
+    id: 24,
+    name: 'AWS Educate Badge',
+    issuer: 'AWS Educate',
+    platform: 'aws',
+    earnedDate: 'March 2026',
+    imageUrl: 'https://pages.awseducate.com/rs/773-JYK-169/images/AWSEBadge.png',
+    verificationUrl: 'https://pages.awseducate.com/rs/773-JYK-169/images/AWSEBadge.png',
+    category: 'Cloud',
+    track: 'Learning',
+    skills: ['AWS Educate', 'Cloud Learning'],
+    priority: 24,
   },
 ];
 

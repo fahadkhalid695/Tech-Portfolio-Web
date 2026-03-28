@@ -182,6 +182,16 @@ const MarqueeTrack: React.FC<MarqueeTrackProps> = ({
   // Calculate total width for seamless loop
   const totalWidth = badges.length * BADGE_WIDTH;
 
+  // Start right-moving row from the middle copy so it shows full badges immediately.
+  useEffect(() => {
+    const oneSetWidth = totalWidth / 3;
+    scrollPositionRef.current = direction === 'right' ? oneSetWidth : 0;
+
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(${-scrollPositionRef.current}px)`;
+    }
+  }, [direction, totalWidth]);
+
   // Auto-scroll animation using requestAnimationFrame
   useEffect(() => {
     if (isPaused || isDragging) {

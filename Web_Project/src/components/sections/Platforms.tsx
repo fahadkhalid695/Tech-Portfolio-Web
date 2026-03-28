@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   Github, 
-  Linkedin, 
-  Shield, 
+  Linkedin,
+  Shield,
   GraduationCap, 
   BookOpen, 
   Cloud, 
@@ -35,14 +35,14 @@ const PlatformsSection: React.FC = () => {
   
   const prefersReducedMotion = useReducedMotion();
 
-  // Load LinkedIn badge script on mount
+  // Load LinkedIn badge script for the embedded profile card.
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://platform.linkedin.com/badges/js/profile.js';
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
-    
+
     return () => {
       const existingScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
       if (existingScript) existingScript.remove();
@@ -120,8 +120,56 @@ const PlatformsSection: React.FC = () => {
           </h3>
           
           <div className="flex flex-wrap justify-center gap-8 items-start">
-            {/* TryHackMe Badge */}
-            <motion.div 
+            {/* GitHub Live Stats */}
+            <motion.a 
+              href="https://github.com/fahadkhalid695"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-glass p-6 rounded-xl text-center block"
+              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            >
+              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
+                <Github size={16} style={{ color: '#181717' }} />
+                GitHub Stats
+              </h4>
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=fahadkhalid695&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true&cache_seconds=86400"
+                alt="GitHub Stats"
+                className="h-[165px] w-auto rounded-lg"
+                loading="lazy"
+              />
+              <div className="inline-flex items-center gap-1 mt-4 text-sm text-accent-500 hover:underline">
+                <ExternalLink size={14} />
+                View Full Profile
+              </div>
+            </motion.a>
+
+            {/* GitHub Streak */}
+            <motion.a 
+              href="https://github.com/fahadkhalid695"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-glass p-6 rounded-xl text-center block"
+              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            >
+              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
+                <Github size={16} style={{ color: '#181717' }} />
+                GitHub Streak
+              </h4>
+              <img
+                src="https://streak-stats.demolab.com/?user=fahadkhalid695&theme=tokyonight&hide_border=true"
+                alt="GitHub Streak"
+                className="h-[165px] w-auto rounded-lg"
+                loading="lazy"
+              />
+              <div className="inline-flex items-center gap-1 mt-4 text-sm text-accent-500 hover:underline">
+                <ExternalLink size={14} />
+                View Full Profile
+              </div>
+            </motion.a>
+
+            {/* TryHackMe Live Badge */}
+            <motion.div
               className="card-glass p-6 rounded-xl text-center"
               whileHover={prefersReducedMotion ? {} : { y: -4 }}
             >
@@ -129,13 +177,13 @@ const PlatformsSection: React.FC = () => {
                 <Shield size={16} style={{ color: '#1C2538' }} />
                 TryHackMe Profile
               </h4>
-              <iframe 
-                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371" 
+              <iframe
+                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371"
                 style={{ border: 'none', width: '320px', height: '180px', borderRadius: '8px' }}
                 title="TryHackMe Badge"
                 loading="lazy"
               />
-              <a 
+              <a
                 href="https://tryhackme.com/p/fahadkhalid695"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -146,8 +194,8 @@ const PlatformsSection: React.FC = () => {
               </a>
             </motion.div>
 
-            {/* LinkedIn Badge */}
-            <motion.div 
+            {/* LinkedIn Live Badge */}
+            <motion.div
               className="card-glass p-6 rounded-xl text-center"
               whileHover={prefersReducedMotion ? {} : { y: -4 }}
             >
@@ -155,17 +203,17 @@ const PlatformsSection: React.FC = () => {
                 <Linkedin size={16} style={{ color: '#0A66C2' }} />
                 LinkedIn Profile
               </h4>
-              <div 
-                className="badge-base LI-profile-badge" 
-                data-locale="en_US" 
-                data-size="medium" 
-                data-theme="dark" 
-                data-type="VERTICAL" 
-                data-vanity="fahadkhalid695" 
+              <div
+                className="badge-base LI-profile-badge"
+                data-locale="en_US"
+                data-size="medium"
+                data-theme="dark"
+                data-type="VERTICAL"
+                data-vanity="fahadkhalid695"
                 data-version="v1"
               >
-                <a 
-                  className="badge-base__link LI-simple-link" 
+                <a
+                  className="badge-base__link LI-simple-link"
                   href="https://pk.linkedin.com/in/fahadkhalid695?trk=profile-badge"
                 >
                   Fahad Khalid
