@@ -1,7 +1,7 @@
 import { Experience } from '../types';
 
 // ═══════════════════════════════════════════════════════════════════════════
-// EXPERIENCE DATA — ordered: Microsoft Student Ambassador → AWS SBG Captain → CS Teacher
+// EXPERIENCE DATA — ordered: Microsoft Student Ambassador → AWS SBG Leader → CS Teacher
 // ═══════════════════════════════════════════════════════════════════════════
 
 export const experiences: Experience[] = [
@@ -32,13 +32,13 @@ export const experiences: Experience[] = [
       "Community Building"
     ],
     isCurrent: true,
-    companyUrl: "https://studentambassadors.microsoft.com/"
+    companyUrl: "https://mvp.microsoft.com/en-US/studentambassadors/profile/0d95577c-3bc7-49cc-a00f-0178ac3d14c2"
   },
 
-  // ─── 02 — AWS Student Builder Group Captain ───────────────────────────────
+  // ─── 02 — AWS Student Builder Group Leader ────────────────────────────────
   {
     id: 2,
-    role: "AWS SBG Captain",
+    role: "AWS Student Builder Group Leader",
     company: "AWS Student Builder Group — PGC Muridke",
     type: "Volunteer",
     location: "PGC Campus, Muridke",
@@ -61,7 +61,8 @@ export const experiences: Experience[] = [
       "Community Leadership",
       "Event Management"
     ],
-    isCurrent: true
+    isCurrent: true,
+    companyUrl: "https://builder.aws.com/community/@rfk695"
   },
 
   // ─── 03 — Computer Science Teacher ───────────────────────────────────────

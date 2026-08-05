@@ -162,9 +162,9 @@ const About: React.FC = () => {
               style={{ color: 'var(--color-text-secondary)' }}
             >
               Beyond code, I lead two student communities:{' '}
-              <strong style={{ color: '#E4572E', fontWeight: 600 }}>AWS Student Builder Group Captain</strong>{' '}
+              <strong style={{ color: '#FF9900', fontWeight: 600 }}>AWS Student Builder Group Leader</strong>{' '}
               at PGC Muridke and a{' '}
-              <strong style={{ color: 'var(--color-accent)', fontWeight: 600 }}>Microsoft Student Ambassador</strong>{' '}
+              <strong style={{ color: '#0078D4', fontWeight: 600 }}>Microsoft Student Ambassador</strong>{' '}
               — focused on bringing cloud, AI, and developer education to students.
             </motion.p>
 

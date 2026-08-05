@@ -81,11 +81,11 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: textDelay - 0.1 }}
           >
-            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#7EC8E3', opacity: 0.6 }}>
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: 'var(--color-text-secondary)', opacity: 0.6 }}>
               SHEET {SHEET.number}/{SHEET.total}
             </span>
-            <span className="w-8 border-t opacity-30" style={{ borderColor: '#7EC8E3' }} />
-            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#7EC8E3', opacity: 0.6 }}>
+            <span className="w-8 border-t opacity-30" style={{ borderColor: 'var(--color-text-secondary)' }} />
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: 'var(--color-text-secondary)', opacity: 0.6 }}>
               {SHEET.title}
             </span>
           </motion.div>
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
           {/* Greeting */}
           <motion.p
             className="font-mono-data text-xs mb-3 tracking-widest"
-            style={{ color: '#7EC8E3', opacity: 0.7 }}
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.7 }}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 0.7, y: 0 }}
             transition={{ duration: 0.35, delay: textDelay }}
@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
               style={{
                 fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
                 letterSpacing: '0.06em',
-                color: '#EAF4FF',
+                color: 'var(--color-text)',
                 lineHeight: 1.05,
               }}
               initial={{ opacity: 0, y: 12 }}
@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.45, delay: textDelay + 0.08 }}
             >
               FAHAD{' '}
-              <span style={{ color: '#7EC8E3' }}>KHALID</span>
+              <span style={{ color: 'var(--color-accent)' }}>KHALID</span>
             </motion.h1>
           </div>
 
@@ -149,9 +149,9 @@ const Hero: React.FC = () => {
                 'CLOUD ENGINEER',
                 'CYBERSECURITY PRACTITIONER',
                 'AI AGENT BUILDER',
-                'AWS SBG CAPTAIN',
+                'AWS SBG LEADER',
                 'MICROSOFT STUDENT AMBASSADOR',
-                'COMMUNITY BUILDER',
+                'STUDENT BUILDER GROUP LEADER',
                 'SOFTWARE ENGINEER',
               ]}
               intervalMs={3800}
@@ -161,15 +161,15 @@ const Hero: React.FC = () => {
           {/* Description */}
           <motion.p
             className="text-sm leading-relaxed max-w-lg mb-6"
-            style={{ color: '#7EC8E3', opacity: 0.75 }}
+            style={{ color: 'var(--color-text-secondary)' }}
             initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 0.75, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: textDelay + 0.28 }}
           >
             Computer Science undergraduate building AI systems, cloud infrastructure,
             and security solutions — while leading student communities around AWS and Microsoft technologies.
             {' '}
-            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#E4572E', opacity: 0.9 }}>
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#E4572E' }}>
               ● ACTIVE
             </span>
           </motion.p>
@@ -203,9 +203,9 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.3, delay: textDelay + 0.48 }}
           >
             {[
-              { href: personalInfo.social.github,           icon: <Github size={16} />,   label: 'GitHub'   },
-              { href: personalInfo.social.linkedin,         icon: <Linkedin size={16} />, label: 'LinkedIn' },
-              { href: `mailto:${personalInfo.contact.email}`, icon: <Mail size={16} />,   label: 'Email'    },
+              { href: personalInfo.social.github,             icon: <Github   size={16} />, label: 'GitHub'   },
+              { href: personalInfo.social.linkedin,           icon: <Linkedin size={16} />, label: 'LinkedIn' },
+              { href: `mailto:${personalInfo.contact.email}`, icon: <Mail     size={16} />, label: 'Email'    },
             ].map(s => (
               <a
                 key={s.label}
@@ -213,14 +213,21 @@ const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex items-center justify-center w-8 h-8 border transition-colors duration-200"
+                className="flex items-center justify-center w-8 h-8 border transition-all duration-200"
                 style={{
-                  borderColor: 'rgba(126,200,227,0.25)',
-                  color: '#7EC8E3',
-                  opacity: 0.7,
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-text-secondary)',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '0.7'; }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = 'var(--color-border-accent)';
+                  el.style.color = 'var(--color-accent)';
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = 'var(--color-border)';
+                  el.style.color = 'var(--color-text-secondary)';
+                }}
               >
                 {s.icon}
               </a>
@@ -249,40 +256,40 @@ const Hero: React.FC = () => {
             {/* Title block content */}
             <div
               className="border font-mono-data text-xs"
-              style={{ borderColor: 'rgba(126,200,227,0.18)' }}
+              style={{ borderColor: 'var(--color-border)' }}
             >
               {/* Row: title */}
-              <div className="px-3 py-2 border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
-                <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>TITLE</div>
-                <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: '#EAF4FF' }}>
+              <div className="px-3 py-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
+                <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>TITLE</div>
+                <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--color-text)' }}>
                   CS · AI · CLOUD · SECURITY
                 </div>
               </div>
 
               {/* Row: name + role */}
               <div className="grid grid-cols-2">
-                <div className="px-3 py-2 border-r border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
-                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>DRAWN BY</div>
-                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>Fahad Khalid</div>
+                <div className="px-3 py-2 border-r border-b" style={{ borderColor: 'var(--color-border)' }}>
+                  <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>DRAWN BY</div>
+                  <div className="text-[10px]" style={{ color: 'var(--color-text)' }}>Fahad Khalid</div>
                 </div>
-                <div className="px-3 py-2 border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
-                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>ROLE</div>
-                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>Engineer / Educator</div>
+                <div className="px-3 py-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
+                  <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>ROLE</div>
+                  <div className="text-[10px]" style={{ color: 'var(--color-text)' }}>Engineer / Educator</div>
                 </div>
               </div>
 
               {/* Row: sheet + date + rev */}
               <div className="grid grid-cols-3">
-                <div className="px-3 py-2 border-r" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
-                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>SHEET</div>
-                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>{SHEET.number} OF {SHEET.total}</div>
+                <div className="px-3 py-2 border-r" style={{ borderColor: 'var(--color-border)' }}>
+                  <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>SHEET</div>
+                  <div className="text-[10px]" style={{ color: 'var(--color-text)' }}>{SHEET.number} OF {SHEET.total}</div>
                 </div>
-                <div className="px-3 py-2 border-r" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
-                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>DATE</div>
-                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>{TODAY}</div>
+                <div className="px-3 py-2 border-r" style={{ borderColor: 'var(--color-border)' }}>
+                  <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>DATE</div>
+                  <div className="text-[10px]" style={{ color: 'var(--color-text)' }}>{TODAY}</div>
                 </div>
                 <div className="px-3 py-2">
-                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>REV</div>
+                  <div className="text-[9px] uppercase tracking-widest mb-0.5" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>REV</div>
                   <div className="text-[10px]" style={{ color: '#E4572E', fontWeight: 700 }}>{SHEET.rev}</div>
                 </div>
               </div>
@@ -305,7 +312,7 @@ const Hero: React.FC = () => {
       <motion.a
         href="#about"
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
-        style={{ color: '#7EC8E3', opacity: 0.5 }}
+        style={{ color: 'var(--color-text-secondary)', opacity: 0.5 }}
         animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
         aria-label="Scroll to about section"
@@ -336,7 +343,7 @@ const WordSwap: React.FC<{ words: string[]; intervalMs?: number }> = ({ words, i
           exit={{ y: -16, opacity: 0 }}
           transition={{ duration: 0.32, ease: [0.2, 0.9, 0.2, 1] }}
           className="font-mono-data text-sm tracking-widest font-semibold"
-          style={{ color: '#7EC8E3' }}
+          style={{ color: 'var(--color-accent)' }}
         >
           {words[idx]}
         </motion.span>
