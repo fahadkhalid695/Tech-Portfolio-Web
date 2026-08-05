@@ -1,311 +1,136 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Award, ExternalLink, Calendar, Building, CheckCircle, Filter } from 'lucide-react';
 import { certifications } from '../../data/certifications';
-import { Certification } from '../../types';
-import {
-  staggerContainer,
-  staggerItem,
-  useReducedMotion,
-} from '../../utils/animations';
+import CertStamp from '../ui/CertStamp';
+import { CornerMark, SectionLabel } from '../ui/BlueprintPrimitives';
 
-// ═══════════════════════════════════════════════════════════════════════════
-// CERTIFICATIONS SECTION - Filter system with provider-themed cards
-// Features: animated borders, provider colors, staggered entries
-// ═══════════════════════════════════════════════════════════════════════════
-
-// Provider color configurations
-const getProviderConfig = (org: string): { color: string; bgColor: string; borderColor: string } => {
-  const orgLower = org.toLowerCase();
-  
-  if (orgLower.includes('aws') || orgLower.includes('amazon')) {
-    return { color: '#FF9900', bgColor: 'rgba(255, 153, 0, 0.1)', borderColor: 'rgba(255, 153, 0, 0.3)' };
-  }
-  if (orgLower.includes('azure') || orgLower.includes('microsoft')) {
-    return { color: '#0078D4', bgColor: 'rgba(0, 120, 212, 0.1)', borderColor: 'rgba(0, 120, 212, 0.3)' };
-  }
-  if (orgLower.includes('google') || orgLower.includes('gcp')) {
-    return { color: '#4285F4', bgColor: 'rgba(66, 133, 244, 0.1)', borderColor: 'rgba(66, 133, 244, 0.3)' };
-  }
-  if (orgLower.includes('udemy')) {
-    return { color: '#A435F0', bgColor: 'rgba(164, 53, 240, 0.1)', borderColor: 'rgba(164, 53, 240, 0.3)' };
-  }
-  if (orgLower.includes('coursera')) {
-    return { color: '#0056D2', bgColor: 'rgba(0, 86, 210, 0.1)', borderColor: 'rgba(0, 86, 210, 0.3)' };
-  }
-  if (orgLower.includes('linkedin')) {
-    return { color: '#0A66C2', bgColor: 'rgba(10, 102, 194, 0.1)', borderColor: 'rgba(10, 102, 194, 0.3)' };
-  }
-  if (orgLower.includes('cisco')) {
-    return { color: '#049FD9', bgColor: 'rgba(4, 159, 217, 0.1)', borderColor: 'rgba(4, 159, 217, 0.3)' };
-  }
-  // Default accent color
-  return { color: '#00D4FF', bgColor: 'rgba(0, 212, 255, 0.1)', borderColor: 'rgba(0, 212, 255, 0.3)' };
-};
+const TOTAL = 9;
 
 const Certifications: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
+  const [filter, setFilter] = useState('All');
 
-  const prefersReducedMotion = useReducedMotion();
-  const [filter, setFilter] = useState<string>('All');
-
-  // Get unique organizations
-  const organizations = ['All', ...Array.from(new Set(certifications.map((c) => c.organization)))];
-
-  const filteredCerts =
-    filter === 'All'
-      ? certifications
-      : certifications.filter((c) => c.organization === filter);
+  const orgs = ['All', ...Array.from(new Set(certifications.map(c => c.organization)))];
+  const filtered = filter === 'All' ? certifications : certifications.filter(c => c.organization === filter);
 
   return (
     <section
       id="certifications"
-      className="py-20 lg:py-32 section-secondary relative overflow-hidden"
-      aria-label="Certifications and achievements"
+      className="py-20 lg:py-28 relative overflow-hidden"
+      style={{ background: 'var(--color-bg)' }}
+      aria-label="Certifications and credentials"
     >
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full bg-success-500/5 blur-3xl" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-accent-500/5 blur-3xl" />
-      </div>
+      <div className="absolute inset-0 blueprint-grid opacity-50 pointer-events-none" aria-hidden="true" />
+      <CornerMark corner="tl" className="top-3 left-3" color="#7EC8E3" size={18} />
+      <CornerMark corner="br" className="bottom-3 right-3" color="#7EC8E3" size={18} />
 
       <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={staggerContainer(0.1)}
-          className="text-center mb-12"
-        >
-          <motion.span
-            variants={staggerItem}
-            className="inline-block px-4 py-2 rounded-full bg-success-500/10 text-success-500 text-sm font-medium mb-4"
-          >
-            <Award size={14} className="inline mr-2" />
-            Verified Credentials
-          </motion.span>
+        <div ref={ref} className="mb-10">
+          <SectionLabel sheet={7} total={TOTAL} name="Certifications" />
 
           <motion.h2
-            variants={staggerItem}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-4"
+            className="font-display font-bold uppercase text-3xl sm:text-4xl"
+            style={{ color: 'var(--color-text)', letterSpacing: '0.06em' }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.35 }}
           >
-            Certifications & <span className="gradient-text">Achievements</span>
+            VERIFIED{' '}
+            <span style={{ color: 'var(--color-accent)' }}>CREDENTIALS</span>
           </motion.h2>
 
           <motion.p
-            variants={staggerItem}
-            className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto"
+            className="text-sm mt-2"
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.7 }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 0.7 } : {}}
+            transition={{ delay: 0.1 }}
           >
-            Professional certifications that validate expertise and commitment to continuous learning.
+            Each stamp is an issued, verifiable credential — click to verify.
           </motion.p>
+        </div>
+
+        {/* Filter buttons */}
+        <motion.div
+          className="flex flex-wrap gap-2 mb-10"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.15 }}
+        >
+          {orgs.map(org => (
+            <button
+              key={org}
+              onClick={() => setFilter(org)}
+              className="font-mono-data text-[9px] px-3 py-1 border uppercase tracking-widest transition-colors duration-200"
+              style={{
+                borderColor: filter === org ? '#E4572E' : 'var(--color-border)',
+                color: filter === org ? '#E4572E' : 'var(--color-text-secondary)',
+                background: filter === org ? 'rgba(228,87,46,0.08)' : 'transparent',
+                opacity: filter === org ? 1 : 0.65,
+              }}
+            >
+              {org}
+            </button>
+          ))}
         </motion.div>
 
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          <Filter size={18} className="text-light-text-tertiary dark:text-dark-text-tertiary self-center mr-2" />
-          {organizations.map((org) => {
-            const config = org !== 'All' ? getProviderConfig(org) : null;
-            return (
-              <button
-                key={org}
-                onClick={() => setFilter(org)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  filter === org
-                    ? 'text-white shadow-lg'
-                    : 'bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-secondary dark:text-dark-text-secondary hover:opacity-80'
-                }`}
-                style={
-                  filter === org && config
-                    ? { background: config.color, boxShadow: `0 4px 20px ${config.color}40` }
-                    : filter === org
-                    ? { background: 'linear-gradient(135deg, #00D4FF, #A855F7)' }
-                    : undefined
-                }
-              >
-                {org}
-              </button>
-            );
-          })}
-        </motion.div>
-
-        {/* Certifications Grid */}
-        <motion.div
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={staggerContainer(0.1, 0.4)}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        {/* Stamp grid */}
+        <div className="flex flex-wrap justify-center gap-8 md:gap-12">
           <AnimatePresence mode="popLayout">
-            {filteredCerts.map((cert, index) => (
-              <CertificationCard
+            {filtered.map((cert, i) => (
+              <motion.div
                 key={cert.id}
-                cert={cert}
-                index={index}
-                prefersReducedMotion={prefersReducedMotion}
-              />
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+              >
+                <CertStamp
+                  issuer={cert.organization}
+                  name={cert.name}
+                  date={cert.date}
+                  verifyUrl={cert.verificationUrl}
+                  delay={inView ? i * 0.08 : 0}
+                  index={i}
+                />
+              </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
-        {/* Stats */}
+        {/* Stats row */}
         <motion.div
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={staggerContainer(0.1, 0.8)}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto"
+          className="grid grid-cols-3 gap-4 max-w-sm mt-14"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.5 }}
         >
           {[
-            { value: certifications.length, label: 'Certifications', color: 'text-accent-500' },
-            {
-              value: new Set(certifications.map((c) => c.organization)).size,
-              label: 'Organizations',
-              color: 'text-purple-400',
-            },
-            { value: '100%', label: 'Verified', color: 'text-success-500' },
-            { value: 'A+', label: 'Rating', color: 'text-orange-400' },
-          ].map((stat) => (
-            <motion.div
-              key={stat.label}
-              variants={staggerItem}
-              className="card-glass text-center p-4 sm:p-6"
+            { v: certifications.length,                                           l: 'TOTAL'    },
+            { v: new Set(certifications.map(c => c.organization)).size,           l: 'ISSUERS'  },
+            { v: '100%',                                                          l: 'VERIFIED' },
+          ].map(s => (
+            <div
+              key={s.l}
+              className="border p-3 text-center"
+              style={{ borderColor: 'var(--color-border)' }}
             >
-              <div className={`text-2xl sm:text-3xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
-              <div className="text-xs sm:text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
-                {stat.label}
+              <div className="font-display font-bold text-xl" style={{ color: '#E4572E' }}>
+                {s.v}
               </div>
-            </motion.div>
+              <div
+                className="font-mono-data text-[9px] tracking-widest mt-1"
+                style={{ color: 'var(--color-text-secondary)', opacity: 0.5 }}
+              >
+                {s.l}
+              </div>
+            </div>
           ))}
         </motion.div>
       </div>
     </section>
-  );
-};
-
-// ═══════════════════════════════════════════════════════════════════════════
-// CERTIFICATION CARD - Provider-themed with animated border
-// ═══════════════════════════════════════════════════════════════════════════
-
-interface CertificationCardProps {
-  cert: Certification;
-  index: number;
-  prefersReducedMotion: boolean;
-}
-
-const CertificationCard: React.FC<CertificationCardProps> = ({
-  cert,
-  index,
-  prefersReducedMotion,
-}) => {
-  const config = getProviderConfig(cert.organization);
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
-      className="card-incredible group relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={prefersReducedMotion ? {} : { y: -6, scale: 1.02 }}
-      style={{
-        borderColor: isHovered ? config.borderColor : undefined,
-        boxShadow: isHovered ? `0 0 30px ${config.color}30` : undefined,
-      }}
-    >
-      {/* Animated gradient border */}
-      <motion.div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background: `linear-gradient(45deg, transparent, ${config.color}40, transparent)`,
-          backgroundSize: '200% 200%',
-        }}
-        animate={
-          isHovered && !prefersReducedMotion
-            ? { backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }
-            : {}
-        }
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-
-      <div className="p-6 relative z-10">
-        {/* Header */}
-        <div className="flex items-start gap-3 mb-4">
-          <motion.div
-            className="p-2.5 rounded-xl flex-shrink-0"
-            style={{ background: config.bgColor }}
-            whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
-          >
-            <Award size={20} style={{ color: config.color }} />
-          </motion.div>
-
-          <div className="flex-1">
-            <h3 className="text-base font-bold text-light-text dark:text-dark-text mb-1 group-hover:text-accent-500 transition-colors">
-              {cert.name}
-            </h3>
-            <div className="flex items-center gap-2 text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
-              <Building size={14} style={{ color: config.color }} className="flex-shrink-0" />
-              <span>{cert.organization}</span>
-            </div>
-          </div>
-
-          {/* Verified badge */}
-          <motion.div
-            className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-500/10 text-success-500 text-[10px] font-medium flex-shrink-0"
-            animate={
-              !prefersReducedMotion
-                ? { y: [0, -2, 0] }
-                : {}
-            }
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <CheckCircle size={8} />
-            <span>Verified</span>
-          </motion.div>
-        </div>
-
-        {/* Date */}
-        <div
-          className="flex items-center gap-2 text-sm mb-4 p-2 rounded-lg"
-          style={{ background: config.bgColor }}
-        >
-          <Calendar size={14} style={{ color: config.color }} />
-          <span className="text-light-text-secondary dark:text-dark-text-secondary">
-            Earned: {cert.date}
-          </span>
-        </div>
-
-        {/* Verify Button */}
-        <motion.a
-          href={cert.verificationUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg text-sm font-medium transition-all duration-300"
-          style={{
-            background: isHovered ? config.color : config.bgColor,
-            color: isHovered ? 'white' : config.color,
-            border: `1px solid ${config.borderColor}`,
-          }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <ExternalLink size={16} />
-          Verify Certificate
-        </motion.a>
-      </div>
-    </motion.div>
   );
 };
 

@@ -2,17 +2,123 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fahad Khalid - Computer Science Undergraduate and Tech Enthusiast specializing in AI/ML, Cloud Computing, and Cybersecurity" />
-    <meta name="keywords" content="Fahad Khalid, Portfolio, Computer Science, AI/ML, Cloud Computing, Cybersecurity" />
+
+    <!-- ── Favicon ──────────────────────────────────────────────────────── -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- ── Primary SEO ──────────────────────────────────────────────────── -->
+    <title>Fahad Khalid | AI, Cloud &amp; Cybersecurity</title>
+    <meta
+      name="description"
+      content="Fahad Khalid — Computer Science undergraduate specialising in AI, Machine Learning, Cloud Computing (AWS), and Cybersecurity. AWS Student Builder Group Captain and Microsoft Student Ambassador. Explore projects, certifications, and community work."
+    />
     <meta name="author" content="Fahad Khalid" />
-    <meta property="og:title" content="Fahad Khalid | Portfolio" />
-    <meta property="og:description" content="Computer Science Undergraduate | Tech Enthusiast" />
-    <meta property="og:type" content="website" />
-    <title>Fahad Khalid | Portfolio</title>
+    <meta
+      name="keywords"
+      content="Fahad Khalid, Computer Science, AI, Machine Learning, Cloud Computing, AWS, Cybersecurity, Portfolio, AWS Student Builder, Microsoft Student Ambassador, Pakistan"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- ── Canonical URL ─────────────────────────────────────────────────── -->
+    <!--
+      Replace YOUR_DOMAIN with your actual verified domain, e.g. fahadkhalid.dev
+      Example: <link rel="canonical" href="https://fahadkhalid.dev/" />
+    -->
+    <link rel="canonical" href="https://fahad-khalid-portfolio.vercel.app/" />
+
+    <!-- ── Open Graph (Facebook, LinkedIn, WhatsApp previews) ───────────── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Fahad Khalid" />
+    <meta property="og:title"       content="Fahad Khalid | AI, Cloud &amp; Cybersecurity" />
+    <meta
+      property="og:description"
+      content="Computer Science undergraduate building AI systems, cloud infrastructure, and security solutions. AWS SBG Captain and Microsoft Student Ambassador."
+    />
+    <meta property="og:url"         content="https://fahad-khalid-portfolio.vercel.app/" />
+    <!--
+      og:image should be an absolute URL to a 1200×630px image.
+      Replace with your actual deployed image URL.
+    -->
+    <meta property="og:image"       content="https://fahad-khalid-portfolio.vercel.app/image/pic.jpg" />
+    <meta property="og:image:alt"   content="Fahad Khalid — CS undergraduate, AI and Cloud engineer" />
+    <meta property="og:locale"      content="en_US" />
+
+    <!-- ── Twitter / X Card ─────────────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Fahad Khalid | AI, Cloud &amp; Cybersecurity" />
+    <meta
+      name="twitter:description"
+      content="CS undergraduate building AI systems, cloud infrastructure, and security solutions. AWS SBG Captain · Microsoft Student Ambassador."
+    />
+    <meta name="twitter:image"       content="https://fahad-khalid-portfolio.vercel.app/image/pic.jpg" />
+    <meta name="twitter:image:alt"   content="Fahad Khalid — CS undergraduate, AI and Cloud engineer" />
+
+    <!-- ── Theme colour (browser chrome) ───────────────────────────────── -->
+    <meta name="theme-color" content="#0D2B4E" />
+
+    <!-- ── Performance hints ────────────────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+
+    <!-- ── JSON-LD Structured Data ──────────────────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://fahad-khalid-portfolio.vercel.app/#website",
+          "url": "https://fahad-khalid-portfolio.vercel.app/",
+          "name": "Fahad Khalid Portfolio",
+          "description": "Personal portfolio of Fahad Khalid — Computer Science undergraduate specialising in AI, Cloud, and Cybersecurity.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://fahad-khalid-portfolio.vercel.app/#profilepage",
+          "url": "https://fahad-khalid-portfolio.vercel.app/",
+          "name": "Fahad Khalid | AI, Cloud & Cybersecurity",
+          "about": { "@id": "https://fahad-khalid-portfolio.vercel.app/#person" },
+          "isPartOf": { "@id": "https://fahad-khalid-portfolio.vercel.app/#website" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://fahad-khalid-portfolio.vercel.app/#person",
+          "name": "Fahad Khalid",
+          "givenName": "Fahad",
+          "familyName": "Khalid",
+          "url": "https://fahad-khalid-portfolio.vercel.app/",
+          "image": "https://fahad-khalid-portfolio.vercel.app/image/pic.jpg",
+          "jobTitle": "Computer Science Undergraduate",
+          "description": "Computer Science undergraduate specialising in Artificial Intelligence, Machine Learning, Cloud Computing, and Cybersecurity. AWS Student Builder Group Captain at PGC Muridke and Microsoft Student Ambassador.",
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Generative AI",
+            "AI Agents",
+            "Cloud Computing",
+            "Amazon Web Services",
+            "Microsoft Azure",
+            "Cybersecurity",
+            "DevOps",
+            "Software Engineering",
+            "Python",
+            "Computer Vision"
+          ],
+          "nationality": { "@type": "Country", "name": "Pakistan" },
+          "sameAs": [
+            "https://github.com/fahadkhalid695",
+            "https://www.linkedin.com/in/fahad-khalid-aa674430a/"
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
-  <body class="bg-dark text-light antialiased">
+
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,123 +1,148 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+/**
+ * ScrollAnimations — ambient background orbs + scroll-reveal utility.
+ *
+ * Note: The scroll progress bar is rendered in App.tsx (ScrollProgress component).
+ * This file no longer renders a duplicate.
+ *
+ * Exports:
+ *   default  ScrollAnimations  — wrapper that adds fixed background orbs
+ *   named    ScrollReveal      — reusable whileInView wrapper for sections
+ *   named    StaggerReveal     — stagger container for children
+ */
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { staggerContainer, staggerItem } from '../../utils/animations';
+import { useReducedMotion } from '../../utils/animations';
+
+// ─── Ambient background orbs ─────────────────────────────────────────────────
 
 interface ScrollAnimationsProps {
   children: React.ReactNode;
 }
 
 const ScrollAnimations: React.FC<ScrollAnimationsProps> = ({ children }) => {
-  const { scrollYProgress } = useScroll();
-  const [scrollY, setScrollY] = useState(0);
-
-  // Parallax transforms
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((latest) => {
-      setScrollY(latest);
-    });
-    return unsubscribe;
-  }, [scrollYProgress]);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="relative">
-      {/* Background gradient orbs with parallax */}
-      <motion.div
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{ y: backgroundY }}
-      >
-        {/* Top left orb */}
-        <motion.div
-          className="absolute top-20 left-20 w-96 h-96 rounded-full opacity-20"
-          style={{
-            background: 'radial-gradient(circle, rgba(110, 68, 255, 0.3) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        
-        {/* Bottom right orb */}
-        <motion.div
-          className="absolute bottom-20 right-20 w-80 h-80 rounded-full opacity-15"
-          style={{
-            background: 'radial-gradient(circle, rgba(0, 255, 240, 0.3) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-        
-        {/* Center orb */}
-        <motion.div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full opacity-10"
-          style={{
-            background: 'radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%)',
-            filter: 'blur(30px)',
-          }}
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
-      </motion.div>
-
-      {/* Floating particles */}
-      <div className="fixed inset-0 pointer-events-none z-10">
-        {[...Array(12)].map((_, i) => (
+      {/* Fixed ambient orbs — omit animation entirely when reduced-motion */}
+      {!prefersReducedMotion && (
+        <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+          {/* Top-left — violet */}
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary-500/30 rounded-full"
+            className="absolute top-20 left-20 w-80 h-80 rounded-full opacity-[0.12]"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              background: 'radial-gradient(circle, rgba(124, 92, 255, 0.35) 0%, transparent 70%)',
+              filter: 'blur(40px)',
             }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 6 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "easeInOut",
-            }}
+            animate={{ scale: [1, 1.15, 1], opacity: [0.12, 0.18, 0.12] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
           />
-        ))}
-      </div>
-
-      {/* Progress indicator */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 z-50 origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
+          {/* Bottom-right — cyan */}
+          <motion.div
+            className="absolute bottom-20 right-20 w-72 h-72 rounded-full opacity-[0.10]"
+            style={{
+              background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%)',
+              filter: 'blur(40px)',
+            }}
+            animate={{ scale: [1.15, 1, 1.15], opacity: [0.10, 0.16, 0.10] }}
+            transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          />
+          {/* Center — signal green, very faint */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full opacity-[0.06]"
+            style={{
+              background: 'radial-gradient(circle, rgba(56, 242, 160, 0.3) 0%, transparent 70%)',
+              filter: 'blur(30px)',
+            }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.1, 0.06] }}
+            transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+          />
+        </div>
+      )}
 
       {children}
     </div>
   );
 };
+
+// ─── ScrollReveal — whileInView fade-up, triggered once ──────────────────────
+
+interface ScrollRevealProps {
+  children: React.ReactNode;
+  className?: string;
+  /** Delay in seconds before the animation starts after entering viewport */
+  delay?: number;
+  /** y offset to animate from (default 24px) */
+  yOffset?: number;
+}
+
+export const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  className = '',
+  delay = 0,
+  yOffset = 24,
+}) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={className}
+      initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: yOffset }}
+      whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{
+        duration: prefersReducedMotion ? 0.15 : 0.55,
+        delay,
+        ease: [0.2, 0.9, 0.2, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+// ─── StaggerReveal — stagger container for child elements ───────────────────
+
+interface StaggerRevealProps {
+  children: React.ReactNode;
+  className?: string;
+  /** Stagger delay between each child in seconds (default 0.07) */
+  stagger?: number;
+  /** Initial delay before first child animates (default 0) */
+  delay?: number;
+}
+
+export const StaggerReveal: React.FC<StaggerRevealProps> = ({
+  children,
+  className = '',
+  stagger = 0.07,
+  delay = 0,
+}) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-80px' }}
+      variants={staggerContainer(prefersReducedMotion ? 0 : stagger, delay)}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/** Use inside <StaggerReveal> for each child item */
+export const StaggerItem: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => (
+  <motion.div className={className} variants={staggerItem}>
+    {children}
+  </motion.div>
+);
 
 export default ScrollAnimations;

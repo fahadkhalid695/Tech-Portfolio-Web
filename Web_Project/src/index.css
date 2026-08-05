@@ -1,49 +1,38 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Blueprint fonts: Space Grotesk (display/headings) + JetBrains Mono (data) + Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 /* Import theme styles */
 @import './styles/theme.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
+  html { scroll-behavior: smooth; }
+
   body {
-    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text min-h-screen font-sans transition-colors duration-300;
+    @apply min-h-screen font-sans transition-colors duration-300;
+    background-color: #0D2B4E;
+    color: #EAF4FF;
   }
-  
+
+  .light body, body.light {
+    background-color: #F4F0E4;
+    color: #0D2B4E;
+  }
+
+  /* Scoped h1 gradient — only plain h1 without explicit color class */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold tracking-tight;
+    font-family: 'Space Grotesk', Inter, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    tracking: tight;
   }
-  
-  h1 {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
-    background: linear-gradient(45deg, #00fff0, #6e44ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
-  }
-  
-  h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-  }
-  
-  h3 {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
-  }
-  
-  h4 {
-    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
-  }
-  
+
   p {
-    @apply leading-relaxed text-sm sm:text-base text-light-text-secondary dark:text-dark-text-secondary;
+    @apply leading-relaxed text-sm sm:text-base;
+    color: var(--color-text-secondary);
   }
 }
 
@@ -416,5 +405,40 @@ input:focus, textarea:focus {
 @media (min-width: 1024px) {
   .section {
     @apply py-24;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EXPERTISE GRAPH — reduced-motion & no-WebGL fallback classes
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Hide the R3F canvas entirely when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .expertise-graph-canvas {
+    display: none !important;
+  }
+  .expertise-graph-fallback {
+    display: block !important;
+  }
+}
+
+/* Show fallback by default; JS enables the canvas when WebGL is confirmed */
+.expertise-graph-canvas {
+  display: none;
+}
+.expertise-graph-canvas.webgl-ready {
+  display: block;
+}
+.expertise-graph-fallback {
+  display: block;
+}
+.expertise-graph-fallback.hidden-by-webgl {
+  display: none;
+}
+
+/* Card cursor-follow glow — desktop only (pointer: fine = mouse) */
+@media (pointer: fine) {
+  .card-glow-follow {
+    transition: --glow-x 0.15s ease, --glow-y 0.15s ease, box-shadow 0.3s ease;
   }
 }

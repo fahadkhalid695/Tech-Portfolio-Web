@@ -1,0 +1,9 @@
+# robots.txt — Fahad Khalid Portfolio
+# Allow all crawlers to index the public portfolio.
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+# Replace YOUR_DOMAIN with your actual verified domain.
+Sitemap: https://fahad-khalid-portfolio.vercel.app/sitemap.xml

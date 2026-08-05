@@ -1,146 +1,115 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  Github, 
-  Linkedin,
-  Shield,
-  GraduationCap, 
-  BookOpen, 
-  Cloud, 
-  Award, 
-  Layers,
-  ExternalLink
+import {
+  Github, Linkedin, Shield, GraduationCap,
+  BookOpen, Cloud, Award, Layers, ExternalLink,
 } from 'lucide-react';
 import { sortedPlatforms } from '../../data/platforms';
 import { PlatformStat } from '../../types';
 import { useAllPlatformStats } from '../../utils/usePlatformStats';
 import { useTheme } from '../../contexts/ThemeContext';
-import { 
-  staggerContainer, 
-  staggerItem,
-  useReducedMotion 
-} from '../../utils/animations';
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PLATFORMS SECTION
-// Display platform tiles with live stats and embedded badges
-// NO HOVER OVERLAYS - Clean simple cards that link directly
-// ═══════════════════════════════════════════════════════════════════════════
+import { staggerItem, useReducedMotion } from '../../utils/animations';
+import { CornerMark, SectionLabel } from '../ui/BlueprintPrimitives';
 
 const PlatformsSection: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const prefersReducedMotion = useReducedMotion();
   const { theme } = useTheme();
 
-  // Load and re-run LinkedIn badge script when theme changes.
+  // Reload LinkedIn badge script on theme change
   useEffect(() => {
-    const existingScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
-    if (existingScript) {
-      existingScript.remove();
-    }
-
+    const existing = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
+    if (existing) existing.remove();
     const script = document.createElement('script');
     script.src = 'https://platform.linkedin.com/badges/js/profile.js';
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
-
     return () => {
-      const cleanupScript = document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]');
-      if (cleanupScript) cleanupScript.remove();
+      document.querySelector('script[src="https://platform.linkedin.com/badges/js/profile.js"]')?.remove();
     };
   }, [theme]);
 
   return (
-    <section 
-      id="platforms" 
-      className="py-20 lg:py-32 section-secondary relative overflow-hidden"
-      aria-label="Platform Profiles"
+    <section
+      id="platforms"
+      className="py-20 lg:py-28 relative overflow-hidden"
+      style={{ background: 'var(--color-bg)' }}
+      aria-label="Platform profiles"
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 -right-32 w-96 h-96 rounded-full bg-accent-500/5 blur-3xl" />
-        <div className="absolute bottom-1/3 -left-32 w-96 h-96 rounded-full bg-purple-500/5 blur-3xl" />
-      </div>
+      <div className="absolute inset-0 blueprint-grid opacity-40 pointer-events-none" aria-hidden="true" />
+      <CornerMark corner="tl" className="top-3 left-3" color="#7EC8E3" size={18} />
+      <CornerMark corner="br" className="bottom-3 right-3" color="#7EC8E3" size={18} />
 
       <div className="container-custom px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={staggerContainer(0.1)}
-          className="text-center mb-16"
-        >
-          <motion.span 
-            variants={staggerItem}
-            className="inline-block px-4 py-2 rounded-full bg-accent-500/10 text-accent-500 text-sm font-medium mb-4"
+        {/* Header */}
+        <div ref={ref}>
+          <SectionLabel sheet={9} name="Platforms" />
+          <motion.h2
+            className="font-display font-bold uppercase text-3xl sm:text-4xl mb-2"
+            style={{ color: 'var(--color-text)', letterSpacing: '0.06em' }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.35 }}
           >
-            Online Presence
-          </motion.span>
-          
-          <motion.h2 
-            variants={staggerItem}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-4"
-          >
-            My <span className="gradient-text">Platforms</span>
+            ONLINE{' '}
+            <span style={{ color: 'var(--color-accent)' }}>PRESENCE</span>
           </motion.h2>
-          
-          <motion.p 
-            variants={staggerItem}
-            className="text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto"
+          <motion.p
+            className="text-sm mb-10"
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.7 }}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 0.7 } : {}}
+            transition={{ delay: 0.1 }}
           >
-            Connect with me across different platforms and check out my learning journey.
+            Learning platforms, communities, and live profiles.
           </motion.p>
-        </motion.div>
+        </div>
 
-        {/* Platform Grid */}
+        {/* Platform tiles grid */}
         <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
           initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={staggerContainer(0.08)}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          animate={inView ? 'visible' : 'hidden'}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
         >
-          {sortedPlatforms.map((platform) => (
-            <PlatformTile 
-              key={platform.id} 
-              platform={platform}
-              prefersReducedMotion={prefersReducedMotion}
-            />
+          {sortedPlatforms.map(platform => (
+            <PlatformTile key={platform.id} platform={platform} prefersReducedMotion={prefersReducedMotion} />
           ))}
         </motion.div>
 
-        {/* Featured Live Badges Section */}
+        {/* Live badges */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6 }}
-          className="mt-20"
+          transition={{ delay: 0.5 }}
         >
-          <h3 className="text-xl font-semibold text-light-text dark:text-dark-text text-center mb-8">
-            Live Profile Badges
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-            <GitHubLiveProfileCard prefersReducedMotion={prefersReducedMotion} />
+          <div
+            className="font-mono-data text-[9px] tracking-widest mb-6"
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}
+          >
+            LIVE PROFILE BADGES
+          </div>
 
-            {/* TryHackMe Live Badge */}
-            <motion.div
-              className="card-glass p-6 rounded-xl text-center w-full h-full"
-              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            <GitHubLiveCard prefersReducedMotion={prefersReducedMotion} />
+
+            {/* TryHackMe */}
+            <div
+              className="border p-5"
+              style={{ borderColor: 'var(--color-border)', background: 'var(--glass-bg)' }}
             >
-              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
-                <Shield size={16} style={{ color: '#1C2538' }} />
-                TryHackMe Profile
-              </h4>
+              <div
+                className="font-mono-data text-[9px] tracking-widest mb-4 flex items-center gap-2"
+                style={{ color: 'var(--color-text-secondary)', opacity: 0.55 }}
+              >
+                <Shield size={12} style={{ color: '#1C2538' }} />
+                TRYHACKME PROFILE
+              </div>
               <iframe
                 src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=3888371"
-                style={{ border: 'none', width: '100%', maxWidth: '320px', height: '180px', borderRadius: '8px' }}
+                style={{ border: 'none', width: '100%', maxWidth: 320, height: 180 }}
                 title="TryHackMe Badge"
                 loading="lazy"
               />
@@ -148,22 +117,25 @@ const PlatformsSection: React.FC = () => {
                 href="https://tryhackme.com/p/fahadkhalid695"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 mt-4 text-sm text-accent-500 hover:underline"
+                className="inline-flex items-center gap-1 mt-3 font-mono-data text-[9px] tracking-widest uppercase"
+                style={{ color: 'var(--color-accent)', opacity: 0.8 }}
               >
-                <ExternalLink size={14} />
-                View Full Profile
+                <ExternalLink size={10} /> VIEW PROFILE
               </a>
-            </motion.div>
+            </div>
 
-            {/* LinkedIn Live Badge */}
-            <motion.div
-              className="card-glass p-6 rounded-xl text-center w-full h-full"
-              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            {/* LinkedIn */}
+            <div
+              className="border p-5"
+              style={{ borderColor: 'var(--color-border)', background: 'var(--glass-bg)' }}
             >
-              <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-4 flex items-center justify-center gap-2">
-                <Linkedin size={16} style={{ color: '#0A66C2' }} />
-                LinkedIn Profile
-              </h4>
+              <div
+                className="font-mono-data text-[9px] tracking-widest mb-4 flex items-center gap-2"
+                style={{ color: 'var(--color-text-secondary)', opacity: 0.55 }}
+              >
+                <Linkedin size={12} style={{ color: '#0A66C2' }} />
+                LINKEDIN PROFILE
+              </div>
               <div
                 key={`linkedin-${theme}`}
                 className="badge-base LI-profile-badge"
@@ -177,11 +149,12 @@ const PlatformsSection: React.FC = () => {
                 <a
                   className="badge-base__link LI-simple-link"
                   href="https://pk.linkedin.com/in/fahadkhalid695?trk=profile-badge"
+                  style={{ color: 'var(--color-accent)' }}
                 >
                   Fahad Khalid
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -189,241 +162,16 @@ const PlatformsSection: React.FC = () => {
   );
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PLATFORM TILE - Simple card with NO hover overlay/popup
-// Just a clean link card that takes you to the profile
-// ─────────────────────────────────────────────────────────────────────────────
+/* ── PlatformTile ─────────────────────────────────────────────────────────── */
 
 interface PlatformTileProps {
   platform: PlatformStat;
   prefersReducedMotion: boolean;
 }
 
-interface GitHubProfileApi {
-  avatar_url: string;
-  html_url: string;
-  name: string | null;
-  login: string;
-  bio: string | null;
-  public_repos: number;
-  followers: number;
-  following: number;
-  public_gists: number;
-}
-
-const GITHUB_USERNAME = 'fahadkhalid695';
-const GITHUB_COMMIT_CACHE_KEY = `github_commit_count_${GITHUB_USERNAME}`;
-const GITHUB_COMMIT_CACHE_TTL = 6 * 60 * 60 * 1000;
-
-interface GitHubRepoApi {
-  name: string;
-  default_branch: string;
-}
-
-const parseLastPageFromLink = (linkHeader: string | null): number | null => {
-  if (!linkHeader) return null;
-  const lastMatch = linkHeader.match(/[?&]page=(\d+)>;\s*rel="last"/);
-  if (!lastMatch) return null;
-  return Number(lastMatch[1]);
-};
-
-const getRepoCommitCount = async (repoName: string, defaultBranch: string): Promise<number> => {
-  const endpoint = `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/commits?sha=${encodeURIComponent(defaultBranch)}&per_page=1`;
-  const response = await fetch(endpoint, {
-    headers: { Accept: 'application/vnd.github+json' },
-  });
-
-  if (response.status === 409) {
-    return 0;
-  }
-
-  if (!response.ok) {
-    return 0;
-  }
-
-  const lastPage = parseLastPageFromLink(response.headers.get('Link'));
-  if (lastPage) {
-    return lastPage;
-  }
-
-  const commits = (await response.json()) as Array<unknown>;
-  return commits.length > 0 ? 1 : 0;
-};
-
-const fetchTotalCommitCount = async (): Promise<number> => {
-  const reposResponse = await fetch(
-    `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=updated&per_page=100`,
-    { headers: { Accept: 'application/vnd.github+json' } }
-  );
-
-  if (!reposResponse.ok) {
-    throw new Error(`GitHub repos API ${reposResponse.status}`);
-  }
-
-  const repos = (await reposResponse.json()) as GitHubRepoApi[];
-  const commitCounts = await Promise.all(
-    repos.map((repo) => getRepoCommitCount(repo.name, repo.default_branch))
-  );
-
-  return commitCounts.reduce((sum, count) => sum + count, 0);
-};
-
-const GitHubLiveProfileCard: React.FC<{ prefersReducedMotion: boolean }> = ({ prefersReducedMotion }) => {
-  const [profile, setProfile] = useState<GitHubProfileApi | null>(null);
-  const [commitCount, setCommitCount] = useState<number | null>(null);
-  const [commitsLoading, setCommitsLoading] = useState(true);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchGithubProfile = async () => {
-      try {
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-          headers: { Accept: 'application/vnd.github+json' },
-        });
-
-        if (!response.ok) {
-          throw new Error(`GitHub API ${response.status}`);
-        }
-
-        const data = (await response.json()) as GitHubProfileApi;
-        if (isMounted) {
-          setProfile(data);
-          setError(null);
-        }
-      } catch {
-        if (isMounted) {
-          setError('Live stats unavailable');
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    const fetchCommitStats = async () => {
-      try {
-        const cached = localStorage.getItem(GITHUB_COMMIT_CACHE_KEY);
-        if (cached) {
-          const parsed = JSON.parse(cached) as { value: number; timestamp: number };
-          if (Date.now() - parsed.timestamp < GITHUB_COMMIT_CACHE_TTL) {
-            if (isMounted) {
-              setCommitCount(parsed.value);
-              setCommitsLoading(false);
-            }
-            return;
-          }
-        }
-
-        const totalCommits = await fetchTotalCommitCount();
-
-        localStorage.setItem(
-          GITHUB_COMMIT_CACHE_KEY,
-          JSON.stringify({ value: totalCommits, timestamp: Date.now() })
-        );
-
-        if (isMounted) {
-          setCommitCount(totalCommits);
-        }
-      } catch {
-        if (isMounted) {
-          setCommitCount(null);
-        }
-      } finally {
-        if (isMounted) {
-          setCommitsLoading(false);
-        }
-      }
-    };
-
-    fetchGithubProfile();
-    fetchCommitStats();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  return (
-    <motion.a
-      href={`https://github.com/${GITHUB_USERNAME}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="card-glass p-6 rounded-xl block w-full h-full"
-      whileHover={prefersReducedMotion ? {} : { y: -4 }}
-    >
-      <div className="flex items-center justify-between mb-4">
-        <h4 className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary flex items-center gap-2">
-          <Github size={16} style={{ color: '#181717' }} />
-          GitHub Live Profile
-        </h4>
-        <span className="flex items-center gap-1 text-xs text-success-500">
-          <span className="w-2 h-2 rounded-full bg-success-500 animate-pulse" />
-          Live
-        </span>
-      </div>
-
-      <div className="flex items-center gap-4 mb-4">
-        <img
-          src={profile?.avatar_url || `https://github.com/${GITHUB_USERNAME}.png`}
-          alt="GitHub Avatar"
-          className="w-16 h-16 rounded-full border border-light-border dark:border-dark-border"
-          loading="lazy"
-        />
-        <div>
-          <p className="text-base font-semibold text-light-text dark:text-dark-text">
-            {loading ? 'Loading...' : profile?.name || 'Fahad Khalid'}
-          </p>
-          <p className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary">
-            @{profile?.login || GITHUB_USERNAME}
-          </p>
-          {profile?.bio && (
-            <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary mt-1 line-clamp-2">
-              {profile.bio}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-2 mb-4">
-        {[
-          { label: 'Repos', value: profile?.public_repos },
-          { label: 'Followers', value: profile?.followers },
-          { label: 'Following', value: profile?.following },
-          { label: 'Commits', value: commitCount },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="px-3 py-2 rounded-md bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-center"
-          >
-            <p className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary">{item.label}</p>
-            <p className="text-sm font-semibold text-light-text dark:text-dark-text">
-              {loading || (item.label === 'Commits' && commitsLoading) ? '...' : item.value ?? '--'}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div className="inline-flex items-center gap-1 text-sm text-accent-500 hover:underline">
-        <ExternalLink size={14} />
-        View Full Profile
-      </div>
-
-      {error && (
-        <p className="text-xs text-amber-500 mt-3">{error}. Showing fallback avatar.</p>
-      )}
-    </motion.a>
-  );
-};
-
 const PlatformTile: React.FC<PlatformTileProps> = ({ platform, prefersReducedMotion }) => {
   const stats = useAllPlatformStats(platform);
-  
   const Icon = getIconComponent(platform.icon);
-  const hasLiveData = stats.some(s => s.source === 'api' && s.isLive);
 
   return (
     <motion.a
@@ -431,74 +179,181 @@ const PlatformTile: React.FC<PlatformTileProps> = ({ platform, prefersReducedMot
       target="_blank"
       rel="noopener noreferrer"
       variants={staggerItem}
-      whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.02 }}
+      whileHover={prefersReducedMotion ? {} : { y: -4 }}
       transition={{ duration: 0.2 }}
-      className="block card-glass p-5 hover:border-accent-500/30 transition-all duration-300 group"
+      className="block group"
+      style={{
+        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        padding: '1.25rem',
+        transition: 'border-color 0.2s',
+      }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border-accent)'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-border)'; }}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between mb-3">
-        <div 
-          className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-          style={{ backgroundColor: `${platform.color}20` }}
-        >
-          <Icon className="w-6 h-6" style={{ color: platform.color }} />
-        </div>
-          
-        {/* Live indicator for GitHub */}
-        {hasLiveData && (
-          <span className="flex items-center gap-1 text-xs text-success-500">
-            <span className="w-2 h-2 rounded-full bg-success-500 animate-pulse" />
-            Live
-          </span>
-        )}
+      {/* Icon */}
+      <div
+        className="w-11 h-11 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110"
+        style={{ background: `${platform.color}18` }}
+      >
+        <Icon className="w-5 h-5" style={{ color: platform.color }} />
       </div>
 
-      {/* Title & Username */}
-      <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-1 group-hover:text-accent-500 transition-colors">
+      <h3
+        className="font-display font-bold uppercase text-sm mb-0.5"
+        style={{ color: 'var(--color-text)', letterSpacing: '0.04em' }}
+      >
         {platform.displayName}
       </h3>
-      <p className="text-sm text-light-text-tertiary dark:text-dark-text-tertiary mb-3">
+      <p
+        className="font-mono-data text-[9px] tracking-widest mb-3"
+        style={{ color: 'var(--color-text-secondary)', opacity: 0.55 }}
+      >
         @{platform.username}
       </p>
-      
+
       {/* Stats */}
-      <div className="flex flex-wrap gap-2">
-        {stats.map((stat, index) => (
-          <span 
-            key={index}
-            className="px-2 py-1 text-xs rounded-md bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-secondary dark:text-dark-text-secondary"
+      <div className="flex flex-wrap gap-1.5">
+        {stats.map((stat, i) => (
+          <span
+            key={i}
+            className="font-mono-data text-[8px] px-2 py-0.5 border tracking-widest"
+            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)', opacity: 0.75 }}
           >
-            {stat.loading ? '...' : stat.value} {platform.stats[index]?.label}
+            {stat.loading ? '…' : stat.value} {platform.stats[i]?.label}
           </span>
         ))}
       </div>
 
-      {/* View Profile hint on hover */}
-      <div className="mt-4 flex items-center gap-1 text-xs text-accent-500 opacity-0 group-hover:opacity-100 transition-opacity">
-        <ExternalLink size={12} />
-        View Profile
+      <div
+        className="flex items-center gap-1 mt-3 font-mono-data text-[9px] tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ color: 'var(--color-accent)' }}
+      >
+        <ExternalLink size={10} /> View
       </div>
     </motion.a>
   );
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HELPER: Get icon component from string
-// ─────────────────────────────────────────────────────────────────────────────
+/* ── GitHub Live Card ─────────────────────────────────────────────────────── */
 
-const getIconComponent = (iconName: string) => {
-  const icons: Record<string, React.FC<{ className?: string; style?: React.CSSProperties }>> = {
-    Github,
-    Linkedin,
-    Shield,
-    GraduationCap,
-    BookOpen,
-    Cloud,
-    Award,
-    Layers,
+interface GitHubProfileApi {
+  avatar_url: string;
+  name: string | null;
+  login: string;
+  bio: string | null;
+  public_repos: number;
+  followers: number;
+  following: number;
+}
+
+const GITHUB_USERNAME = 'fahadkhalid695';
+
+const GitHubLiveCard: React.FC<{ prefersReducedMotion: boolean }> = ({ prefersReducedMotion }) => {
+  const [profile, setProfile] = useState<GitHubProfileApi | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
+      headers: { Accept: 'application/vnd.github+json' },
+    })
+      .then(r => r.json())
+      .then(d => { if (mounted) { setProfile(d); setLoading(false); } })
+      .catch(() => { if (mounted) { setError(true); setLoading(false); } });
+    return () => { mounted = false; };
+  }, []);
+
+  return (
+    <a
+      href={`https://github.com/${GITHUB_USERNAME}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block"
+      style={{ border: '1px solid var(--color-border)', background: 'var(--glass-bg)', padding: '1.25rem' }}
+    >
+      <div
+        className="font-mono-data text-[9px] tracking-widest mb-4 flex items-center justify-between"
+        style={{ color: 'var(--color-text-secondary)', opacity: 0.55 }}
+      >
+        <span className="flex items-center gap-2">
+          <Github size={12} />
+          GITHUB LIVE PROFILE
+        </span>
+        <span className="flex items-center gap-1" style={{ color: '#10B981' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" />
+          LIVE
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3 mb-4">
+        <img
+          src={profile?.avatar_url || `https://github.com/${GITHUB_USERNAME}.png`}
+          alt="GitHub avatar"
+          className="w-14 h-14 rounded-full"
+          style={{ border: '1px solid var(--color-border)' }}
+          loading="lazy"
+        />
+        <div>
+          <p className="font-display font-bold text-sm" style={{ color: 'var(--color-text)' }}>
+            {loading ? 'Loading…' : profile?.name || 'Fahad Khalid'}
+          </p>
+          <p className="font-mono-data text-[9px] tracking-widest" style={{ color: 'var(--color-text-secondary)', opacity: 0.6 }}>
+            @{GITHUB_USERNAME}
+          </p>
+          {profile?.bio && (
+            <p className="text-xs mt-1 line-clamp-2" style={{ color: 'var(--color-text-secondary)', opacity: 0.7 }}>
+              {profile.bio}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        {[
+          { l: 'REPOS',     v: profile?.public_repos },
+          { l: 'FOLLOWERS', v: profile?.followers    },
+          { l: 'FOLLOWING', v: profile?.following    },
+        ].map(s => (
+          <div
+            key={s.l}
+            className="text-center border p-2"
+            style={{ borderColor: 'var(--color-border)' }}
+          >
+            <div className="font-display font-bold text-base" style={{ color: 'var(--color-accent)' }}>
+              {loading ? '…' : s.v ?? '--'}
+            </div>
+            <div className="font-mono-data text-[7px] tracking-widest" style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}>
+              {s.l}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {error && (
+        <p className="font-mono-data text-[8px]" style={{ color: '#E4572E', opacity: 0.7 }}>
+          // LIVE STATS UNAVAILABLE — SHOWING FALLBACK
+        </p>
+      )}
+
+      <div
+        className="flex items-center gap-1 font-mono-data text-[9px] tracking-widest uppercase"
+        style={{ color: 'var(--color-accent)', opacity: 0.8 }}
+      >
+        <ExternalLink size={10} /> VIEW FULL PROFILE
+      </div>
+    </a>
+  );
+};
+
+/* ── Icon helper ──────────────────────────────────────────────────────────── */
+
+const getIconComponent = (name: string) => {
+  const map: Record<string, React.FC<{ className?: string; style?: React.CSSProperties }>> = {
+    Github, Linkedin, Shield, GraduationCap, BookOpen, Cloud, Award, Layers,
   };
-  
-  return icons[iconName] || Cloud;
+  return map[name] || Cloud;
 };
 
 export default PlatformsSection;

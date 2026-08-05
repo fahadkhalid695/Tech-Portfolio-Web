@@ -1,548 +1,397 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   THEME CSS - Modern Dark & Soft Professional Light
-   Portfolio Design System v2.0
+   THEME CSS — Blueprint / Schematic Design System
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ───────────────────────────────────────────────────────────────────────────
-   CSS CUSTOM PROPERTIES (Design Tokens)
-   ─────────────────────────────────────────────────────────────────────────── */
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
-  /* Global Animation Easing */
   --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
-  /* Animation Durations */
-  --duration-fast: 150ms;
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --duration-fast:   150ms;
   --duration-normal: 300ms;
-  --duration-slow: 500ms;
+  --duration-slow:   500ms;
   --duration-slower: 700ms;
-  
-  /* Spacing Scale */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  
+
+  /* Spacing */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px;
+
   /* Border Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-2xl: 32px;
-  --radius-full: 9999px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.3);
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+  --radius-xl: 16px; --radius-2xl: 24px; --radius-full: 9999px;
+
+  /* Blueprint tokens */
+  --blueprint-bg:   #0D2B4E;
+  --blueprint-deep: #08213D;
+  --line-primary:   #EAF4FF;
+  --line-cyan:      #7EC8E3;
+  --paper:          #F4F0E4;
+  --paper-ink:      #0D2B4E;
+  --accent-stamp:   #E4572E;
+
+  /* Grid */
+  --grid-major: rgba(126, 200, 227, 0.07);
+  --grid-minor: rgba(126, 200, 227, 0.035);
 }
 
-/* Light Theme Colors */
-.light {
-  --color-bg: #FFFFFF;
-  --color-bg-secondary: #F6F9FF;
-  --color-bg-tertiary: #EEF2FF;
-  --color-surface: #FFFFFF;
-  --color-surface-elevated: #F8FAFC;
-  --color-text: #0F172A;
-  --color-text-secondary: #475569;
-  --color-text-tertiary: #64748B;
-  --color-text-muted: #94A3B8;
-  --color-accent: #0B63FF;
-  --color-accent-secondary: #00D4FF;
-  --color-border: rgba(15, 23, 42, 0.1);
-  --color-border-accent: rgba(11, 99, 255, 0.3);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 12px 40px rgba(11, 99, 255, 0.15);
-  --gradient-primary: linear-gradient(135deg, #0B63FF, #00D4FF);
-  --gradient-surface: linear-gradient(180deg, #F6F9FF, #FFFFFF);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.5);
-}
-
-/* Dark Theme Colors (Default) */
+/* ─── Dark Theme (Blueprint — default) ──────────────────────────────────── */
 .dark {
-  --color-bg: #0F172A;
-  --color-bg-secondary: #0B1220;
-  --color-bg-tertiary: #1E293B;
-  --color-surface: #0B1220;
-  --color-surface-elevated: #1E293B;
-  --color-text: #E6EEF8;
-  --color-text-secondary: #94A3B8;
-  --color-text-tertiary: #64748B;
-  --color-text-muted: #6B7280;
-  --color-accent: #00D4FF;
-  --color-accent-secondary: #A855F7;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-accent: rgba(0, 212, 255, 0.3);
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 20px 60px rgba(0, 212, 255, 0.2);
-  --gradient-primary: linear-gradient(135deg, #00D4FF, #A855F7);
-  --gradient-surface: linear-gradient(180deg, #0B1220, #0F172A);
-  --glass-bg: rgba(11, 18, 32, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --color-bg:            #0D2B4E;
+  --color-bg-secondary:  #08213D;
+  --color-bg-tertiary:   #0F3460;
+  --color-surface:       #08213D;
+  --color-surface-elevated: #0F3460;
+  --color-text:          #EAF4FF;
+  --color-text-secondary:#7EC8E3;
+  --color-text-tertiary: #4A7FA5;
+  --color-text-muted:    #2E6080;
+  --color-accent:        #7EC8E3;
+  --color-accent-secondary: #E4572E;
+  --color-border:        rgba(126, 200, 227, 0.15);
+  --color-border-accent: rgba(126, 200, 227, 0.4);
+  --shadow-card:         0 4px 24px rgba(0,0,0,0.5);
+  --shadow-card-hover:   0 12px 40px rgba(0,0,0,0.65);
+  --shadow-inner-glow:   inset 0 1px 0 rgba(126,200,227,0.06);
+  --gradient-primary:    linear-gradient(135deg, #7EC8E3, #4A9DB8);
+  --gradient-surface:    linear-gradient(180deg, #08213D, #0D2B4E);
+  --glass-bg:            rgba(8, 33, 61, 0.80);
+  --glass-border:        rgba(126, 200, 227, 0.12);
+  --glass-blur:          16px;
+  --glass-saturate:      140%;
+  --glass-inner-glow-color: rgba(126,200,227,0.04);
+
+  /* Blueprint-specific */
+  --paper-surface: #F4F0E4;
+  --paper-text:    #0D2B4E;
+  --paper-border:  rgba(13, 43, 78, 0.25);
+  --paper-shadow:  8px 12px 32px rgba(0,0,0,0.55), 2px 3px 8px rgba(0,0,0,0.3);
+}
+
+/* ─── Light Theme (Simplified, no 3D) ───────────────────────────────────── */
+.light {
+  --color-bg:            #F4F0E4;
+  --color-bg-secondary:  #EDE9D8;
+  --color-bg-tertiary:   #E4DFCC;
+  --color-surface:       #FFFFFF;
+  --color-surface-elevated: #F8F5EC;
+  --color-text:          #0D2B4E;
+  --color-text-secondary:#2A5278;
+  --color-text-tertiary: #4A7FA5;
+  --color-text-muted:    #7EC8E3;
+  --color-accent:        #0D2B4E;
+  --color-accent-secondary: #E4572E;
+  --color-border:        rgba(13,43,78,0.12);
+  --color-border-accent: rgba(13,43,78,0.3);
+  --shadow-card:         0 2px 12px rgba(13,43,78,0.10);
+  --shadow-card-hover:   0 8px 28px rgba(13,43,78,0.18);
+  --shadow-inner-glow:   none;
+  --gradient-primary:    linear-gradient(135deg, #0D2B4E, #2A5278);
+  --gradient-surface:    linear-gradient(180deg, #F4F0E4, #EDE9D8);
+  --glass-bg:            rgba(255,255,255,0.85);
+  --glass-border:        rgba(13,43,78,0.12);
+  --glass-blur:          16px;
+  --glass-saturate:      160%;
+  --glass-inner-glow-color: transparent;
+  --paper-surface:       #FFFDF8;
+  --paper-text:          #0D2B4E;
+  --paper-border:        rgba(13,43,78,0.18);
+  --paper-shadow:        4px 6px 20px rgba(13,43,78,0.15), 1px 2px 4px rgba(13,43,78,0.08);
+}
+
+/* ─── Blueprint grid background ─────────────────────────────────────────── */
+.blueprint-grid {
+  background-color: var(--blueprint-bg);
+  background-image:
+    /* Major grid — 40px */
+    repeating-linear-gradient(0deg,   var(--grid-major) 0px, var(--grid-major) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg,  var(--grid-major) 0px, var(--grid-major) 1px, transparent 1px, transparent 40px),
+    /* Minor grid — 10px */
+    repeating-linear-gradient(0deg,   var(--grid-minor) 0px, var(--grid-minor) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(90deg,  var(--grid-minor) 0px, var(--grid-minor) 1px, transparent 1px, transparent 10px);
+}
+
+.light .blueprint-grid {
+  background-color: #EDE9D8;
+  background-image:
+    repeating-linear-gradient(0deg,  rgba(13,43,78,0.06) 0px, rgba(13,43,78,0.06) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(13,43,78,0.06) 0px, rgba(13,43,78,0.06) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(0deg,  rgba(13,43,78,0.025) 0px, rgba(13,43,78,0.025) 1px, transparent 1px, transparent 10px),
+    repeating-linear-gradient(90deg, rgba(13,43,78,0.025) 0px, rgba(13,43,78,0.025) 1px, transparent 1px, transparent 10px);
 }
 
 @layer components {
+  /* ─── Section utilities ─────────────────────────────────────────────────── */
+  .section-primary   { background: var(--color-bg); }
+  .section-secondary { background: var(--color-bg-secondary); }
+  .section-tertiary  { background: var(--color-bg-tertiary); }
+
   /* ─────────────────────────────────────────────────────────────────────────
-     CARD STYLES
+     LIGHT MODE GLOBAL OVERRIDES
+     All blueprint section cards that use rgba(8,33,61,…) dark panel
+     backgrounds need to become light-readable in .light mode.
      ───────────────────────────────────────────────────────────────────────── */
-  
-  /* Base Card - Glassmorphism */
+
+  /* Section headings — dark hex #EAF4FF is invisible on cream */
+  .light .bp-heading {
+    color: var(--color-text) !important;
+  }
+
+  /* Generic panel card (used in Experience, Hackathons, Skills) */
+  .bp-panel {
+    border-color: rgba(126,200,227,0.18);
+    background: rgba(8,33,61,0.60);
+  }
+  .light .bp-panel {
+    background: rgba(255,255,255,0.90) !important;
+    border-color: rgba(13,43,78,0.18) !important;
+  }
+
+  /* Blueprint text tokens — secondary text is cyan in dark, navy in light */
+  .bp-text-secondary {
+    color: #7EC8E3;
+  }
+  .light .bp-text-secondary {
+    color: var(--color-text-secondary) !important;
+  }
+
+  /* Blueprint muted text */
+  .bp-text-muted {
+    color: #7EC8E3;
+    opacity: 0.65;
+  }
+  .light .bp-text-muted {
+    color: var(--color-text-tertiary) !important;
+    opacity: 0.75 !important;
+  }
+
+  /* Blueprint chip/tag */
+  .bp-chip {
+    border-color: rgba(126,200,227,0.20);
+    color: #7EC8E3;
+  }
+  .light .bp-chip {
+    border-color: rgba(13,43,78,0.20) !important;
+    color: var(--color-text-secondary) !important;
+  }
+
+  /* Section background override — sections that use inline style
+     background: var(--color-bg-secondary) already work correctly via CSS vars.
+     But blueprint-grid needs a color-appropriate bg-color in light mode. */
+  .light .blueprint-grid-section {
+    background-color: var(--color-bg-secondary) !important;
+  }
+
+  /* ─── Blueprint card — "pinned paper sheet" ─────────────────────────────── */
+  .card-sheet {
+    background: var(--paper-surface);
+    color: var(--paper-text);
+    border: 1px solid var(--paper-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--paper-shadow);
+    transition: transform var(--duration-normal) var(--ease),
+                box-shadow var(--duration-normal) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-sheet:hover {
+    transform: translateY(-6px) rotate(0deg) !important;
+    box-shadow: 12px 20px 48px rgba(0,0,0,0.65), 3px 5px 12px rgba(0,0,0,0.35);
+  }
+
+  /* Corner fold on paper cards */
+  .card-sheet::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    background: linear-gradient(225deg, rgba(13,43,78,0.12) 50%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* ─── Glass card (for blueprint-bg panels, not paper) ───────────────────── */
   .card-glass {
-    @apply relative overflow-hidden;
+    position: relative;
+    overflow: hidden;
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
     border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card), var(--shadow-inner-glow, none);
     transition: all var(--duration-normal) var(--ease);
   }
-  
+
   .card-glass:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-card-hover);
     border-color: var(--color-border-accent);
   }
-  
-  /* Incredible Card - Premium with animated border */
+
+  /* ─── card-incredible → synonym for card-glass in blueprint system ──────── */
   .card-incredible {
-    @apply relative overflow-hidden;
-    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid var(--color-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     transition: all var(--duration-slow) var(--ease);
+    outline: 1px solid rgba(126,200,227,0.10);
+    outline-offset: -1px;
   }
-  
+
   .dark .card-incredible {
-    background: rgba(11, 18, 32, 0.6);
-    border: 1px solid rgba(0, 212, 255, 0.15);
-    box-shadow: 
-      0 10px 40px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(0, 212, 255, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    background: rgba(8,33,61,0.78);
+    outline-color: rgba(126,200,227,0.12);
   }
-  
+
   .light .card-incredible {
-    background: #FFFFFF;
-    border: 1px solid rgba(11, 99, 255, 0.15);
-    box-shadow: 
-      0 8px 30px rgba(11, 99, 255, 0.08),
-      0 2px 8px rgba(0, 0, 0, 0.04);
+    background: rgba(255,255,255,0.90);
+    outline-color: rgba(13,43,78,0.12);
+    box-shadow: 0 4px 16px rgba(13,43,78,0.08);
   }
-  
+
   .card-incredible:hover {
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-6px);
   }
-  
+
   .dark .card-incredible:hover {
-    box-shadow: 
-      0 20px 60px rgba(0, 212, 255, 0.2),
-      0 0 0 1px rgba(0, 212, 255, 0.4);
-    border-color: rgba(0, 212, 255, 0.4);
+    outline-color: rgba(126,200,227,0.35);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(126,200,227,0.12);
   }
-  
+
   .light .card-incredible:hover {
-    box-shadow: 
-      0 16px 48px rgba(11, 99, 255, 0.15),
-      0 4px 12px rgba(0, 0, 0, 0.08);
-    border-color: rgba(11, 99, 255, 0.4);
+    outline-color: rgba(13,43,78,0.30);
+    box-shadow: 0 12px 36px rgba(13,43,78,0.15);
   }
-  
-  /* Animated gradient border */
-  .card-incredible::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: var(--gradient-primary);
+
+  /* ─── Cert stamp ─────────────────────────────────────────────────────────── */
+  .cert-stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--accent-stamp);
+    color: var(--accent-stamp);
+    transform: rotate(-8deg);
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+  }
+
+  .dark .cert-stamp { mix-blend-mode: normal; opacity: 1; }
+
+  /* ─── Dimension line (SVG wrapper) ──────────────────────────────────────── */
+  .dim-line-svg {
+    overflow: visible;
+    display: block;
+  }
+
+  /* ─── Blueprint text ─────────────────────────────────────────────────────── */
+  .blueprint-text {
+    font-family: 'Space Grotesk', Inter, system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+
+  /* ─── Gradient text ──────────────────────────────────────────────────────── */
+  .gradient-text {
+    background: linear-gradient(135deg, #7EC8E3, #EAF4FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .light .gradient-text {
+    background: linear-gradient(135deg, #0D2B4E, #2A5278);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-animated {
+    background: linear-gradient(135deg, #7EC8E3, #EAF4FF, #7EC8E3);
     background-size: 200% 200%;
-    border-radius: inherit;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity var(--duration-slow) var(--ease);
-    animation: gradient-rotate 3s linear infinite;
-  }
-  
-  .card-incredible:hover::before {
-    opacity: 1;
-  }
-  
-  /* Shimmer effect */
-  .card-incredible::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
-    transition: left 0.7s var(--ease);
-  }
-  
-  .card-incredible:hover::after {
-    left: 100%;
-  }
-  
-  /* 3D Tilt Card */
-  .card-tilt {
-    @apply relative overflow-hidden;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    border-radius: var(--radius-xl);
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-card);
-    transition: box-shadow var(--duration-normal) var(--ease);
-  }
-  
-  .card-tilt:hover {
-    box-shadow: var(--shadow-card-hover);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease-in-out infinite;
   }
 
-  /* Result-based glow cards (for hackathons) */
-  .card-glow-gold {
-    --glow-color: rgba(255, 215, 0, 0.4);
-  }
-  
-  .card-glow-cyan {
-    --glow-color: rgba(0, 212, 255, 0.4);
-  }
-  
-  .card-glow-white {
-    --glow-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .card-glow-gold:hover,
-  .card-glow-cyan:hover,
-  .card-glow-white:hover {
-    box-shadow: 0 0 40px var(--glow-color), var(--shadow-card-hover);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     BUTTON STYLES
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  /* Premium Gradient Button */
+  /* ─── Buttons ────────────────────────────────────────────────────────────── */
   .btn-premium {
     @apply relative inline-flex items-center justify-center font-semibold overflow-hidden;
     padding: var(--space-4) var(--space-8);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     background: var(--gradient-primary);
-    color: white;
-    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+    color: #EAF4FF;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 16px rgba(126,200,227,0.25);
     transition: all var(--duration-normal) var(--ease);
+    border: 1px solid rgba(126,200,227,0.3);
   }
-  
+
   .btn-premium:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(126,200,227,0.35);
   }
-  
-  .btn-premium:active {
-    transform: translateY(0) scale(0.98);
+
+  .light .btn-premium {
+    background: linear-gradient(135deg, #0D2B4E, #2A5278);
+    color: #F4F0E4;
+    box-shadow: 0 4px 16px rgba(13,43,78,0.25);
   }
-  
-  .btn-premium::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #33dfff, #c084fc);
-    opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease);
-  }
-  
-  .btn-premium:hover::before {
-    opacity: 1;
-  }
-  
-  .btn-premium span {
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* Secondary/Outline Button */
+
   .btn-secondary {
-    @apply relative inline-flex items-center justify-center font-semibold overflow-hidden;
+    @apply relative inline-flex items-center justify-center font-semibold;
     padding: var(--space-4) var(--space-8);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     background: transparent;
-    border: 2px solid var(--color-accent);
-    color: var(--color-accent);
+    border: 1px solid var(--line-cyan);
+    color: var(--line-cyan);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
     transition: all var(--duration-normal) var(--ease);
   }
-  
+
   .btn-secondary:hover {
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(126,200,227,0.08);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.2);
   }
-  
+
   .light .btn-secondary {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    border-color: #0D2B4E;
+    color: #0D2B4E;
   }
-  
+
   .light .btn-secondary:hover {
-    background: rgba(11, 99, 255, 0.1);
-    box-shadow: 0 8px 24px rgba(11, 99, 255, 0.15);
-  }
-  
-  /* Ghost Button */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center font-medium;
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-md);
-    background: transparent;
-    color: var(--color-text-secondary);
-    transition: all var(--duration-fast) var(--ease);
-  }
-  
-  .btn-ghost:hover {
-    color: var(--color-accent);
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(13,43,78,0.08);
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     ANIMATION UTILITIES
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  /* Floating animation */
-  .float-animation {
-    animation: float-smooth 6s ease-in-out infinite;
-  }
-  
-  @keyframes float-smooth {
-    0%, 100% {
-      transform: translateY(0) rotate(0deg);
+  /* ─── Reduced motion ─────────────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
-    25% {
-      transform: translateY(-15px) rotate(1deg);
-    }
-    50% {
-      transform: translateY(-8px) rotate(-1deg);
-    }
-    75% {
-      transform: translateY(-12px) rotate(0.5deg);
-    }
-  }
-  
-  /* Gradient rotate animation */
-  @keyframes gradient-rotate {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  /* Pulse glow effect */
-  .pulse-glow {
-    animation: pulse-glow-animation 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse-glow-animation {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.7);
-    }
-  }
-  
-  .light .pulse-glow {
-    animation: pulse-glow-light 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse-glow-light {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(11, 99, 255, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(11, 99, 255, 0.5);
-    }
-  }
-  
-  /* Ring glow (for portrait) */
-  .ring-glow {
-    animation: ring-glow-animation 3s ease-in-out infinite;
-  }
-  
-  @keyframes ring-glow-animation {
-    0%, 100% {
-      box-shadow: 
-        0 0 0 4px rgba(0, 212, 255, 0.3),
-        0 0 20px rgba(0, 212, 255, 0.2);
-    }
-    50% {
-      box-shadow: 
-        0 0 0 6px rgba(0, 212, 255, 0.5),
-        0 0 40px rgba(0, 212, 255, 0.4);
-    }
-  }
-  
-  .light .ring-glow {
-    animation: ring-glow-light 3s ease-in-out infinite;
-  }
-  
-  @keyframes ring-glow-light {
-    0%, 100% {
-      box-shadow: 
-        0 0 0 4px rgba(11, 99, 255, 0.2),
-        0 0 20px rgba(11, 99, 255, 0.15);
-    }
-    50% {
-      box-shadow: 
-        0 0 0 6px rgba(11, 99, 255, 0.4),
-        0 0 40px rgba(11, 99, 255, 0.3);
-    }
-  }
-  
-  /* Live pulse indicator */
-  .live-pulse {
-    @apply relative;
-  }
-  
-  .live-pulse::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 8px;
-    background: #10B981;
-    border-radius: 50%;
-    animation: live-pulse-animation 2s ease-in-out infinite;
-  }
-  
-  @keyframes live-pulse-animation {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.5);
-      opacity: 0.5;
-    }
-  }
-  
-  /* Magnetic hover effect */
-  .magnetic-hover {
-    transition: transform var(--duration-normal) var(--ease);
-  }
-  
-  .magnetic-hover:hover {
-    transform: translateY(-4px) scale(1.02);
-  }
-  
-  /* Underline grow effect */
-  .underline-grow {
-    @apply relative;
-  }
-  
-  .underline-grow::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gradient-primary);
-    transition: width var(--duration-normal) var(--ease);
-  }
-  
-  .underline-grow:hover::after {
-    width: 100%;
-  }
-  
-  /* ─────────────────────────────────────────────────────────────────────────
-     GLASS MORPHISM UTILITIES
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  .glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid var(--glass-border);
-  }
-  
-  .glass-effect-strong {
-    background: var(--glass-bg);
-    backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid var(--glass-border);
+    .card-sheet:hover { transform: translateY(-4px) !important; }
+    .card-glass:hover  { transform: none !important; }
   }
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     TEXT UTILITIES
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  /* Gradient text */
-  .gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .gradient-text-animated {
-    background: var(--gradient-primary);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-rotate 3s ease-in-out infinite;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     SECTION UTILITIES
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  .section-primary {
-    background: var(--color-bg);
-  }
-  
-  .section-secondary {
-    background: var(--color-bg-secondary);
-  }
-  
-  .section-tertiary {
-    background: var(--color-bg-tertiary);
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     SCROLL PROGRESS BAR
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  .scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    z-index: 9999;
-    transform-origin: left;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     HORIZONTAL SCROLL CONTAINER
-     ───────────────────────────────────────────────────────────────────────── */
-  
+  /* ─── Scrollbar ──────────────────────────────────────────────────────────── */
   .horizontal-scroll {
     display: flex;
     gap: var(--space-6);
@@ -551,42 +400,7 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    -ms-overflow-style: none;
   }
-  
-  .horizontal-scroll::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .horizontal-scroll > * {
-    scroll-snap-align: start;
-    flex-shrink: 0;
-  }
-
-  /* ─────────────────────────────────────────────────────────────────────────
-     REDUCED MOTION
-     ───────────────────────────────────────────────────────────────────────── */
-  
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    
-    .float-animation,
-    .pulse-glow,
-    .ring-glow,
-    .gradient-text-animated {
-      animation: none !important;
-    }
-    
-    .card-incredible:hover,
-    .card-glass:hover,
-    .card-tilt:hover {
-      transform: none !important;
-    }
-  }
+  .horizontal-scroll::-webkit-scrollbar { display: none; }
+  .horizontal-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
 }

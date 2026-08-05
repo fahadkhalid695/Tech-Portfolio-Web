@@ -355,19 +355,29 @@ export const timelineBounce: Variants = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Calculate 3D tilt transform based on mouse position
- * @param x - Mouse X position relative to element center (-1 to 1)
- * @param y - Mouse Y position relative to element center (-1 to 1)
- * @param maxTilt - Maximum tilt angle in degrees
+ * Calculate 3D tilt transform based on mouse position within an element.
+ * Accepts either (x, y, maxTilt) or (x, y, width, height, maxTilt) for backwards compat.
  */
 export const calculate3DTilt = (
   x: number,
   y: number,
-  maxTilt: number = 10
+  widthOrMaxTilt: number = 10,
+  height?: number,
+  maxTiltOverride?: number
 ): { rotateX: number; rotateY: number } => {
+  // 5-arg form: (mouseX, mouseY, elementWidth, elementHeight, maxTilt)
+  if (height !== undefined && maxTiltOverride !== undefined) {
+    const nx = (x / widthOrMaxTilt) * 2 - 1;   // normalise to -1..1
+    const ny = (y / height) * 2 - 1;
+    return {
+      rotateX: ny * maxTiltOverride * -1,
+      rotateY: nx * maxTiltOverride,
+    };
+  }
+  // 3-arg form: (normX -1..1, normY -1..1, maxTilt)
   return {
-    rotateX: y * maxTilt * -1, // Invert Y for natural feel
-    rotateY: x * maxTilt,
+    rotateX: y * widthOrMaxTilt * -1,
+    rotateY: x * widthOrMaxTilt,
   };
 };
 

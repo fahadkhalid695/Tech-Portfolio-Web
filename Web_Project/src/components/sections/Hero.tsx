@@ -1,459 +1,347 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Github, Linkedin, Mail, Download, ExternalLink } from 'lucide-react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import MagneticButton from '../ui/MagneticButton';
-import { getResumeUrl, getResumeAction, personalInfo } from '../../data/personalInfo';
-import { 
-  fadeInUp, 
-  fadeInLeft, 
-  fadeInRight, 
-  staggerContainer, 
-  staggerItem,
-  floating,
-  useReducedMotion 
-} from '../../utils/animations';
+/**
+ * Hero — Blueprint "title block" treatment.
+ *
+ * Layout:
+ *   - Full-viewport blueprint grid background
+ *   - Corner crosshair / registration marks at all four corners
+ *   - Left: headline + dimension line + sub-copy + CTAs
+ *   - Bottom-right: title-block box (name / role / SHEET 01 / date / REV)
+ *
+ * Load sequence (no WebGL):
+ *   1. Grid fades in (0→400ms)
+ *   2. Corner marks draw (150ms each, staggered)
+ *   3. Title-block border strokes around perimeter (SVG pathLength, 600ms)
+ *   4. Dimension line extends under headline (550ms)
+ *   5. Text content fades + 8px rise (staggered, 80ms/child)
+ */
 
-// ═══════════════════════════════════════════════════════════════════════════
-// HERO SECTION - Two-column split layout
-// Left: Headline + CTAs + social icons
-// Right: Floating card with portrait/interactive element
-// ═══════════════════════════════════════════════════════════════════════════
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ArrowRight, Github, Linkedin, Mail, Download, ExternalLink } from 'lucide-react';
+import MagneticButton from '../ui/MagneticButton';
+import { CornerMark, DimensionLine, DrawBorder } from '../ui/BlueprintPrimitives';
+import { getResumeUrl, getResumeAction, personalInfo } from '../../data/personalInfo';
+import { useReducedMotion } from '../../utils/animations';
+
+// Sheet data
+const SHEET = { number: '01', total: '09', title: 'OVERVIEW — FK PORTFOLIO', rev: 'A' };
+const TODAY = new Date().toISOString().slice(0, 10);
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
 
 const Hero: React.FC = () => {
-  const { scrollY } = useScroll();
   const prefersReducedMotion = useReducedMotion();
-  
-  // Parallax transforms
-  const y1 = useTransform(scrollY, [0, 500], [0, -100]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
-
   const resumeUrl = getResumeUrl();
   const resumeAction = getResumeAction();
 
-  return (
-    <section 
-      id="home" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 lg:pt-28"
-      aria-label="Hero section"
-    >
-      {/* Background gradient */}
-      <motion.div 
-        className="absolute inset-0 section-primary"
-        style={{ y: prefersReducedMotion ? 0 : y2 }}
-      >
-        {/* Animated gradient orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)',
-            }}
-            animate={prefersReducedMotion ? {} : {
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-              x: [0, 50, 0],
-              y: [0, -30, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          
-          <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)',
-            }}
-            animate={prefersReducedMotion ? {} : {
-              scale: [1.2, 1, 1.2],
-              opacity: [0.2, 0.4, 0.2],
-              x: [0, -30, 0],
-              y: [0, 40, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          
-          {/* Light theme gradient orb */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full light:opacity-30 dark:opacity-0"
-            style={{
-              background: 'radial-gradient(circle, rgba(11, 99, 255, 0.1) 0%, transparent 60%)',
-              filter: 'blur(80px)',
-            }}
-          />
-        </div>
-      </motion.div>
+  // Title-block ref for DrawBorder sizing
+  const [tbSize, setTbSize] = useState({ w: 340, h: 140 });
+  const tbRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (tbRef.current) {
+      const r = tbRef.current.getBoundingClientRect();
+      setTbSize({ w: r.width, h: r.height });
+    }
+  }, []);
 
-      {/* Main content */}
-      <motion.div 
-        className="container-custom relative z-10 px-4 sm:px-6 lg:px-8"
-        style={{ y: prefersReducedMotion ? 0 : y1, opacity, scale }}
-      >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
-          
-          {/* Left Column - Text Content */}
+  // Stagger delays for text content (after border draws ~0.7s)
+  const textDelay = prefersReducedMotion ? 0.05 : 0.75;
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20"
+      aria-label="Hero — Title block"
+    >
+      {/* Blueprint grid background */}
+      <motion.div
+        className="absolute inset-0 blueprint-grid"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: prefersReducedMotion ? 0.01 : 0.4, ease: 'easeOut' }}
+        aria-hidden="true"
+      />
+
+      {/* ── Corner registration marks ── */}
+      <CornerMark corner="tl" className="top-4 left-4"   delay={prefersReducedMotion ? 0 : 0.42} />
+      <CornerMark corner="tr" className="top-4 right-4"  delay={prefersReducedMotion ? 0 : 0.48} />
+      <CornerMark corner="bl" className="bottom-4 left-4"  delay={prefersReducedMotion ? 0 : 0.44} />
+      <CornerMark corner="br" className="bottom-4 right-4" delay={prefersReducedMotion ? 0 : 0.46} />
+
+      {/* ── Main content ── */}
+      <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 pb-20">
+
+        {/* Left column — headline */}
+        <div className="flex-1 max-w-2xl">
+
+          {/* Sheet label */}
           <motion.div
-            className="text-center lg:text-left order-2 lg:order-1"
-            variants={staggerContainer(0.1, 0.2)}
-            initial="hidden"
-            animate="visible"
+            className="flex items-center gap-3 mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: textDelay - 0.1 }}
           >
-            {/* Greeting */}
-            <motion.p 
-              variants={staggerItem}
-              className="text-base sm:text-lg text-light-text-secondary dark:text-dark-text-secondary mb-4 font-medium"
-            >
-              <span className="inline-block mr-2">👋</span>
-              Hi, I'm
-            </motion.p>
-            
-            {/* Name */}
-            <motion.h1 
-              variants={staggerItem}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
-            >
-              <span className="text-light-text dark:text-dark-text">Fahad </span>
-              <span className="gradient-text-animated">Khalid</span>
-            </motion.h1>
-            
-            {/* Headline */}
-            <motion.h2 
-              variants={staggerItem}
-              className="text-xl sm:text-2xl md:text-3xl font-semibold text-light-text dark:text-dark-text mb-4"
-            >
-              Building secure, intelligent systems.
-            </motion.h2>
-            
-            {/* Word swap subtitle */}
-            <motion.div variants={staggerItem} className="h-10 mb-6">
-              <WordSwap 
-                words={['AI/ML Developer', 'Cloud Architect', 'Security Engineer', 'Full Stack Developer']}
-              />
-            </motion.div>
-            
-            {/* Subline */}
-            <motion.p 
-              variants={staggerItem}
-              className="text-base sm:text-lg text-light-text-secondary dark:text-dark-text-secondary mb-8 max-w-xl mx-auto lg:mx-0"
-            >
-              Computer Science undergraduate passionate about building scalable cloud solutions, 
-              intelligent AI systems, and secure infrastructure.
-            </motion.p>
-            
-            {/* CTAs */}
-            <motion.div 
-              variants={staggerItem}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8"
-            >
-              <MagneticButton 
-                href="#projects" 
-                className="btn-premium group"
-                strength={0.3}
-                aria-label="View my projects"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  See My Work
-                  <motion.span
-                    className="inline-block"
-                    initial={{ x: 0, opacity: 0 }}
-                    whileHover={{ x: 4, opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ArrowRight size={18} />
-                  </motion.span>
-                </span>
-              </MagneticButton>
-              
-              <MagneticButton 
-                href={resumeUrl}
-                target={resumeAction.target}
-                className="btn-secondary group"
-                strength={0.3}
-                aria-label={resumeAction.action === 'view' ? 'View resume' : 'Download resume'}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  {resumeAction.action === 'view' ? (
-                    <>
-                      View Resume
-                      <ExternalLink size={16} />
-                    </>
-                  ) : (
-                    <>
-                      Download Resume
-                      <Download size={16} />
-                    </>
-                  )}
-                </span>
-              </MagneticButton>
-            </motion.div>
-            
-            {/* Social Icons */}
-            <motion.div 
-              variants={staggerItem}
-              className="flex gap-4 justify-center lg:justify-start"
-            >
-              <SocialIcon 
-                href={personalInfo.social.github}
-                icon={<Github size={20} />}
-                label="GitHub"
-              />
-              <SocialIcon 
-                href={personalInfo.social.linkedin}
-                icon={<Linkedin size={20} />}
-                label="LinkedIn"
-              />
-              <SocialIcon 
-                href={`mailto:${personalInfo.contact.email}`}
-                icon={<Mail size={20} />}
-                label="Email"
-              />
-            </motion.div>
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#7EC8E3', opacity: 0.6 }}>
+              SHEET {SHEET.number}/{SHEET.total}
+            </span>
+            <span className="w-8 border-t opacity-30" style={{ borderColor: '#7EC8E3' }} />
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#7EC8E3', opacity: 0.6 }}>
+              {SHEET.title}
+            </span>
           </motion.div>
-          
-          {/* Right Column - Floating Visual */}
-          <motion.div 
-            className="flex justify-center lg:justify-end order-1 lg:order-2"
-            variants={fadeInRight}
-            initial="hidden"
-            animate="visible"
+
+          {/* Greeting */}
+          <motion.p
+            className="font-mono-data text-xs mb-3 tracking-widest"
+            style={{ color: '#7EC8E3', opacity: 0.7 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 0.7, y: 0 }}
+            transition={{ duration: 0.35, delay: textDelay }}
           >
-            <FloatingCard prefersReducedMotion={prefersReducedMotion} />
-          </motion.div>
-        </div>
-      </motion.div>
-      
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 2,
-          ease: "easeInOut" 
-        }}
-      >
-        <a 
-          href="#about" 
-          className="flex flex-col items-center gap-2 text-light-text-tertiary dark:text-dark-text-tertiary hover:text-accent-500 dark:hover:text-accent-500 transition-colors duration-300"
-          aria-label="Scroll to about section"
-        >
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <ChevronDown size={24} />
-        </a>
-      </motion.div>
-      
-      {/* Floating particles */}
-      {!prefersReducedMotion && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1.5 h-1.5 rounded-full"
+            // ENTITY: FAHAD KHALID
+          </motion.p>
+
+          {/* Name headline */}
+          <div className="relative mb-2">
+            <motion.h1
+              className="font-display font-bold uppercase"
               style={{
-                left: `${15 + Math.random() * 70}%`,
-                top: `${15 + Math.random() * 70}%`,
-                background: i % 2 === 0 
-                  ? 'rgba(0, 212, 255, 0.4)' 
-                  : 'rgba(168, 85, 247, 0.4)',
+                fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
+                letterSpacing: '0.06em',
+                color: '#EAF4FF',
+                lineHeight: 1.05,
               }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.3, 0.8, 0.3],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-                ease: "easeInOut",
-              }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: textDelay + 0.08 }}
+            >
+              FAHAD{' '}
+              <span style={{ color: '#7EC8E3' }}>KHALID</span>
+            </motion.h1>
+          </div>
+
+          {/* Dimension line under headline */}
+          <motion.div
+            className="mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.1, delay: textDelay + 0.25 }}
+          >
+            <DimensionLine
+              width={380}
+              label="PORTFOLIO v2026"
+              color="#7EC8E3"
+              delay={textDelay + 0.28}
             />
-          ))}
+          </motion.div>
+
+          {/* Role / word-swap */}
+          <motion.div
+            className="h-8 mb-4"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: textDelay + 0.18 }}
+          >
+            <WordSwap
+              words={[
+                'CS UNDERGRADUATE',
+                'AI / ML BUILDER',
+                'CLOUD ENGINEER',
+                'CYBERSECURITY PRACTITIONER',
+                'AI AGENT BUILDER',
+                'AWS SBG CAPTAIN',
+                'MICROSOFT STUDENT AMBASSADOR',
+                'COMMUNITY BUILDER',
+                'SOFTWARE ENGINEER',
+              ]}
+              intervalMs={3800}
+            />
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            className="text-sm leading-relaxed max-w-lg mb-6"
+            style={{ color: '#7EC8E3', opacity: 0.75 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 0.75, y: 0 }}
+            transition={{ duration: 0.4, delay: textDelay + 0.28 }}
+          >
+            Computer Science undergraduate building AI systems, cloud infrastructure,
+            and security solutions — while leading student communities around AWS and Microsoft technologies.
+            {' '}
+            <span className="font-mono-data text-[10px] tracking-widest" style={{ color: '#E4572E', opacity: 0.9 }}>
+              ● ACTIVE
+            </span>
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-wrap gap-3"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: textDelay + 0.38 }}
+          >
+            <MagneticButton href="#projects" className="btn-premium" strength={0.3}>
+              <span className="flex items-center gap-2 relative z-10">
+                VIEW WORK <ArrowRight size={14} />
+              </span>
+            </MagneticButton>
+            <MagneticButton href={resumeUrl} className="btn-secondary" strength={0.3}>
+              <span className="flex items-center gap-2">
+                {resumeAction.action === 'view'
+                  ? <><ExternalLink size={13} /> RESUME</>
+                  : <><Download size={13} /> RESUME</>}
+              </span>
+            </MagneticButton>
+          </motion.div>
+
+          {/* Social icons */}
+          <motion.div
+            className="flex gap-3 mt-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: textDelay + 0.48 }}
+          >
+            {[
+              { href: personalInfo.social.github,           icon: <Github size={16} />,   label: 'GitHub'   },
+              { href: personalInfo.social.linkedin,         icon: <Linkedin size={16} />, label: 'LinkedIn' },
+              { href: `mailto:${personalInfo.contact.email}`, icon: <Mail size={16} />,   label: 'Email'    },
+            ].map(s => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="flex items-center justify-center w-8 h-8 border transition-colors duration-200"
+                style={{
+                  borderColor: 'rgba(126,200,227,0.25)',
+                  color: '#7EC8E3',
+                  opacity: 0.7,
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '0.7'; }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </motion.div>
         </div>
-      )}
+
+        {/* Right column — title block */}
+        <motion.div
+          className="relative self-end lg:self-auto shrink-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2, delay: textDelay + 0.15 }}
+        >
+          <div ref={tbRef} className="relative" style={{ width: 'clamp(260px, 30vw, 340px)' }}>
+            {/* Animated border */}
+            <DrawBorder
+              width={tbSize.w}
+              height={tbSize.h}
+              color="#7EC8E3"
+              strokeWidth={1}
+              delay={prefersReducedMotion ? 0 : 0.52}
+              duration={0.75}
+            />
+
+            {/* Title block content */}
+            <div
+              className="border font-mono-data text-xs"
+              style={{ borderColor: 'rgba(126,200,227,0.18)' }}
+            >
+              {/* Row: title */}
+              <div className="px-3 py-2 border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
+                <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>TITLE</div>
+                <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: '#EAF4FF' }}>
+                  CS · AI · CLOUD · SECURITY
+                </div>
+              </div>
+
+              {/* Row: name + role */}
+              <div className="grid grid-cols-2">
+                <div className="px-3 py-2 border-r border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
+                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>DRAWN BY</div>
+                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>Fahad Khalid</div>
+                </div>
+                <div className="px-3 py-2 border-b" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
+                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>ROLE</div>
+                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>Engineer / Educator</div>
+                </div>
+              </div>
+
+              {/* Row: sheet + date + rev */}
+              <div className="grid grid-cols-3">
+                <div className="px-3 py-2 border-r" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
+                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>SHEET</div>
+                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>{SHEET.number} OF {SHEET.total}</div>
+                </div>
+                <div className="px-3 py-2 border-r" style={{ borderColor: 'rgba(126,200,227,0.18)' }}>
+                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>DATE</div>
+                  <div className="text-[10px]" style={{ color: '#EAF4FF' }}>{TODAY}</div>
+                </div>
+                <div className="px-3 py-2">
+                  <div className="text-[9px] opacity-40 uppercase tracking-widest mb-0.5" style={{ color: '#7EC8E3' }}>REV</div>
+                  <div className="text-[10px]" style={{ color: '#E4572E', fontWeight: 700 }}>{SHEET.rev}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Dimension line below title block */}
+          <div className="mt-2">
+            <DimensionLine
+              width={tbSize.w}
+              label={`${tbSize.w}px`}
+              color="#7EC8E3"
+              delay={prefersReducedMotion ? 0 : 1.35}
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#about"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
+        style={{ color: '#7EC8E3', opacity: 0.5 }}
+        animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+        aria-label="Scroll to about section"
+      >
+        <span className="font-mono-data text-[9px] tracking-widest">SCROLL</span>
+        <ChevronDown size={16} />
+      </motion.a>
     </section>
   );
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// WORD SWAP COMPONENT - Animated word rotation
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── WordSwap ─────────────────────────────────────────────────────────────────
 
-interface WordSwapProps {
-  words: string[];
-  interval?: number;
-}
-
-const WordSwap: React.FC<WordSwapProps> = ({ words, interval = 3000 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
+const WordSwap: React.FC<{ words: string[]; intervalMs?: number }> = ({ words, intervalMs = 3200 }) => {
+  const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % words.length);
-    }, interval);
-    return () => clearInterval(timer);
-  }, [words.length, interval]);
+    const t = setInterval(() => setIdx(p => (p + 1) % words.length), intervalMs);
+    return () => clearInterval(t);
+  }, [words.length, intervalMs]);
 
   return (
-    <div className="relative h-full flex items-center justify-center lg:justify-start overflow-hidden">
+    <div className="overflow-hidden h-full flex items-center">
       <AnimatePresence mode="wait">
         <motion.span
-          key={currentIndex}
-          initial={{ y: 20, opacity: 0 }}
+          key={idx}
+          initial={{ y: 16, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.2, 0.9, 0.2, 1] }}
-          className="text-lg sm:text-xl text-accent-500 dark:text-accent-500 font-medium"
+          exit={{ y: -16, opacity: 0 }}
+          transition={{ duration: 0.32, ease: [0.2, 0.9, 0.2, 1] }}
+          className="font-mono-data text-sm tracking-widest font-semibold"
+          style={{ color: '#7EC8E3' }}
         >
-          {words[currentIndex]}
+          {words[idx]}
         </motion.span>
       </AnimatePresence>
     </div>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// FLOATING CARD COMPONENT - Interactive visual element
-// ─────────────────────────────────────────────────────────────────────────────
-
-interface FloatingCardProps {
-  prefersReducedMotion: boolean;
-}
-
-const FloatingCard: React.FC<FloatingCardProps> = ({ prefersReducedMotion }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion) return;
-    
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-    const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-    setMousePosition({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePosition({ x: 0, y: 0 });
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.div
-      className="relative"
-      animate={prefersReducedMotion ? {} : {
-        y: [0, -15, 0],
-      }}
-      transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
-      <motion.div
-        className="relative w-72 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-[450px] card-glass p-6 cursor-pointer"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: `perspective(1000px) rotateX(${mousePosition.y * -10}deg) rotateY(${mousePosition.x * 10}deg)`,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
-        transition={{ duration: 0.3, ease: [0.2, 0.9, 0.2, 1] }}
-      >
-        {/* Profile image placeholder / Avatar */}
-        <div className="relative w-full h-48 sm:h-56 lg:h-64 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-accent-500/20 to-purple-500/20">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full ring-glow bg-gradient-to-br from-accent-500 to-purple-500 flex items-center justify-center">
-              <span className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">FK</span>
-            </div>
-          </div>
-          
-          {/* Decorative elements */}
-          <motion.div 
-            className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-accent-500/30"
-            animate={prefersReducedMotion ? {} : { rotate: [0, 90, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div 
-            className="absolute bottom-4 left-4 w-6 h-6 rounded-full bg-purple-500/30"
-            animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-        
-        {/* Mini CV info */}
-        <div className="space-y-2" style={{ transform: 'translateZ(20px)' }}>
-          <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
-            Quick Stats
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-accent-500/20 text-accent-500">
-              AI/ML
-            </span>
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-purple-500/20 text-purple-400">
-              Cloud
-            </span>
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-success-500/20 text-success-500">
-              Security
-            </span>
-          </div>
-          <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-            5+ Projects • 3+ Certifications
-          </p>
-        </div>
-        
-        {/* Hover effect overlay */}
-        <motion.div 
-          className="absolute inset-0 rounded-3xl pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${50 + mousePosition.x * 50}% ${50 + mousePosition.y * 50}%, rgba(0, 212, 255, 0.15), transparent 50%)`,
-          }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        />
-      </motion.div>
-      
-      {/* Background glow */}
-      <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-accent-500/20 to-purple-500/20 blur-2xl -z-10 opacity-60" />
-    </motion.div>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// SOCIAL ICON COMPONENT
-// ─────────────────────────────────────────────────────────────────────────────
-
-interface SocialIconProps {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-}
-
-const SocialIcon: React.FC<SocialIconProps> = ({ href, icon, label }) => {
-  return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-10 h-10 flex items-center justify-center rounded-full bg-light-bg-tertiary dark:bg-dark-bg-tertiary text-light-text-secondary dark:text-dark-text-secondary hover:bg-accent-500 hover:text-white dark:hover:bg-accent-500 transition-colors duration-300"
-      whileHover={{ scale: 1.1, rotate: 5 }}
-      whileTap={{ scale: 0.95 }}
-      aria-label={label}
-    >
-      {icon}
-    </motion.a>
   );
 };
 

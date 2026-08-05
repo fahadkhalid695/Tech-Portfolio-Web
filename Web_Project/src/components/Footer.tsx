@@ -1,71 +1,101 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Phone, Heart, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, ArrowUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    { name: 'GitHub', icon: <Github size={20} />, url: 'https://github.com/fahadkhalid695' },
-    { name: 'LinkedIn', icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/fahad-khalid-aa674430a/' },
-    { name: 'Email', icon: <Mail size={20} />, url: 'mailto:fahadkhalid695@gmail.com' },
-    { name: 'WhatsApp', icon: <Phone size={20} />, url: 'https://wa.me/923004343753' },
-  ];
+const QUICK_LINKS = ['About', 'Skills', 'Projects', 'Hackathons', 'Certifications', 'Platforms'];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+const SOCIAL = [
+  { name: 'GitHub',   icon: <Github  size={18} />, url: 'https://github.com/fahadkhalid695' },
+  { name: 'LinkedIn', icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/fahad-khalid-aa674430a/' },
+  { name: 'Email',    icon: <Mail    size={18} />, url: 'mailto:fahadkhalid695@gmail.com' },
+  { name: 'WhatsApp', icon: <Phone   size={18} />, url: 'https://wa.me/923004343753' },
+];
+
+const Footer: React.FC = () => {
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-bg-tertiary dark:border-dark-bg-tertiary relative">
-      {/* Back to top button */}
+    <footer
+      className="relative border-t"
+      style={{
+        background: 'var(--color-bg-secondary)',
+        borderColor: 'rgba(126,200,227,0.12)',
+      }}
+    >
+      {/* Back to top */}
       <motion.button
-        onClick={scrollToTop}
-        className="absolute -top-6 right-8 p-3 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="absolute -top-5 right-8 w-10 h-10 flex items-center justify-center border"
+        style={{
+          background: 'var(--color-bg)',
+          borderColor: 'rgba(126,200,227,0.25)',
+          color: '#7EC8E3',
+        }}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
+        aria-label="Back to top"
       >
-        <ArrowUp size={20} />
+        <ArrowUp size={16} />
       </motion.button>
 
-      <div className="container-custom py-12">
+      {/* Blueprint grid overlay */}
+      <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none" aria-hidden="true" />
+
+      <div className="container-custom py-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+
+          {/* Brand */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-4"
+            transition={{ duration: 0.4 }}
           >
-            <div className="flex items-center gap-2">
-              <span className="text-primary-500 text-2xl font-bold">FK</span>
-              <span className="text-light-text dark:text-dark-text text-xl font-semibold">Fahad Khalid</span>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-mono-data text-xl font-bold" style={{ color: '#7EC8E3', letterSpacing: '0.08em' }}>
+                FK
+              </span>
+              <span className="font-display font-bold uppercase text-base tracking-widest" style={{ color: 'var(--color-text)', letterSpacing: '0.10em' }}>
+                Fahad Khalid
+              </span>
             </div>
-            <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-              Computer Science Undergraduate passionate about AI/ML, Cloud Computing, and Cybersecurity. 
-              Building innovative solutions for tomorrow's challenges.
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)', opacity: 0.75 }}>
+              CS undergraduate · AI · Cloud · Cybersecurity.
+              Building real-world solutions and student communities.
             </p>
+            <div className="mt-3 font-mono-data text-[9px] tracking-widest" style={{ color: '#7EC8E3', opacity: 0.4 }}>
+              // AWS SBG CAPTAIN · MICROSOFT STUDENT AMBASSADOR
+            </div>
           </motion.div>
 
           {/* Quick links */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-4"
+            transition={{ duration: 0.4, delay: 0.08 }}
           >
-            <h4 className="text-light-text dark:text-dark-text font-semibold text-lg">Quick Links</h4>
-            <div className="grid grid-cols-2 gap-2">
-              {['About', 'Skills', 'Projects', 'Hackathons', 'Certifications', 'Contact'].map((link) => (
+            <h4
+              className="font-mono-data text-[10px] uppercase tracking-widest mb-4"
+              style={{ color: '#7EC8E3', opacity: 0.5 }}
+            >
+              QUICK LINKS
+            </h4>
+            <div className="grid grid-cols-2 gap-y-2 gap-x-4">
+              {QUICK_LINKS.map(link => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
-                  className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-400 transition-colors duration-300 text-sm"
+                  className="font-mono-data text-[10px] uppercase tracking-widest transition-colors duration-200"
+                  style={{ color: 'var(--color-text-secondary)', opacity: 0.7 }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = '#7EC8E3';
+                    (e.currentTarget as HTMLAnchorElement).style.opacity = '1';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text-secondary)';
+                    (e.currentTarget as HTMLAnchorElement).style.opacity = '0.7';
+                  }}
                 >
                   {link}
                 </a>
@@ -73,54 +103,71 @@ const Footer: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Social links */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+          {/* Social */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-4"
+            transition={{ duration: 0.4, delay: 0.16 }}
           >
-            <h4 className="text-light-text dark:text-dark-text font-semibold text-lg">Connect With Me</h4>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((link) => (
+            <h4
+              className="font-mono-data text-[10px] uppercase tracking-widest mb-4"
+              style={{ color: '#7EC8E3', opacity: 0.5 }}
+            >
+              CONNECT
+            </h4>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {SOCIAL.map(s => (
                 <a
-                  key={link.name}
-                  href={link.url}
+                  key={s.name}
+                  href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-light-bg-tertiary dark:bg-dark-bg-tertiary hover:bg-primary-500/20 border border-light-bg-tertiary dark:border-dark-bg-tertiary hover:border-primary-500/30 rounded-lg text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-400 transition-all duration-300 group"
-                  aria-label={link.name}
+                  aria-label={s.name}
+                  className="flex items-center justify-center w-9 h-9 border transition-colors duration-200"
+                  style={{
+                    borderColor: 'rgba(126,200,227,0.20)',
+                    color: 'var(--color-text-secondary)',
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(126,200,227,0.45)';
+                    (e.currentTarget as HTMLAnchorElement).style.color = '#7EC8E3';
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(126,200,227,0.20)';
+                    (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-text-secondary)';
+                  }}
                 >
-                  <span className="group-hover:scale-110 transition-transform duration-300 inline-block">
-                    {link.icon}
-                  </span>
+                  {s.icon}
                 </a>
               ))}
             </div>
-            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm">
-              Open to collaboration and new opportunities
+            <p
+              className="font-mono-data text-[9px] tracking-widest"
+              style={{ color: 'var(--color-text-secondary)', opacity: 0.5 }}
+            >
+              Open to collaborations and opportunities
             </p>
           </motion.div>
         </div>
-        
-        <div className="mt-12 pt-8 border-t border-light-bg-tertiary dark:border-dark-bg-tertiary">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col md:flex-row justify-between items-center gap-4"
+
+        {/* Bottom bar */}
+        <div
+          className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderColor: 'rgba(126,200,227,0.08)' }}
+        >
+          <p
+            className="font-mono-data text-[9px] tracking-widest"
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.45 }}
           >
-            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm flex items-center gap-1">
-              &copy; {currentYear} Fahad Khalid. Made with 
-              <Heart size={14} className="text-red-500 animate-pulse" /> 
-              and lots of coffee
-            </p>
-            <p className="text-light-text-tertiary dark:text-dark-text-tertiary text-sm">
-              Built with React, TypeScript & Tailwind CSS
-            </p>
-          </motion.div>
+            © {year} FAHAD KHALID · ALL RIGHTS RESERVED
+          </p>
+          <p
+            className="font-mono-data text-[9px] tracking-widest"
+            style={{ color: 'var(--color-text-secondary)', opacity: 0.35 }}
+          >
+            BUILT WITH REACT · TYPESCRIPT · TAILWIND CSS
+          </p>
         </div>
       </div>
     </footer>
